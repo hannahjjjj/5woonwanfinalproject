@@ -1,7 +1,5 @@
 package com.multi.reivew;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,27 +7,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.multi.dto.ReviewDTO;
 import com.multi.service.ReviewService;
 
+
 @SpringBootTest
-class ViewItemAll {
-	
+class GetReview {
+
 	@Autowired
 	ReviewService service;
 	
 	@Test
 	void contextLoads() {
-		
-		List<ReviewDTO> list = null;
+		ReviewDTO review = null;
 		try {
-			list = service.get();
+			review = service.get(100);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		for(ReviewDTO i:list) {
-			System.out.println(i);
-		}
-		
+		System.out.println(review);
 	}
 
 }
+
+
+
+
