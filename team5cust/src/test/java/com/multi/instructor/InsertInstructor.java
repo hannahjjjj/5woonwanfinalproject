@@ -1,28 +1,29 @@
-package com.multi.reivew;
+package com.multi.instructor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.ReviewDTO;
-import com.multi.service.ReviewService;
+import com.multi.dto.InstructorDTO;
+import com.multi.service.InstructorService;
 
 
 @SpringBootTest
-class GetItem {
+class InsertInstructor {
 
 	@Autowired
-	ReviewService service;
+	InstructorService service;
 	
 	@Test
 	void contextLoads() {
-		ReviewDTO item = null;
+		InstructorDTO instructor = new InstructorDTO(100,100,"윤진호","헬린이","a.jpg","aaa@aa.com","01000000000");
 		try {
-			item = service.get(1056);
+			service.register(instructor);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

@@ -9,13 +9,13 @@ import com.multi.service.ReviewService;
 
 
 @SpringBootTest
-class UpdateItem {
+class UpdateReview {
 	@Autowired
 	ReviewService service;
 	
 	@Test
 	void contextLoads() {
-		ReviewDTO item = new ReviewDTO();
+		ReviewDTO item = new ReviewDTO(100,100,"dbswlsgh","쏘쏘","2");
 		try {
 			service.modify(item);
 		} catch (Exception e) {

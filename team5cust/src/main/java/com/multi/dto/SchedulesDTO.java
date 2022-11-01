@@ -21,4 +21,8 @@ public class SchedulesDTO {
 	String custid;
 	Date starttime;
 	Date endtime;
+	
+	//
+	
+	int period;
 }

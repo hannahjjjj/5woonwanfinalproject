@@ -1,5 +1,7 @@
 package com.multi.schedules;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,15 +11,17 @@ import com.multi.service.SchedulesService;
 
 
 @SpringBootTest
-class UpdateItem {
+class Updateschedules {
 	@Autowired
 	SchedulesService service;
 	
 	@Test
 	void contextLoads() {
-		SchedulesDTO item = new SchedulesDTO();
+		Date today=new Date();
+		
+		SchedulesDTO schedules = new SchedulesDTO(100,100,"dbswlsgh",today,today,6);
 		try {
-			service.modify(item);
+			service.modify(schedules);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

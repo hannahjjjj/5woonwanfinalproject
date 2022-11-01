@@ -9,21 +9,21 @@ import com.multi.service.SchedulesService;
 
 
 @SpringBootTest
-class InsertItem {
+class Getschedules {
 
 	@Autowired
 	SchedulesService service;
 	
 	@Test
 	void contextLoads() {
-		SchedulesDTO item = new SchedulesDTO();
+		SchedulesDTO schedules = null;
 		try {
-			service.register(item);
+			schedules = service.get(100);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(schedules);
 	}
 
 }

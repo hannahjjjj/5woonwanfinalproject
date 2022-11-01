@@ -1,28 +1,29 @@
-package com.multi.schedules;
+package com.multi.reivew;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.SchedulesDTO;
-import com.multi.service.SchedulesService;
+import com.multi.dto.ReviewDTO;
+import com.multi.service.ReviewService;
 
 
 @SpringBootTest
-class GetItem {
+class InsertReview {
 
 	@Autowired
-	SchedulesService service;
+	ReviewService service;
 	
 	@Test
 	void contextLoads() {
-		SchedulesDTO item = null;
+		ReviewDTO item = new ReviewDTO(100,100,"dbswlsgh","별로","1");
 		try {
-			item = service.get(1056);
+			service.register(item);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

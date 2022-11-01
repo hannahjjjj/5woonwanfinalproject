@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class InstructorDTO {
 	//강사 테이블 기본 컬럼
-	int istructorid;
+	int instructorid;
 	int facilityid;
 	String instructorname;
 	String instructorcon;

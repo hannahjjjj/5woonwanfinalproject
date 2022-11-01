@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.multi.service.ReviewService;
 
 @SpringBootTest
-class DeleteItem {
+class DeleteReview {
 	
 	@Autowired
 	ReviewService service;
@@ -15,7 +15,7 @@ class DeleteItem {
 	@Test
 	void contextLoads() {
 		try {
-			service.remove(1057);
+			service.remove(100);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

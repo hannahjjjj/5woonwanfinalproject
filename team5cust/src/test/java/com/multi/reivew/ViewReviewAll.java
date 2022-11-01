@@ -1,32 +1,35 @@
-package com.multi.instructor;
+package com.multi.reivew;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.InstructorDTO;
-import com.multi.service.InstructorService;
-
+import com.multi.dto.ReviewDTO;
+import com.multi.service.ReviewService;
 
 @SpringBootTest
-class GetItem {
-
+class ViewReviewAll {
+	
 	@Autowired
-	InstructorService service;
+	ReviewService service;
 	
 	@Test
 	void contextLoads() {
-		InstructorDTO item = null;
+		
+		List<ReviewDTO> list = null;
 		try {
-			item = service.get(1056);
+			list = service.get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		for(ReviewDTO i:list) {
+			System.out.println(i);
+		}
+		
 	}
 
 }
-
-
-
-

@@ -1,5 +1,7 @@
 package com.multi.instructor;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,27 +9,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.multi.dto.InstructorDTO;
 import com.multi.service.InstructorService;
 
-
 @SpringBootTest
-class InsertItem {
-
+class ViewInstructorAll {
+	
 	@Autowired
 	InstructorService service;
 	
 	@Test
 	void contextLoads() {
-		InstructorDTO instructor = new InstructorDTO();
+		
+		List<InstructorDTO> list = null;
 		try {
-			service.register(instructor);
+			list = service.get();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		for(InstructorDTO i:list) {
+			System.out.println(i);
+		}
+		
 	}
 
 }
-
-
-
-

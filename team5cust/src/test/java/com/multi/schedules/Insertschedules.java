@@ -1,6 +1,6 @@
 package com.multi.schedules;
 
-import java.util.List;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,26 +9,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.SchedulesService;
 
+
 @SpringBootTest
-class SelectItemAll {
-	
+class Insertschedules {
+
 	@Autowired
 	SchedulesService service;
 	
 	@Test
 	void contextLoads() {
+		Date today=new Date();
+        
+		SchedulesDTO schedules = new SchedulesDTO(100,100,"dbswlsgh",today,today,3);
 		
-		List<SchedulesDTO> list = null;
 		try {
-//			list = service.selectItemAll(11);
+			service.register(schedules);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		for(SchedulesDTO i:list) {
-			System.out.println(i);
 		}
 		
 	}
 
 }
+
+
+
+

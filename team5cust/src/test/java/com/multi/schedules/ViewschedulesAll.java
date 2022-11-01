@@ -10,7 +10,7 @@ import com.multi.dto.SchedulesDTO;
 import com.multi.service.SchedulesService;
 
 @SpringBootTest
-class ViewItemAll {
+class ViewschedulesAll {
 	
 	@Autowired
 	SchedulesService service;

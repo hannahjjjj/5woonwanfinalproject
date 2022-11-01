@@ -2,44 +2,23 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.multi.mapper.LikedMapper">
+<mapper namespace="com.multi.mapper.ReviewMapper">
 	
-  	<select id="select" parameterType="Integer" resultType="LikedDTO">
-		SELECT l.likedid, l.custid, l.itemid, i.name AS item_name FROM liked l
-		INNER JOIN item i ON l.itemid = i.itemid
-		WHERE l.likedid = #{likedid}
-	</select>
-	
-	<select id="selectAll" resultType="LikedDTO">
-		SELECT * FROM liked
-	</select>
-
- 	<insert id="insert" parameterType="LikedDTO">
-		INSERT INTO liked VALUES (NULL, #{custid}, #{itemid})
+	<insert id="insert" parameterType="ReviewDTO">
+		INSERT INTO review VALUES (NULL, #{instructorid}, #{custid},#{reviewcon},#{starpoint},NOW())
 	</insert>
-	
-	<update id="update" parameterType="LikedDTO">
-		UPDATE liked SET itemid = #{itemid} WHERE likedid = #{likedid}
-	</update> 
-	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM liked WHERE likedid=#{likedid}
+		DELETE FROM review WHERE reviewid=#{reviewid}
 	</delete>
-	
-	<delete id="deleteall">
-		DELETE FROM liked
-	</delete> 
-	<select id="viewLikedCustid" parameterType="String" resultType="LikedDTO">
-		SELECT l.likedid, i.image1, l.custid, i.name AS name, i.price AS price FROM liked l
-		INNER JOIN item i ON l.itemid = i.itemid
-		WHERE l.custid = #{custid}
+	<update id="update" parameterType="ReviewDTO">
+		UPDATE review SET instructorid=#{instructorid}, custid=#{custid},reviewcon=#{reviewcon}, starpoint=#{starpoint},rdate=NOW()
+		WHERE reviewid=#{reviewid}
+	</update> 
+	<select id="selectAll" resultType="ReviewDTO">
+		SELECT * FROM review
 	</select>
-	
-	<select id="viewLikedItemid" parameterType="Integer" resultType="LikedDTO">
-		SELECT i.image1, l.itemid, l.custid, i.name AS name, i.price AS price FROM liked l
-		INNER JOIN item i ON l.itemid = i.itemid
-		WHERE l.itemid = #{itemid}
+	<select id="select" parameterType="Integer" resultType="ReviewDTO">
+		SELECT * FROM review WHERE reviewid = #{reviewid}
 	</select>
-	
 	
 </mapper>
