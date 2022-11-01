@@ -4,35 +4,23 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.mapper.CateMapper">
 	
-<!-- 	<select id="select" parameterType="Integer" resultType="CateDTO">
+	<select id="select" parameterType="Integer" resultType="CateDTO">
 		SELECT * FROM cate WHERE cateid=#{cateid}
 	</select>
-	
-	<select id="viewCateTopid" parameterType="Integer" resultType="CateDTO">
-	SELECT name,cateid FROM cate
-	WHERE topid = #{topid}
-	</select>
-	
-	<select id="viewCateName" parameterType="Integer" resultType="CateDTO">
-	SELECT name, cateid FROM cate
-	WHERE topid = (SELECT cat.topid FROM cate cat
-	INNER JOIN item i ON cat.cateid = i.cateid
-	WHERE itemid = #{itemid})
-	</select>
-	
+
 	<select id="selectAll" resultType="CateDTO">
 		SELECT * FROM cate
 	</select>
 
 	<update id="update" parameterType="CateDTO">
-		UPDATE cate SET name=#{name}, topid=#{topid} WHERE cateid=#{cateid}
+		UPDATE cate SET type=#{type} WHERE cateid=#{cateid}
 	</update>
  
-	<delete id="delete" parameterType="Integer">
-		DELETE FROM cate WHERE cateid=#{cateid}
-	</delete>  -->
 	<insert id="insert" parameterType="CateDTO">
 		INSERT INTO cate VALUES (#{cateid},#{type})
 	</insert>
 	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM cate WHERE cateid=#{cateid}
+	</delete>
 </mapper>

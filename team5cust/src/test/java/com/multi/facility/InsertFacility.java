@@ -1,27 +1,31 @@
-package com.multi.cate;
+package com.multi.facility;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.multi.dto.CateDTO;
+import com.multi.dto.FacilityDTO;
 import com.multi.service.CateService;
+import com.multi.service.FacilityService;
 
 @SpringBootTest
-	class UpdateCate {
+	class InsertFacility {
 	@Autowired
-	CateService service;
+	FacilityService service;
 	
+
 	@Test
 	void contextLoads() {
-		CateDTO cate = new CateDTO(10,"필라테스");
+
+		FacilityDTO facility = new FacilityDTO(0, 12, "gym헬스장","서울특별시 강남구 대치동 96", "a.jpg", 37.12, 128.54);
 		try {
-			service.modify(cate);
+			service.register(facility);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
 
 
 }

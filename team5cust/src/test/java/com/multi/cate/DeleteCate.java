@@ -15,7 +15,7 @@ import com.multi.service.CateService;
 	@Test
 	void contextLoads() {
 		try {
-			service.remove(23);
+			service.remove(11);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
