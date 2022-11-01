@@ -51,6 +51,12 @@ public class MainController {
 		model.addAttribute("center","contact");
 		return "index";
 	}
+	
+	@RequestMapping("/404")
+	public String fzf(Model model) {
+		model.addAttribute("center","404");
+		return "index";
+	}
 }
 
 
