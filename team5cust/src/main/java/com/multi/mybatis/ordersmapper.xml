@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.OrdersMapper">
+	
+	<insert id="insert" parameterType="OrdersDTO">
+		INSERT INTO orders VALUES (NULL, #{itemid}, #{custid}, NOW())
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM orders WHERE orderid=#{orderid}
+	</delete>
+	<update id="update" parameterType="OrdersDTO">
+		UPDATE orders SET itemid=#{itemid}, custid=#{custid}, odate=NOW()
+		WHERE orderid=#{orderid}
+	</update> 
+	<select id="selectAll" resultType="OrdersDTO">
+		SELECT * FROM orders
+	</select>
+	<select id="select" parameterType="Integer" resultType="OrdersDTO">
+		SELECT * FROM orders WHERE orderid = #{orderid}
+	</select>
+	
+</mapper>
