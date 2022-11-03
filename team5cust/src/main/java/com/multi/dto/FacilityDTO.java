@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FacilityDTO { //깃헙 오류용
+public class FacilityDTO { //깃헙 오류
 	private int facilityid;
 	private int cateid;
 	private String facilityname;
