@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+
+<script >
+
+
+function modal(){
+	$('#testModal').modal();
+};
+
+$(document).ready(function(){
+
+	var status = "[[${status}]]";
+	
+	if(status=="0"){
+		modal();
+	}
+	
+	$('#login_btn').click(function(){
+		alert("");
+		 $('#login_form').attr(
+			{
+				'action':'/loginimpl',
+				'method':'post'
+			}		 
+		);	
+		alert("");
+		$('#login_form').submit();
+		
+		
+	});
+
+});
+</script>
+
+</head>
+     <!-- 모달 -->
+	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+
+					</button>
+
+				</div>
+				<div class="modal-body">ID또는비밀번호가 일치하지않습니다. 다시 시도해주세요.</div>
+				<div class="modal-footer">
+					<button class="btn" type="button" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br><br>
+   <!-- Contact Form -->
+   <br><br><br>
+   <div>
+   		<a class="navbar-brand" style="margin:auto; text-align:center;">
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		LogIn</a>
+   </div>
+   <br>
+<div class="comment-form-wrap pt-2" style="margin:auto; text-align:center; width:700px;">
+	<form class="p-1 bg-light" id="login_form">
+	<br><br>
+	  <div class="form-group">
+	    <label for="id">ID : </label>
+	    <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
+	  </div>
+	  <br>
+	  <div class="form-group">
+	    <label for="pwd">PASSWORD : </label>
+	    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" style="color: black">
+	  </div>
+	 <button class="btn py-3 px-4 btn-primary" id="login_btn" style="width:150px;">LOGIN</button><br><br>
+     <button class="btn py-3 px-4 btn-primary" style="width:150px;"><a th:href="@{/register}" onclick="location.hrer='register.html'" id="register_btn" style="color: white">REGISTER</a></button> 
+	<br><br>
+	</form>   
+</div>
+
+<br><br><br><br><br><br>
+         
+
+
