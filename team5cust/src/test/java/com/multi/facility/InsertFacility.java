@@ -18,7 +18,7 @@ import com.multi.service.FacilityService;
 	@Test
 	void contextLoads() {
 
-		FacilityDTO facility = new FacilityDTO(0, 12, "gym헬스장","서울특별시 강남구 대치동 96", "a.jpg", 37.12, 128.54);
+		FacilityDTO facility = new FacilityDTO(0, 12, "gym헬스장","서울특별시 강남구 대치동 96","02)486-9452","a.jpg", 37.12, 128.54);
 		try {
 			service.register(facility);
 		} catch (Exception e) {

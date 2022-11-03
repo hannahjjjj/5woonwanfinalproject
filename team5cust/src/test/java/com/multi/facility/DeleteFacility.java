@@ -15,7 +15,7 @@ import com.multi.service.FacilityService;
 	@Test
 	void contextLoads() {
 		try {
-			service.remove(101);
+			service.remove(100);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
