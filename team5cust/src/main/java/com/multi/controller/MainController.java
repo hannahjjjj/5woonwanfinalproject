@@ -1,10 +1,18 @@
 package com.multi.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.dto.FacilityDTO;
+import com.multi.service.FacilityService;
 @Controller
 public class MainController {	
+	@Autowired
+	FacilityService fservice;
 	
 	@RequestMapping("/")
 	public String main() {
@@ -36,12 +44,18 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/properties")
-	public String properties(Model model) {
-		model.addAttribute("center", "properties");
-		return "index";
-	}
-	
+	   @RequestMapping("/facility")
+	   public String facility(Model model) { 
+		   List<FacilityDTO> list = null;
+		  try {
+			  list=fservice.get();
+			  model.addAttribute("facilitylist",list);
+			  model.addAttribute("center", "facility"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	      return "index";
+	   }
 	@RequestMapping("/blog")
 	public String blog(Model model) {
 		model.addAttribute("center", "blog");

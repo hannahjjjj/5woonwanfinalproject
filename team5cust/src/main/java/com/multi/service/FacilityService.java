@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.multi.dto.CateDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.ItemDTO;
 import com.multi.frame.MyService;
 import com.multi.mapper.CateMapper;
 import com.multi.mapper.FacilityMapper;
@@ -44,7 +45,9 @@ public class FacilityService implements MyService<Integer, FacilityDTO>{
 	public List<FacilityDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
-
+	public List<FacilityDTO> selectFacilityAll(int facilityid) throws Exception {
+		return mapper.selectFacilityAll(facilityid);
+	}
 	
 }
 	
