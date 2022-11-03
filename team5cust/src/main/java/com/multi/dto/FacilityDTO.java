@@ -16,6 +16,7 @@ public class FacilityDTO {
 	private int cateid;
 	private String facilityname;
 	private String facilityaddr;
+	private String facilitynumber;
 	private String facilityimg;
 	private double lat;
 	private double lng;

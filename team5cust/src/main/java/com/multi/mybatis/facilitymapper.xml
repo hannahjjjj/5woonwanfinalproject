@@ -13,12 +13,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="update" parameterType="FacilityDTO">
-		UPDATE facility SET cateid=#{cateid},facilityname=#{facilityname},facilityaddr=#{facilityaddr},facilityimg=#{facilityimg},lat=#{lat},lng=#{lng} 
+		UPDATE facility SET cateid=#{cateid},facilityname=#{facilityname},facilityaddr=#{facilityaddr},facilitynumber=#{facilitynumber},facilityimg=#{facilityimg},lat=#{lat},lng=#{lng} 
 		WHERE facilityid=#{facilityid}
 	</update>
  
 	<insert id="insert" parameterType="FacilityDTO">
-		INSERT INTO facility VALUES (#{facilityid},#{cateid},#{facilityname},#{facilityaddr},#{facilityimg},#{lat},#{lng})
+		INSERT INTO facility VALUES (#{facilityid},#{cateid},#{facilityname},#{facilityaddr},#{facilitynumber},#{facilityimg},#{lat},#{lng})
 	</insert>
 	
 	<delete id="delete" parameterType="Integer">

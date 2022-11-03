@@ -53,6 +53,11 @@ public class MainController {
 		model.addAttribute("center", "contact");
 		return "index";
 	}
+	@RequestMapping("/search")
+	public String search(Model model) {
+		model.addAttribute("center", "search");
+		return "index";
+	}
 }
 
 
