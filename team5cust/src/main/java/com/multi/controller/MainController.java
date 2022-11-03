@@ -18,6 +18,8 @@ public class MainController {
 	@Autowired
 	CustService custservice;
 	
+	
+	@Autowired
 	FacilityService fservice;
 
 	@RequestMapping("/index")
@@ -30,11 +32,6 @@ public class MainController {
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("center", "about");
-		return "index";
-	}
-	@RequestMapping("/properties")
-	public String properties(Model model) {
-		model.addAttribute("center", "properties");
 		return "index";
 	}
 	@RequestMapping("/contact")
@@ -95,6 +92,7 @@ public class MainController {
 		   List<FacilityDTO> list = null;
 		  try {
 			  list=fservice.get();
+			  System.out.println(list);
 			  model.addAttribute("facilitylist",list);
 			  model.addAttribute("center", "facility"); 
 		} catch (Exception e) {
