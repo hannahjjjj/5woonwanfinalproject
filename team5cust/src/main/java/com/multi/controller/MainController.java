@@ -100,18 +100,18 @@ public class MainController {
 	
 
 	
-	   @RequestMapping("/facility")
-	   public String facility(Model model) { 
-		   List<FacilityDTO> list = null;
-		  try {
-			  list=fservice.get();
-			  model.addAttribute("facilitylist",list);
-			  model.addAttribute("center", "facility"); 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	      return "index";
-	   }
+//	   @RequestMapping("/facility")
+//	   public String facility(Model model) { 
+//		   List<FacilityDTO> list = null;
+//		  try {
+//			  list=fservice.get();
+//			  model.addAttribute("facilitylist",list);
+//			  model.addAttribute("center", "facility"); 
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	      return "index";
+//	   }
 	@RequestMapping("/blog")
 	public String blog(Model model) {
 		model.addAttribute("center", "blog");

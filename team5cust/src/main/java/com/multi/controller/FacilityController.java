@@ -19,18 +19,21 @@ public class FacilityController {
 	@Autowired
 	FacilityService fservice;
 	
-	@RequestMapping("/health")
-	public String health(Model model,int cateid) {
+	@RequestMapping("/facility")
+	public String facility(Model model,int cateid) {
 		CateDTO cate = null;
 		List<FacilityDTO> fac = null;
+		
 		try {
-			cate = cservice.get(10);
+			cate = cservice.get(cateid);
 			model.addAttribute("cate", cate);
+			model.addAttribute("center","facility/health");
 			fac = fservice.selectFacilityAll(cateid);
-			model.addAttribute("fl", fac);
+			model.addAttribute("facilitylist", fac);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(fac);
 		return "index";
 	}
 
