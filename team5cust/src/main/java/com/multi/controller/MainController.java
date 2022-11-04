@@ -105,6 +105,12 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/blog-single")
+	public String blogsingle(Model model) {
+		model.addAttribute("center", "blog-single");
+		return "index";
+	}
+	
 	@RequestMapping("/search")
 	public String search(Model model) {
 		model.addAttribute("center", "search");

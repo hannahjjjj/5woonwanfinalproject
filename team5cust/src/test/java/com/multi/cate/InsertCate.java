@@ -16,7 +16,7 @@ import com.multi.service.CateService;
 	@Test
 	void contextLoads() {
 
-		CateDTO cate = new CateDTO(0,"헬스");
+		CateDTO cate = new CateDTO(10,"헬스");
 		try {
 			service.register(cate);
 		} catch (Exception e) {

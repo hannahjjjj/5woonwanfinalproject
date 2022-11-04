@@ -45,8 +45,8 @@ public class FacilityService implements MyService<Integer, FacilityDTO>{
 	public List<FacilityDTO> get() throws Exception {
 		return mapper.selectAll();
 	}
-	public List<FacilityDTO> selectFacilityAll(int facilityid) throws Exception {
-		return mapper.selectFacilityAll(facilityid);
+	public List<FacilityDTO> selectFacilityAll(int cateid) throws Exception {
+		return mapper.selectFacilityAll(cateid);
 	}
 	
 }
