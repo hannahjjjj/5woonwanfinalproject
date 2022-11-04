@@ -92,7 +92,6 @@ public class MainController {
 		   List<FacilityDTO> list = null;
 		  try {
 			  list=fservice.get();
-			  System.out.println(list);
 			  model.addAttribute("facilitylist",list);
 			  model.addAttribute("center", "facility"); 
 		} catch (Exception e) {

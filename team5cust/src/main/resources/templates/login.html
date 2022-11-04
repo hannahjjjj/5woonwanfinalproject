@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <head>
+<meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
 
-<script >
-
-
+<script>
 function modal(){
 	$('#testModal').modal();
 };
@@ -17,7 +16,6 @@ $(document).ready(function(){
 	}
 	
 	$('#login_btn').click(function(){
-		alert("");
 		 $('#login_form').attr(
 			{
 				'action':'/loginimpl',
@@ -34,7 +32,9 @@ $(document).ready(function(){
 </script>
 
 </head>
-     <!-- ¸ğ´Ş -->
+
+<body>
+     <!-- ëª¨ë‹¬ -->
 	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -44,9 +44,9 @@ $(document).ready(function(){
 					</button>
 
 				</div>
-				<div class="modal-body">ID¶Ç´Âºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.</div>
+				<div class="modal-body">IDë˜ëŠ”ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.</div>
 				<div class="modal-footer">
-					<button class="btn" type="button" data-dismiss="modal">È®ÀÎ</button>
+					<button class="btn" type="button" data-dismiss="modal">í™•ì¸</button>
 				</div>
 			</div>
 		</div>
@@ -84,6 +84,5 @@ $(document).ready(function(){
 </div>
 
 <br><br><br><br><br><br>
-         
 
-
+</body>
