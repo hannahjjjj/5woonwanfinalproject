@@ -22,7 +22,6 @@ $(document).ready(function(){
 				'method':'post'
 			}		 
 		);	
-		alert("");
 		$('#login_form').submit();
 		
 		
@@ -78,9 +77,10 @@ $(document).ready(function(){
 	    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" style="color: black">
 	  </div>
 	 <button class="btn py-3 px-4 btn-primary" id="login_btn" style="width:150px;">LOGIN</button><br><br>
-     <button class="btn py-3 px-4 btn-primary" style="width:150px;"><a th:href="@{/register}" onclick="location.hrer='register.html'" id="register_btn" style="color: white">REGISTER</a></button> 
-	<br><br>
 	</form>   
+	<form class="p-1 bg-light" id="register_form">
+     <button class="btn py-3 px-4 btn-primary" style="width:150px;"><a th:href="@{/register}" onclick="location.hrer='register.html'" id="register_btn" style="color: white">REGISTER</a></button>
+     </form> 
 </div>
 
 <br><br><br><br><br><br>

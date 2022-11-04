@@ -74,7 +74,18 @@ public class MainController {
 
 	      return "index";
 	   }
+
+	   @RequestMapping("/logout")
+		public String logout(Model model,HttpSession session) {
+			
+			if(session != null) {
+				session.invalidate();
+			}
+			return "index";
+		}
+	   
 	 
+	// login 관련 end
 	@RequestMapping("/agent")
 	public String agent(Model model) {
 		model.addAttribute("center", "agent");
@@ -86,6 +97,8 @@ public class MainController {
 		model.addAttribute("center", "services");
 		return "index";
 	}
+	
+
 	
 	   @RequestMapping("/facility")
 	   public String facility(Model model) { 
@@ -116,6 +129,30 @@ public class MainController {
 		model.addAttribute("center", "search");
 		return "index";
 	}
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("center", "register");
+		model.addAttribute("registatus", "1");
+		return "index";
+	}
+	
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Model model, CustDTO cust) {
+//		System.out.println(cust);
+		try {
+			custservice.register(cust);
+			model.addAttribute("center","login");
+			model.addAttribute("registatus", "1");
+			
+		} catch (Exception e) {
+			model.addAttribute("center", "register");
+			model.addAttribute("registatus", "0");
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	
 }
 
 
