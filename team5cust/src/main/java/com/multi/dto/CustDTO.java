@@ -24,6 +24,8 @@ public class CustDTO {
 	String email;
 	String withdrawal;
 	String membership;
+	String addr;
+	String postno;
 	Date expiration;
 	Date custrdate;
 }

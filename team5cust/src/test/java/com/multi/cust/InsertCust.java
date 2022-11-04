@@ -16,7 +16,7 @@ class InsertCust {
 	@Test
 	void contextLoads() {
 		
-		CustDTO cust= new CustDTO("dbswlsgh1238", "pwd01", "윤진호", "01093971238", "M", "1996-08-04", "dbswlsgh1238@naver.com", "N", "N",null, null);
+		CustDTO cust= new CustDTO("dbswlsgh1238", "pwd01", "윤진호", "01093971238", "M", "1996-08-04", "dbswlsgh1238@naver.com", "N", "N",null, null,null, null);
 		
 		try {
 			service.register(cust);
