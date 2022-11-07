@@ -11,6 +11,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="CateDTO">
 		SELECT * FROM cate
 	</select>
+	
+	<select id="viewCateName" parameterType="Integer" resultType="CateDTO">
+	SELECT type,cateid FROM cate
+	WHERE cateid = (SELECT ca.cateid FROM cate ca
+	INNER JOIN facility f ON ca.cateid = f.cateid
+	WHERE facilityid = #{facilityid})
+	</select>
 
 	<update id="update" parameterType="CateDTO">
 		UPDATE cate SET type=#{type} WHERE cateid=#{cateid}

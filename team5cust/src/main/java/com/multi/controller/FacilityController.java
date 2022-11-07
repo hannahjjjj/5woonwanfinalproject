@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
 import com.multi.dto.FacilityDTO;
+
+
 import com.multi.service.CateService;
 import com.multi.service.FacilityService;
 
@@ -18,6 +20,8 @@ public class FacilityController {
 	CateService cservice;
 	@Autowired
 	FacilityService fservice;
+	
+
 	
 	@RequestMapping("/facility")
 	public String facility(Model model,int cateid) {
@@ -33,8 +37,24 @@ public class FacilityController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(fac);
 		return "index";
+	}
+	
+	@RequestMapping("/facilitydetail")
+	public String facilitydetail(Model model,int facilityid) {
+		FacilityDTO facility = null;
+		List<CateDTO> list = null;
+		try {
+			facility = fservice.get(facilityid);
+			list=cservice.viewCateName(facilityid);
+			model.addAttribute("catelist",list);
+			model.addAttribute("facilitydetail",facility);
+			model.addAttribute("center","facility/facilitydetail");
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
+		return "index";
+		
 	}
 
 	

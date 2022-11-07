@@ -40,7 +40,11 @@ public class CateService implements MyService<Integer, CateDTO>{
 	@Override
 	public List<CateDTO> get() throws Exception {
 		return mapper.selectAll();
-				
 	}
+	
+	public List<CateDTO> viewCateName(int facilityid) throws Exception {
+		return mapper.viewCateName(facilityid);
+	}
+
 }
 	
