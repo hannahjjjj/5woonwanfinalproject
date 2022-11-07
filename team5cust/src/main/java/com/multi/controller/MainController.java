@@ -51,10 +51,8 @@ public class MainController {
 	 @RequestMapping("/loginimpl")
 	   public String loginimpl(String id, String pwd, Model model, HttpSession session) {   
 	      CustDTO cust = null;
-	      System.out.println(id+pwd);
 	      try {
 	         cust = custservice.get(id);
-	         System.out.println(cust);
 	         if(cust == null) {
 	        	 model.addAttribute("status", "0");
 	        	 model.addAttribute("center", "login");
