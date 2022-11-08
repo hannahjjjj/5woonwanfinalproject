@@ -12,19 +12,7 @@ color:white;
 <!-- Detail Area -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h1 class="h3 mb-0 text-gray-800">회원정보
-          <th>	
-        		<button type="button" class="btn btn-sm">
-          		<a th:href="@{/orderlist(id=${mypage.custid})}"><span class="material-icons-outlined color">list_alt</span>주문목록</a>
-        		</button>
-          </th>
-          <th>	
-        		<button type="button" class="btn btn-sm">
-          		<a th:href="@{/reviewlist(id=${mypage.custid})}">리뷰 남기기</a>
-        		</button>
-          </th>
-         
-         </h1>
+        <h1 class="h3 mb-0 text-gray-800">회원정보</h1>
     </div>
     <div class="card-body">
     	<form id="cust_form">
@@ -42,29 +30,33 @@ color:white;
 		      <input type="text" readonly=readonly class="form-control" id="custname" th:value="${mypage.custname}" name="custname">
 		    </div>
 		    <div class="form-group">
+		      <label for="contect">전화번호:</label>
+		      <input type="text" readonly=readonly class="form-control" id="contect" th:value="${mypage.contect}" name="contect">
+		    </div>		    
+		    <div class="form-group">
 		      <label for="gender">성별:</label>
 		      <input type="text" readonly=readonly class="form-control" id="gender" th:value="${mypage.gender}" name="gender">
 		    </div>
+   		    <div class="form-group">
+		      <label for="birth">생일:</label>
+		      <input type="text" readonly=readonly class="form-control" id="birth" th:value="${mypage.birth}" name="birth">
+		    </div>
 		    <div class="form-group">
-		      <label for="age">나이:</label>
-		      <input type="text" readonly=readonly class="form-control" id="age" th:value="${mypage.age}" name="age">
+		      <label for="email">이메일 주소:</label>
+		      <input type="text" readonly=readonly class="form-control" id="email" th:value="${mypage.email}" name="email">
+		    </div>
+		    <div class="form-group">
+		      <label for="membership">회원권 유무:</label>
+		      <input type="text" readonly=readonly class="form-control" id="membership" th:value="${mypage.membership}" name="membership">
+		    </div>
+		    <div class="form-group">
+		      <label for="expiration">회원권 만료 예정일</label>
+		      <input type="text" readonly=readonly class="form-control" id="expiration" th:value="${mypage.expiration}" name="expiration">
 		    </div>
 		    <div class="form-group">
 		      <label for="rdate">회원가입 날짜:</label>
 		      <input type="text" readonly=readonly class="form-control" id="custrdate" th:value="${#dates.format(mypage.custrdate, 'yyyy-MM-dd')}" name="custrdate">
 		    </div>
-		    <div class="form-group">
-		      <label for="birth">생일:</label>
-		      <input type="text" readonly=readonly class="form-control" id="birth" th:value="${mypage.birth}" name="birth">
-		    </div>
-		    <div class="form-group">
-		      <label for="tel">전화번호:</label>
-		      <input type="text" readonly=readonly class="form-control" id="tel" th:value="${mypage.tel}" name="tel">
-		    </div>
-		    <div class="form-group">
-		      <label for="addr">주소:</label>
-		      <input type="text" readonly=readonly class="form-control" id="addr" th:value="${mypage.addr}" name="addr">
-		    </div>		    		    		    		    		    		    
 		  </form>
 		  <button id="update_btn" class="btn btn-default"><a th:href="@{/custupdate(id=${mypage.custid})}">회원정보 수정</a></button>
     </div>
