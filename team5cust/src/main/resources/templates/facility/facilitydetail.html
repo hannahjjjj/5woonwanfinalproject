@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
   <body>
  
     
@@ -17,50 +18,25 @@
     
     
     
-      <section class="ftco-section">
-    	<div class="col-md-3 sidebar ftco-animate">
- 		<div class="sidebar-box">
-            <form action="#" class="search-form">
-              <div class="form-group">
-                <span class="icon icon-search"></span>
-                <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-              </div>
-            </form>
-          </div>
-          <div class="sidebar-box ftco-animate" >
+      <section class="ftco-section ftco-degree-bg">>
 
-            <div class="categories">
-              <h3>Categories</h3>
-              <li><a th:href="@{/facility(cateid=10)}">HEALTH</a></li>
-              <li><a th:href="@{/facility(cateid=20)}">PILATES</a></li>
-              <li><a th:href="@{/facility(cateid=30)}">CROSSFIT</a></li>
-
-            </div>
-
-          </div>
-          </div>
-          </section>
+       
           
-          <section class="ftco-section ftco-no-pb">
-			<div class="container" th:each="fd:${facilitydetail}">
-				<div class="row no-gutters">
+       
+			<div class="container">
+				<div class="col-md-10 order-md-last ftco-animate"  th:each="fd:${facilitydetail}" >
 				<div class="property-wrap ftco-animate">
-<!--         			<a th:href="@{/facility(facilityid=${fl.facilityid})}"class="img"><img id="flimg" th:src="@{/images/}+${fl.facilityimg}+'.jpg'"></a> -->
          			<a th:href="@{/facilitydetail(facilityid=${fd.facilityid})}"class="img" th:style="'background-image: url('+@{images/}+${fd.facilityimg}+@{.jpg}+');'"></a>
-					</div>
-					<div class="col-md-6 wrap-about py-md-5 ftco-animate">
-	          <div class="heading-section p-md-5">
-	           
-        			<div class="facility_name" th:text="${fd.facilityname}"> </div>
-        			<div class="facility_number" th:text="${fd.facilitynumber}"> </div>
-
-	            
-	          </div>
-					</div>
-				</div>
-				</div>
-			</div>
-		</section>
+					<div class="col-md-10 order-md-last ftco-animate">
+	         		<div class="heading-section p-md-5">
+	         		<div class="facility_name" th:text="${fd.facilityname}"> </div>
+        			<div class="facility_number" th:text="${fd.facilitynumber}"> </div>	            
+	           </div>
+			   </div>
+			   </div>
+			   </div>
+			   </div>
+		  </section>
 
 
    

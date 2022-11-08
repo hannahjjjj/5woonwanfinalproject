@@ -44,6 +44,7 @@ public class FacilityController {
 	public String facilitydetail(Model model,int facilityid) {
 		FacilityDTO facility = null;
 		List<CateDTO> list = null;
+		List<FacilityDTO> fac = null;
 		try {
 			facility = fservice.get(facilityid);
 			list=cservice.viewCateName(facilityid);
