@@ -48,7 +48,7 @@
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" th:href="@{/index}">5WoonWan</a>
+	      <a class="navbar-brand" th:href="@{/index}"><span>5운완</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -57,6 +57,8 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a th:href="@{/index}" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a th:href="@{/about}" class="nav-link">About</a></li>
+	          <li class="nav-item"><a th:href="@{/item}" class="nav-link">Item</a></li>
+	          <li class="nav-item" th:if="${session.logincust != null}"><a th:href="@{/orderdetail(id=${session.logincust.custid})}" class="nav-link">OrderDetail</a></li>
 	          <li class="nav-item"><a th:href="@{/agent}" class="nav-link">Agent</a></li>
 	          <li class="nav-item"><a th:href="@{/services}" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a th:href="@{/facility(cateid=10)}" class="nav-link">Facility</a></li>
@@ -136,7 +138,7 @@
           <div class="col-md-12 text-center">
 	
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">5운완</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>

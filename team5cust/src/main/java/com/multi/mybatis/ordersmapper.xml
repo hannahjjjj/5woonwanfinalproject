@@ -21,4 +21,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM orders WHERE orderid = #{orderid}
 	</select>
 	
+		<select id="orderall" parameterType="String" resultType="OrdersDTO">
+		SELECT o.orderid as orderid, it.itemname as item_name, o.odate as odate, it.itemprice as item_price, it.itemcount as item_count, ins.instructorname as instructor_name 
+		FROM item it
+		INNER JOIN orders as o ON it.itemid=o.itemid
+		INNER JOIN instructor ins ON ins.instructorid=it.instructorid
+		WHERE o.custid = #{custid}
+	</select>
+	
 </mapper>

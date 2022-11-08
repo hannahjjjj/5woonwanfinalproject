@@ -1,37 +1,26 @@
-package com.multi.orders;
-
-import java.util.Date;
+package com.multi.custbody.copy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.OrdersDTO;
-import com.multi.service.OrdersService;
-
+import com.multi.dto.CustbodyDTO;
+import com.multi.service.CustbodyService;
 
 @SpringBootTest
-class InsertOrders {
+class DeleteCustbody {
 
 	@Autowired
-	OrdersService service;
+	CustbodyService service;
 	
 	@Test
 	void contextLoads() {
-		Date day=new Date();
-		OrdersDTO order = new OrdersDTO(0, 100,"id08", day,null,0,0,0);
 		try {
-			service.register(order);
+			service.remove(1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println(order);
 		}
-		
+		System.out.println("DELETE OK");
 	}
-
 }
-
-
-
-

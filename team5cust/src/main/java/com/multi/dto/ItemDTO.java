@@ -18,10 +18,11 @@ public class ItemDTO {
 	private int instructorid;
 	private String itemname;
 	private String itemimg;
-	private int counting;
+	private int count;
 	private int period;
 	private int itemprice;
 	private String itemstate;
+	private String instructorname;
 	
 	private MultipartFile img;
 }
