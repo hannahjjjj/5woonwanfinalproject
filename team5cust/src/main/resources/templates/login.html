@@ -33,9 +33,6 @@ $(document).ready(function(){
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script>
-function saveToDos(token) { //item을 localStorage에 저장합니다. 
-	typeof(Storage) !== 'undefined' && sessionStorage.setItem('AccessKEY', JSON.stringify(token)); 
-};
 
 window.Kakao.init('f4363fcc8b7b65aa79629e4cb5604c80');
         
@@ -61,6 +58,10 @@ function kakaologin() {
 const login = document.querySelector('#kakaologin');
 login.addEventListener('click', kakaoLogin);
 
+
+function loginimpl(){
+	
+}
 </script>
 
 <!-- kakko login test -->

@@ -43,7 +43,9 @@ public class OrdersService implements MyService<Integer, OrdersDTO> {
 		return mapper.selectAll();
 	}
 
-
+	public List<OrdersDTO> orderall(String custid) throws Exception{
+		return mapper.orderall(custid);
+	}
 	
 	
 	// 주문상세 인서트할때
