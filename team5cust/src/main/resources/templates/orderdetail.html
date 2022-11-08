@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/re_style.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,300,0,0" />
+<style>
+#r_img {
+	width: 150px;
+}
+
+h3 {
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+</style>
+<script>
+	function inv(custid) {
+		var c = confirm('강사를 선택해주세요');
+//		var instructorid = $()
+
+		
+	}
+
+	
+	function rev(custid) {
+		var c = confirm('리뷰를 작성 하시겠습니까?');
+		var itemid = $('#itemid').val();
+		var item_name = $('#item_name').val();
+		var item_count = $('#item_count').val();
+		var total_cnt = $('#total_cnt').val();
+		if (c == true) {
+			location.href = '[[@{/review/reinsert?id=}]]' + cust_id
+					+ '&[[@{itemid=}]]' + itemid;
+		}
+	}
+
+	$(document).ready(function() {
+
+	});
+</script>
+
+
+<body>
+
+	<section class="ftco-section">
+		<div class="item-element" style="">
+
+			<!-- Container (The Band Section) -->
+			<div class="container text-center">
+				<div class="login-card">
+					<h3>OrderDetail Page</h3>
+					<table id="otb" class="table">
+						<thead>
+							<tr class="active">
+
+								<th>주문번호</th>
+								<th>상품명</th>
+								<th>주문날짜</th>
+								<th>상품수량</th>
+								<th>주문금액</th>
+								<th>강사</th>
+								<th>리뷰작성</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c:${list}">
+								<td th:text="${c.orderid}" id="orderid"><input type=hidden
+									th:value="${c.itemid}" readonly="readonly" id="itemid">
+								<td th:text="${c.item_name}" id="item_name"></td>
+								<td th:text="${c.odate}" id="odate"></td>
+								<td th:text="${c.item_count}"></td>
+								<td th:text="${c.item_price}"></td>
+								<!-- <td th:href= "@{/order/review(id=${c.custid})}" th:text="${c.custid}"></td> -->
+
+
+								<td th:text = "${c.instructor_name}"></td>					
+								<td><button style="background-color: pink;"
+										th:onclick="rev([[${c.custid}]]);"
+										class="btn btn-default btn-sm" id="review_btn">
+										<!--  button을 누를때마다 rev()함수 호출 -->
+										<span class="glyphicon glyphicon-pencil"></span> REVIEW
+									</button></td>
+
+							</tr>
+
+						</tbody>
+					</table>
+					<br>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+	
+
+</body>
+
+
+
