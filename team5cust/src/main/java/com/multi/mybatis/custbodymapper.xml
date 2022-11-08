@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.CustbodyMapper">
+	
+	<select id="select" parameterType="Integer" resultType="CustbodyDTO">
+		SELECT * FROM custbody WHERE bodyinfoid=#{bodyinfoid}
+	</select>
+
+	<select id="selectAll" resultType="CustbodyDTO">
+		SELECT * FROM custbody
+	</select>
+
+	<update id="update" parameterType="CustbodyDTO">
+		UPDATE custbody SET bodyinfoid=#{bodyinfoid}, custid=#{custid}, sysdate(),
+		height=#{height}, bodyfat=#{bodyfat}, muscle=#{muscle}, weight=#{weight}
+		WHERE bodyinfoid=#{bodyinfoid}
+	</update>
+
+	<insert id="insert" parameterType="CustbodyDTO">
+		INSERT INTO cart VALUES (#{bodyinfoid},#{custid},sysdate(),#{height},
+		#{bodyfat},#{muscle},#{weight})
+	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM cart WHERE bodyinfoid=#{bodyinfoid}
+	</delete>
+</mapper>
