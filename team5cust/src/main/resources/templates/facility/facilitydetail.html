@@ -10,7 +10,44 @@ img{
 </style>
 
   <body>
- 
+  <script>
+function getdata(facilityid){
+   $.ajax({
+      url:'/marker',
+      data:{'facilityid':facilityid},
+      success:function(data){
+         display(data);
+      }
+   });
+};
+$(document).ready(function(){
+  var fid=$('#fid').text();  
+  	getdata(fid);
+	   
+});
+function display(data){
+	
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(data[0].lat,data[0].lng), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(data[0].lat,data[0].lng); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+}
+</script>
     
     <section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
     
@@ -55,6 +92,7 @@ img{
 			<div class="container">
 				<div class="col-md-50 order-md-last ftco-animate" style=text-align:center;>
 				<div th:each="fd:${facilitydetail}">
+        		<div id="fid" th:text="${fd.facilityid}" style="display:none"></div>
 				<div class="property-wrap ftco-animate">
          			<img th:src="@{/images/}+${fd.facilityimg}+'.jpg'"alt="">
 			   </div>
@@ -66,31 +104,7 @@ img{
         			<br>
         			
         			 <div id="map" style="width:100%;height:350px;"></div>
-
-				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0fea3fe201a1743afb33d24f5621e9cd"></script>
-				<script>
-				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-				    mapOption = { 
-				        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-				        level: 3 // 지도의 확대 레벨
-				    };
-				
-				var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-				
-				// 마커가 표시될 위치입니다 
-				var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-				
-				// 마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-				    position: markerPosition
-				});
-				
-				// 마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-				
-				// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-				// marker.setMap(null);    
-				</script>            
+        			 
 			   </div>
 	           </div>
 			   </div>
