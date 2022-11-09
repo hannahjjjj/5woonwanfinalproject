@@ -45,6 +45,10 @@ public class CustService implements MyService<String,CustDTO>{
 		// TODO Auto-generated method stub
 		return mapper.selectAll();
 	}
+	
+	public CustDTO selectkakkoid(String kakkoid) throws Exception{
+		return mapper.selectkakkoid(kakkoid);
+	}
 
 }
 	

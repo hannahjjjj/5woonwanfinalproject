@@ -38,12 +38,27 @@ window.Kakao.init('f4363fcc8b7b65aa79629e4cb5604c80');
         
 function kakaologin() {
     Kakao.Auth.login({
-      scope: 'account_email,gender,birthday',
+      scope: 'profile_nickname,account_email,gender,birthday',
       success: function (response) {
         Kakao.API.request({
           url: '/v2/user/me',
           success: function (response) {
-        	  console.log(response)
+              $.ajax({
+                  url:"/kakkologin",
+                  data:{"id":response.id, 
+                	  "kakko_account":response.kakao_account,
+                	  "name":JSON.stringify(response.properties.nickname),
+                	  "email":JSON.stringify(response.kakao_account.email),
+                	  "gender":JSON.stringify(response.kakao_account.gender),
+                	  "birthday":JSON.stringify(response.kakao_account.birthday)
+                	  },
+                  Type:"post",
+                  success:function(data){
+                      //성공적으로 하고나면 이동할 url
+                      location.href="/";  
+                  }
+                  
+               });
           },
           fail: function (error) {
             console.log(error)
@@ -58,13 +73,7 @@ function kakaologin() {
 const login = document.querySelector('#kakaologin');
 login.addEventListener('click', kakaoLogin);
 
-
-function loginimpl(){
-	
-}
 </script>
-
-<!-- kakko login test -->
 
 </head>
 
@@ -89,15 +98,8 @@ function loginimpl(){
 	<br><br><br>
    <!-- Contact Form -->
    <br><br><br>
-   <div>
-   		<a class="navbar-brand" style="margin:auto; text-align:center;">
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   		LogIn</a>
+   <div align="center">
+   		<a class="navbar-brand"   style="margin:auto; text-align:center;">LogIn</a>
    </div>
    <br>
 <div class="comment-form-wrap pt-2" style="margin:auto; text-align:center; width:700px;">
@@ -115,7 +117,7 @@ function loginimpl(){
 	 <button class="btn py-3 px-4 btn-primary" id="login_btn" style="width:150px; height:50px;">LOGIN</button><br><br>
 	</form>   
 	<form class="p-1 bg-light" id="register_form">
-     <button class="btn py-3 px-4 btn-primary" style="width:150px; height:50px;"><a th:href="@{/register}" onclick="location.hrer='register.html'" id="register_btn" style="color: white">REGISTER</a></button>
+     <button class="btn py-3 px-4 btn-primary" style="width:150px; height:50px;"><a th:href="@{/register}" onclick="location.href='register.html'" id="register_btn" style="color: white">REGISTER</a></button>
      </form> 
 	<form class="p-1 bg-light" id="kakkologin_form">
 	<br>

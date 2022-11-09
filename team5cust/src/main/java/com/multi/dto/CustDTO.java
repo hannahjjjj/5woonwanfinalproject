@@ -28,4 +28,5 @@ public class CustDTO {
 	String postno;
 	Date expiration;
 	Date custrdate;
+	String kakkoid;
 }
