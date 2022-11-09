@@ -7,18 +7,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="select" parameterType="String" resultType="CustDTO">
 		SELECT * FROM cust WHERE custid=#{custid}
 	</select>
+	
+	<select id="selectkakkoid" parameterType="String" resultType="CustDTO">
+		SELECT * FROM cust WHERE kakkoid=#{kakkoid}
+	</select>
 
 	<select id="selectAll" resultType="CustDTO">
 		SELECT * FROM cust
 	</select>
 
 	<update id="update" parameterType="CustDTO">
-		UPDATE cust SET custpwd=#{custpwd},custname=#{custname},contact=#{contact},gender=#{gender},birth=#{birth},email=#{email},withdrawal=#{withdrawal},addr=${addr},membership=#{membership},expiration=#{expiration},custrdate=#{custrdate} 
+		UPDATE cust SET custpwd=#{custpwd},custname=#{custname},contact=#{contact},gender=#{gender},birth=#{birth},email=#{email},withdrawal=#{withdrawal},addr=${addr},membership=#{membership},expiration=#{expiration},custrdate=#{custrdate},kakkoid=#{kakkoid} 
 		WHERE custid=#{custid}
 	</update>
  
 	<insert id="insert" parameterType="CustDTO">
-		INSERT INTO cust VALUES (#{custid},#{custpwd},#{custname},#{contact},#{gender},#{birth},#{email},NULL,NULL,NULL,NOW(),#{addr},#{postno})
+		INSERT INTO cust VALUES (#{custid},#{custpwd},#{custname},#{contact},#{gender},#{birth},#{email},NULL,NULL,NULL,NOW(),#{addr},#{postno},#{kakkoid})
 	</insert>
 	
 	<delete id="delete" parameterType="CustDTO">

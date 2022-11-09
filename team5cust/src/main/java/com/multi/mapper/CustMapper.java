@@ -9,4 +9,5 @@ import com.multi.frame.MyMapper;
 @Repository
 @Mapper
 public interface CustMapper extends MyMapper<String,CustDTO>{
+	public CustDTO selectkakkoid(String kakkoid) throws Exception;
 }
