@@ -1,6 +1,8 @@
 package com.multi.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ public class AJAXController {
 	CustService custservice;
 	
 	@RequestMapping("/kakkologin")
-	public String likedcnt(String id,String name,String birthday,String email,String gender,HttpSession session) {
+	public String kakkologin(String id,String name,String birthday,String email,String gender,HttpSession session) {
 		name=name.substring(1, name.length()-1);
 		birthday=birthday.substring(1, birthday.length()-1);
 		email=email.substring(1, email.length()-1);
