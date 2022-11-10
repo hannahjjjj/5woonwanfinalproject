@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
 import com.multi.dto.FacilityDTO;
-
-
+import com.multi.dto.InstructorDTO;
 import com.multi.service.CateService;
 import com.multi.service.FacilityService;
+import com.multi.service.InstructorService;
 
 @Controller
 public class FacilityController {
@@ -20,6 +20,8 @@ public class FacilityController {
 	CateService cservice;
 	@Autowired
 	FacilityService fservice;
+	@Autowired
+	InstructorService iservice;
 	
 
 	
@@ -45,11 +47,14 @@ public class FacilityController {
 		FacilityDTO facility = null;
 		List<CateDTO> list = null;
 		List<FacilityDTO> fac = null;
+		List<InstructorDTO> ins = null;
 		try {
 			facility = fservice.get(facilityid);
 			list=cservice.viewCateName(facilityid);
+			ins=iservice.selectFacilityList(facilityid);
 			model.addAttribute("catelist",list);
 			model.addAttribute("facilitydetail",facility);
+			model.addAttribute("ins",ins);
 			model.addAttribute("center","facility/facilitydetail");
 		} catch (Exception e) {			
 			e.printStackTrace();
