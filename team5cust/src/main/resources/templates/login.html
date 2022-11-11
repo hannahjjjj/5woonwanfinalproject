@@ -31,7 +31,7 @@ $(document).ready(function(){
 </script>
 <!-- kakko login test -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script>
 
 window.Kakao.init('f4363fcc8b7b65aa79629e4cb5604c80');
@@ -74,7 +74,24 @@ const login = document.querySelector('#kakaologin');
 login.addEventListener('click', kakaoLogin);
 
 </script>
+<script>
+function naverLogin() {
+	  var naverLogin = new naver.LoginWithNaverId(
+				{
+					clientId: "ftBRzhRgpIJDkToc4CQX", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+					callbackUrl: "http://127.0.0.1", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+					isPopup: false,
+					callbackHandle: false
+				}
+			);	
+	  naverLogin.init();
 
+}
+</script>
+
+  <script>
+
+  </script>
 </head>
 
 <body>
@@ -122,9 +139,15 @@ login.addEventListener('click', kakaoLogin);
 	<form class="p-1 bg-light" id="kakkologin_form">
 	<br>
 		<a id="kakao-login-btn" href="javascript:kakaologin()">
-  			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" style="width:150px; height:50px;">
+  			<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222" alt="카카오 로그인 버튼" style="width:200px; height:50px;">
 		</a>
 		<p id="token-result"></p>
+	</form>
+	<form class="p-1 bg-light" id="naverlogin_form">
+		 <a id="naverIdLogin_loginButton" href="javascript:naverLogin()">
+		 	<img src="images/naverlogin.png" style="width:200px; height:50px;">
+	      </a>
+		<br>
 	</form>
 </div>
 

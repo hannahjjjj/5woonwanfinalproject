@@ -46,6 +46,11 @@ public class AJAXController {
 		}
 		return "";
 	}
+	@RequestMapping("/naverlogin")
+	public String naverlogin(String email) {
+		System.out.println(email);
+		return "";
+	}
 	
 	@RequestMapping("/marker")
 	public Object marker(int facilityid) {
