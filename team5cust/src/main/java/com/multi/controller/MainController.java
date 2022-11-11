@@ -150,21 +150,70 @@ public class MainController {
 		
 		return "index";
 	}
-	@RequestMapping("/mypage")
-	public String mypage(Model model) {
-		model.addAttribute("center", "cust/mypage");
+	
+
+
+	@RequestMapping("/custdetail")
+	public String custdetail(Model model, String id) {
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(id);
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("center","/cust/custdetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "index";
 	}
 	
+	@RequestMapping("/custupdate")
+	public String custupdate(Model model, String id) {
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(id);
+			model.addAttribute("custupdate", cust);
+			model.addAttribute("center", "/cust/custupdate");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/custdelete")
+	public String custdelete(Model model, String id) {
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(id);
+			model.addAttribute("custdelete", cust);
+			model.addAttribute("center", "/cust/custdelete");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/custupdateimpl")
+	public String custupdateimpl(Model model, CustDTO cust, HttpSession session) {
+		try {
+			custservice.modify(cust);
+			session.setAttribute("logincust", cust);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:custdetail?id="+cust.getCustid();
+	}
+	
+	@RequestMapping("/custdeleteimpl")
+	public String custdeleteimpl(Model model, String custid,HttpSession session) {
+		try {
+			custservice.remove(custid);
+			if(session != null) {
+				session.invalidate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:";
+	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
