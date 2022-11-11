@@ -44,4 +44,7 @@ public class InstructorService implements MyService<Integer, InstructorDTO>{
 		// TODO Auto-generated method stub
 		return mapper.selectAll();
 	}
+	public List<InstructorDTO> selectFacilityList(int facilityid) throws Exception{
+		return mapper.selectFacilityList(facilityid);
+	}
 	}
