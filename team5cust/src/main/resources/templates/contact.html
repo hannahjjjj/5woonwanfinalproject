@@ -16,8 +16,8 @@ var lng=126.9769576;
 function display(){
 	var mapContainer=document.querySelector('#map');
 	var mapOption = {
-		center: new kakao.maps.LatLng(lat,lng), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-    	level: 8 // ÁöµµÀÇ È®´ë ·¹º§
+		center: new kakao.maps.LatLng(lat,lng), // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½ï¿½ï¿½Ç¥
+    	level: 8 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 	map = new kakao.maps.Map(mapContainer, mapOption); 
 	
@@ -26,21 +26,21 @@ function display(){
 function displaymarker(data){
 	for(var i=0;i<data.length;i++){
 		 var marker = new kakao.maps.Marker({
-		        map: map, // ¸¶Ä¿¸¦ Ç¥½ÃÇÒ Áöµµ
-		        position: new kakao.maps.LatLng(data[i].lat,data[i].lng) // ¸¶Ä¿ÀÇ Å¸ÀÌÆ², ¸¶Ä¿¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®¸é Å¸ÀÌÆ²ÀÌ Ç¥½ÃµË´Ï´Ù
-		        //image : markerImage // ¸¶Ä¿ ÀÌ¹ÌÁö 
+		        map: map, // ï¿½ï¿½Ä¿ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		        position: new kakao.maps.LatLng(data[i].lat,data[i].lng) // ï¿½ï¿½Ä¿ï¿½ï¿½ Å¸ï¿½ï¿½Æ², ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Æ²ï¿½ï¿½ Ç¥ï¿½ÃµË´Ï´ï¿½
+		        //image : markerImage // ï¿½ï¿½Ä¿ ï¿½Ì¹ï¿½ï¿½ï¿½ 
 		    });
 		 var iwContent = '<h3>'+data[i].title+'</h3>';
 		 iwContent+='<img width="50px" src="/img/'+data[i].img+'">';
-		 var iwPosition = new kakao.maps.LatLng(data[i].lat,data[i].lng); //ÀÎÆ÷À©µµ¿ì Ç¥½Ã À§Ä¡ÀÔ´Ï´Ù
+		 var iwPosition = new kakao.maps.LatLng(data[i].lat,data[i].lng); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ô´Ï´ï¿½
 
-		// ÀÎÆ÷À©µµ¿ì¸¦ »ý¼ºÇÕ´Ï´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½
 		var infowindow = new kakao.maps.InfoWindow({
 	    	position : iwPosition, 
 	    	content : iwContent 
 		});
 	kakao.maps.event.addListener(marker, 'mouseover',mouseoverListener(marker,infowindow));
-	// ¸¶Ä¿¿¡ ¸¶¿ì½º¾Æ¿ô ÀÌº¥Æ®¸¦ µî·ÏÇÕ´Ï´Ù
+	// ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½Æ¿ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½
 	kakao.maps.event.addListener(marker, 'mouseout',mouseoutListener(marker,infowindow)); 
 	kakao.maps.event.addListener(marker, 'click', mouseclickListener(data[i].target));
 	
@@ -150,6 +150,13 @@ $(document).ready(function(){
         	</div>
         </div>
       </div>
+      <div>
+   	    <link rel="stylesheet" th:href="@{/css/btn_top.css}">
+      	<script th:src="@{/js/btn_top.js}"></script>
+    	<a id="TopButton" class="ScrollButton"><img src="/images/btn_up_light.png" width="35px" height="35px"></a>
+		<a id="BottomButton" class="ScrollButton"><img src="/images/btn_down_light.png" width="35px" height="35px"></a>
+		<a id="footer"></a>
+	  </div>
     </section>
 
   </body>
