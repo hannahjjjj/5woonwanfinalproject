@@ -47,7 +47,7 @@ public class AJAXController {
 	@RequestMapping("/naverlogin")
 	public String naverlogin(String email,String name,String gender,String birthday,String birthyear,String mobile,HttpSession session) {
 		
-		CustDTO cust =new CustDTO(email, null, name, mobile, gender, birthyear+birthday, email, null, null, null, null, null, null, null);
+		CustDTO cust =new CustDTO(email, null, name, mobile, gender, birthyear+"-"+birthday, email, null, null, null, null, null, null, null);
 		
 		try {
 			if(custservice.get(email)==null) {
@@ -59,7 +59,6 @@ public class AJAXController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("c");
 		return "";
 	}
 	
