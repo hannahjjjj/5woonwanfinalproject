@@ -1,0 +1,14 @@
+.ScrollButton {
+  position: fixed;   /* 버튼의 위치 고정 */
+  right: 10px;       /* x 위치 입력 */
+  cursor: pointer;   /* 호버링 했을 때 커서 모양 변경 */
+  z-index: 10;       /* 다른 태그에 가려지지 않게 우선순위 변경 */
+  display: none;     /* 스크롤 위치에 상관없이 보이게 하려면 생략 */
+}
+/* 두 태그에 각각 y 위치 입력 */
+#TopButton {
+  bottom: 108px;        
+}
+#BottomButton {
+  bottom: 75px;
+}

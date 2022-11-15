@@ -15,7 +15,7 @@ class UpdateItem {
 	
 	@Test
 	void contextLoads() {
-		ItemDTO item = new ItemDTO(101,100,200,"PT","a.jpg", 10, 0, 550000, "Y", null);
+		ItemDTO item = new ItemDTO(101,100,200,"PT","a.jpg", 10, 0, 550000, "Y",NULL);
 		try {
 			service.modify(item);
 		} catch (Exception e) {

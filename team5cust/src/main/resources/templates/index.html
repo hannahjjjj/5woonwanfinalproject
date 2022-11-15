@@ -66,8 +66,9 @@
 	          <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Contact</a></li>
 	          <!-- 로그인시 아이콘 변경   -->
 	          <li class="nav-item"><a th:href="@{/login}" class="nav-link" th:if = "${session.logincust == null}"><img src="/images/login_before.png" style="width:25px; height:25px;"></a></li>
-	          <li class="nav-item"><a th:href="@{/mypage}" class="nav-link" th:if = "${session.logincust != null}"><img src="/images/login_after.png" style="width:25px; height:25px;"></a></li>
+	          <li class="nav-item"><a th:href="@{/custdetail(id=${session.logincust.custid})}" class="material-icons md maincolor" th:if = "${session.logincust != null}" th:text="${session.logincust.custname}+'님'">person</a></li>
 	          <li class="nav-item"><a th:href="@{/logout}" class="nav-link" th:if = "${session.logincust != null}"><img src="/images/logout.png" style="width:25px; height:25px;"></a></li>
+
 	        </ul>
 	      </div>
 	    </div>

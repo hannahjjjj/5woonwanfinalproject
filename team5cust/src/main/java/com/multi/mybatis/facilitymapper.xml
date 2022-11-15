@@ -15,6 +15,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectFacilityAll" parameterType="Integer" resultType="FacilityDTO">
 		SELECT * FROM facility WHERE cateid=#{cateid}
 	</select>
+	
+	<select id="viewFacilityName" parameterType="Integer" resultType="FacilityDTO">
+	SELECT * FROM facility
+	WHERE cateid = (SELECT f.facilityid FROM facility f
+	INNER JOIN instructor i ON f.facilityid = i.facilityid
+	WHERE instructorid = #{instructorid})
+	</select>
 
 	<update id="update" parameterType="FacilityDTO">
 		UPDATE facility SET cateid=#{cateid},facilityname=#{facilityname},facilityaddr=#{facilityaddr},facilitynumber=#{facilitynumber},facilityimg=#{facilityimg},lat=#{lat},lng=#{lng} 

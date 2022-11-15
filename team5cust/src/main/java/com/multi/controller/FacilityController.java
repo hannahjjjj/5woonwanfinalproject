@@ -62,7 +62,21 @@ public class FacilityController {
 		return "index";
 		
 	}
-
+	@RequestMapping("/instructordetail")
+	public String instructordetail(Model model,int instructorid) {
+		InstructorDTO inst = null;
+		List<FacilityDTO> fac = null;	
+		try {
+			inst = iservice.get(instructorid);
+			fac = fservice.viewFacilityName(instructorid);
+			model.addAttribute("facilitylist",fac);
+			model.addAttribute("instructordetail",inst);
+			model.addAttribute("center","facility/instructordetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
 	
 
 }
