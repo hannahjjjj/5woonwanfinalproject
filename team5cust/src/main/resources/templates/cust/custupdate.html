@@ -8,7 +8,7 @@ $(document).ready(function () {
 		if(c == true){
 			$('#cust_form').attr({
 				'method':'post',
-				'action': '/custupdateimpl'
+				'action': '[[@{/custupdateimpl}]]'
 			});
 		
 			$('#cust_form').submit();
@@ -47,9 +47,9 @@ $(document).ready(function () {
           <div class="sidebar-box ftco-animate" >
             <div class="categories">
               <h3>My Page 메뉴</h3> <!-- 메뉴 버튼 생성시 에러발생 확인 필요 -->
-              <!-- <li><a th:href="@{/custdetail(id=${custdetail.custid})}">회원정보 수정</a></li>
+              <li><a th:href="@{/custdetail(id=${custupdate.custid})}">내 정보</a></li>
               <li><a th:href="@{/cust}">스케줄 관리</a></li>
-              <li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li> -->
+              <li><a th:href="@{/custdelete(id=${custupdate.custid})}">회원 탈퇴하기</a></li>
             </div>
           </div>
           </div>
@@ -73,7 +73,7 @@ $(document).ready(function () {
 <!-- Detail Area -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h1 class="h3 mb-0 text-gray-800">회원정보 수정</h1>
+        <h1 class="h3 mb-0 text-gray-800">내 정보 수정</h1>
     </div>
     <div class="card-body">
     	<form id="cust_form">
@@ -88,15 +88,15 @@ $(document).ready(function () {
 		    </div>
 		    <div class="form-group">
 		      <label for="name">이름:</label>
-		      <input type="text" class="form-control" id="custname" th:value="${custupdate.custname}" name="custname">
+		      <input type="text" readonly=readonly class="form-control" id="custname" th:value="${custupdate.custname}" name="custname">
 		    </div>
 		    <div class="form-group">
 		      <label for="tel">전화번호:</label>
 		      <input type="text"  class="form-control" id="contact" th:value="${custupdate.contact}" name="contact">
 		    </div>
 		    <div class="form-group">
-		      <label for="addr">주소:</label>
-		      <input type="text"  class="form-control" id="addr" th:value="${custupdate.addr}" name="addr">
+		      <label for="addr">이메일 주소:</label>
+		      <input type="text"  class="form-control" id="email" th:value="${custupdate.email}" name="email">
 		    </div>		    
 		  </form>
 		  <button id="update_btn" class="btn btn-default">UPDATE</button>
