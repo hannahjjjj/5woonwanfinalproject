@@ -66,8 +66,9 @@
 	          <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Contact</a></li>
 	          <!-- 로그인시 아이콘 변경   -->
 	          <li class="nav-item"><a th:href="@{/login}" class="nav-link" th:if = "${session.logincust == null}"><img src="/images/login_before.png" style="width:25px; height:25px;"></a></li>
-	          <li class="nav-item"><a th:href="@{/mypage}" class="nav-link" th:if = "${session.logincust != null}"><img src="/images/login_after.png" style="width:25px; height:25px;"></a></li>
+	          <li class="nav-item"><a th:href="@{/custdetail(id=${session.logincust.custid})}" class="material-icons md maincolor" th:if = "${session.logincust != null}" th:text="${session.logincust.custname}+'님'">person</a></li>
 	          <li class="nav-item"><a th:href="@{/logout}" class="nav-link" th:if = "${session.logincust != null}"><img src="/images/logout.png" style="width:25px; height:25px;"></a></li>
+
 	        </ul>
 	      </div>
 	    </div>
@@ -158,7 +159,44 @@
   <script th:src="@{/js/popper.min.js}"></script>
   <script th:src="@{/js/main.js}"></script>
   <script th:src="@{/js/bootstrap.min.js}"></script>
-
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+  <script>
+  var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "ftBRzhRgpIJDkToc4CQX", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+				callbackUrl: "http://127.0.0.1", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+				isPopup: false,
+				callbackHandle: false
+			}
+		);	
+	naverLogin.init();
+	window.addEventListener('load', function () {
+		naverLogin.getLoginStatus(function (status) {
+		 
+			if (status) {
+				var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+				
+				console.log(naverLogin.user); 
+	       if( email == undefined || email == null) {
+				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+				naverLogin.reprompt();
+				return;
+			}
+			} else {
+				console.log("callback 처리에 실패하였습니다.");
+				}
+			});
+	});
+	$.ajax({
+        url:"/naverlogin",
+        data:{"email":email, 
+      	  },
+        Type:"post",
+        success:function(data){
+            //성공적으로 하고나면 이동할 url
+        }
+     });
+  </script>
     
   </body>
 </html>
