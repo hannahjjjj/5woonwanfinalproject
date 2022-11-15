@@ -49,5 +49,9 @@ public class FacilityService implements MyService<Integer, FacilityDTO>{
 		return mapper.selectFacilityAll(cateid);
 	}
 	
+	public List<FacilityDTO> viewFacilityName(int instructorid) throws Exception {
+		return mapper.viewFacilityName(instructorid);
+	}
+
 }
 	

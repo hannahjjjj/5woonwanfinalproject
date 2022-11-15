@@ -19,6 +19,7 @@ public class InstructorDTO {
 	String instructorname;
 	String instructorcon;
 	String instructorimg;
+	String instructorimg2;
 	String instructoremail;
 	String instructorphone;
 	

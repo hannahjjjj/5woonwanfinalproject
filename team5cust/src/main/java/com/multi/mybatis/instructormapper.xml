@@ -4,13 +4,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.mapper.InstructorMapper">
  	<insert id="insert" parameterType="InstructorDTO">
-		INSERT INTO instructor VALUES (NULL, #{facilityid}, #{instructorname},#{instructorcon},#{instructorimg},#{instructoremail},#{instructorphone})
+		INSERT INTO instructor VALUES (NULL, #{facilityid}, #{instructorname},#{instructorcon},#{instructorimg},#{instructorimg2},#{instructoremail},#{instructorphone})
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM instructor WHERE instructorid=#{instructorid}
 	</delete>
 	<update id="update" parameterType="InstructorDTO">
-		UPDATE instructor SET facilityid=#{facilityid}, instructorname=#{instructorname}, instructorcon=#{instructorcon},instructorimg=#{instructorimg},instructoremail=#{instructoremail},instructorphone=#{instructorphone}
+		UPDATE instructor SET facilityid=#{facilityid}, instructorname=#{instructorname}, instructorcon=#{instructorcon},instructorimg=#{instructorimg},instructorimg2=#{instructorimg2},instructoremail=#{instructoremail},instructorphone=#{instructorphone}
 		WHERE instructorid=#{instructorid}
 	</update> 
 	<select id="selectAll" resultType="InstructorDTO">

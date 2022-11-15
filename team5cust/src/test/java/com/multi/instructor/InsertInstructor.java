@@ -16,7 +16,7 @@ class InsertInstructor {
 	
 	@Test
 	void contextLoads() {
-		InstructorDTO instructor = new InstructorDTO(100,100,"윤진호","헬린이","a.jpg","aaa@aa.com","01000000000");
+		InstructorDTO instructor = new InstructorDTO(100,100,"윤진호","헬린이","a","a-1","aaa@aa.com","01000000000");
 		try {
 			service.register(instructor);
 		} catch (Exception e) {
