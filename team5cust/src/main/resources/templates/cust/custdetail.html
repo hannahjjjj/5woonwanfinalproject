@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate pb-5 text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us<i class="ion-ios-arrow-forward"></i></span></p>
+          	<p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>MY PAGE<i class="ion-ios-arrow-forward"></i></span></p>
             <h1 class="mb-3 bread">내 정보</h1>
           </div>
         </div>
@@ -12,17 +12,15 @@
 </section>
  
  <body>
-      <section class="ftco-section ftco-degree-bg">>
+      <section class="ftco-section ftco-degree-bg">
 		<div class="col-md-2 sidebar ftco-animate">
           <div class="sidebar-box ftco-animate" >
-
             <div class="categories">
               <h3>My Page 메뉴</h3>
               <li><a th:href="@{/custupdate(id=${custdetail.custid})}">회원정보 수정</a></li>
               <li><a th:href="@{/cust}">스케줄 관리</a></li>
               <li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li>
             </div>
-
           </div>
           </div>
        
@@ -54,15 +52,13 @@ color:white;
 <!-- Detail Area -->
 
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
+<div class="card shadow mb-4" style="width:1050px;">
+    <div class="card-header py-3" style="width:1050px;">
         <h1 class="h3 mb-0 text-gray-800">회원정보</h1>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="width:1040px;">
     	<form id="cust_form">
-		    <div class="form-group">
-		    
-		    
+		    <div class="form-group" >
 		      <label for="id">아이디:</label>
 		      <input type="text" readonly=readonly class="form-control" id="custid" th:value="${custdetail.custid}" name="custid">
 		      <span id="ispan"></span>
