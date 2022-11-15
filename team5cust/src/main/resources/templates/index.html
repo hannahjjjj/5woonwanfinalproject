@@ -171,11 +171,29 @@
 	naverLogin.init();
 	window.addEventListener('load', function () {
 		naverLogin.getLoginStatus(function (status) {
-		 
+			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
 			if (status) {
 				var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-				
-				console.log(naverLogin.user); 
+			 	var name = naverLogin.user.getName();
+			    var gender = naverLogin.user.getGender();
+			    var birthday = naverLogin.user.getBirthday();
+	 		 	var birthyear = naverLogin.user.getBirthyear();
+			    var mobile = naverLogin.user.getMobile();
+				$.ajax({
+			        url:"/naverlogin",
+			        data:{"email":email,
+			        	"name":name,
+			        	"gender":gender,
+			        	"birthday":birthday,
+			        	"birthyear":birthyear,
+			        	"mobile":mobile
+			      	  },
+			        Type:"post",
+			        success:function(data){
+			            //성공적으로 하고나면 이동할 url
+			            
+			        }
+			     });
 	       if( email == undefined || email == null) {
 				alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
 				naverLogin.reprompt();
@@ -186,15 +204,7 @@
 				}
 			});
 	});
-	$.ajax({
-        url:"/naverlogin",
-        data:{"email":email, 
-      	  },
-        Type:"post",
-        success:function(data){
-            //성공적으로 하고나면 이동할 url
-        }
-     });
+	
   </script>
     
   </body>
