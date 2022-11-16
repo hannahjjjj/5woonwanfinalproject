@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectFacilityList" parameterType="Integer" resultType="InstructorDTO">
 		SELECT * FROM instructor WHERE facilityid = #{facilityid}
 	</select>
+	
+	<select id="selectInstructorList" parameterType="Integer" resultType="InstructorDTO">
+		SELECT * FROM instructor WHERE instructorid = #{instructorid}
+	</select>
 </mapper>

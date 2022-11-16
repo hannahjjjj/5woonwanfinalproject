@@ -16,6 +16,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM facility WHERE cateid=#{cateid}
 	</select>
 	
+	<select id="searchFacility" resultType="FacilityDTO" parameterType="string">
+    	SELECT * FROM facility WHERE name LIKE CONCAT('%',#{txt},'%')
+    </select>
+	
 	<select id="viewFacilityName" parameterType="Integer" resultType="FacilityDTO">
 	SELECT * FROM facility
 	WHERE cateid = (SELECT f.facilityid FROM facility f

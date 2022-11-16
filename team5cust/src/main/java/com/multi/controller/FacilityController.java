@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CateDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
+import com.multi.mapper.FacilityMapper;
 import com.multi.service.CateService;
 import com.multi.service.FacilityService;
 import com.multi.service.InstructorService;
@@ -22,6 +23,8 @@ public class FacilityController {
 	FacilityService fservice;
 	@Autowired
 	InstructorService iservice;
+	@Autowired
+	FacilityMapper fmapper;
 	
 
 	
@@ -62,21 +65,40 @@ public class FacilityController {
 		return "index";
 		
 	}
+	
 	@RequestMapping("/instructordetail")
 	public String instructordetail(Model model,int instructorid) {
 		InstructorDTO inst = null;
 		List<FacilityDTO> fac = null;	
+		List<InstructorDTO> ins = null;
 		try {
 			inst = iservice.get(instructorid);
 			fac = fservice.viewFacilityName(instructorid);
+			ins = iservice.selectInstructorList(instructorid);
 			model.addAttribute("facilitylist",fac);
+			model.addAttribute("ins",ins);
 			model.addAttribute("instructordetail",inst);
 			model.addAttribute("center","facility/instructordetail");
+			System.out.println(ins);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "index";
 	}
 	
+	@RequestMapping("/search2")
+	public String searchFacility(Model model, String txt) {
+		List<FacilityDTO>fac=null;
+		try {
+			fac=fmapper.searchFacility(txt);
+			model.addAttribute("fac",fac);		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("center","search");
+		
+		return"index";
+	}
 
 }
