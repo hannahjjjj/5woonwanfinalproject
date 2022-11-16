@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<style>
+<script>
+$('#search').click(function(){
+	$('#search').attr({
+		method:'get',
+		action:'[[@{/search2}]]'
+	});
+	$('#search').submit();
+});
 
-
-</style>
+</script>
  
   <body>
     
@@ -26,7 +32,7 @@
             <form action="#" class="search-form">
               <div class="form-group">
                 <span class="icon icon-search"></span>
-                <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                 <input id="search2" type="text" class="form-control" placeholder="Type a keyword and hit enter">
               </div>
             </form>
           </div>

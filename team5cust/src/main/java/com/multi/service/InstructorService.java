@@ -47,4 +47,7 @@ public class InstructorService implements MyService<Integer, InstructorDTO>{
 	public List<InstructorDTO> selectFacilityList(int facilityid) throws Exception{
 		return mapper.selectFacilityList(facilityid);
 	}
+	public List<InstructorDTO> selectInstructorList(int instructorid) throws Exception{
+		return mapper.selectInstructorList(instructorid);
+	}
 	}
