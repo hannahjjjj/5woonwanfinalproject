@@ -1,8 +1,6 @@
 package com.multi.controller;
 
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -47,8 +45,20 @@ public class AJAXController {
 		return "";
 	}
 	@RequestMapping("/naverlogin")
-	public String naverlogin(String email) {
-		System.out.println(email);
+	public String naverlogin(String email,String name,String gender,String birthday,String birthyear,String mobile,HttpSession session) {
+		
+		CustDTO cust =new CustDTO(email, null, name, mobile, gender, birthyear+"-"+birthday, email, null, null, null, null, null, null, null);
+		
+		try {
+			if(custservice.get(email)==null) {
+				custservice.register(cust);
+				session.setAttribute("logincust", cust);
+			}else {
+				session.setAttribute("logincust", cust);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "";
 	}
 	
