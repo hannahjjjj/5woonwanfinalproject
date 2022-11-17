@@ -179,6 +179,19 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/custschedule")
+	public String custschedule(Model model, String id) {
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(id);
+			model.addAttribute("custschedule", cust);
+			model.addAttribute("center", "/cust/custschedule");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
 	@RequestMapping("/custdelete")
 	public String custdelete(Model model, String id) {
 		CustDTO cust = null;

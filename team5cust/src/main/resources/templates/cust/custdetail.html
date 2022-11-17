@@ -18,7 +18,7 @@
             <div class="categories">
               <h3>My Page 메뉴</h3>
               <li><a th:href="@{/custupdate(id=${custdetail.custid})}">회원정보 수정</a></li>
-              <li><a th:href="@{/cust}">스케줄 관리</a></li>
+              <li><a th:href="@{/custschedule(id=${custdetail.custid})}">스케줄 관리</a></li>
               <li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li>
             </div>
           </div>
