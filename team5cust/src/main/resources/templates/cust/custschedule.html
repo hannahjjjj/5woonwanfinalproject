@@ -8,9 +8,13 @@
     	document.addEventListener('DOMContentLoaded', function() {
         	var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
+            	
+            	dateClick: function(info) {
+            	    alert('Date: ' + info.dateStr);
+            	},
                 // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
                 headerToolbar: {
-                    left: 'prevYear,prev,next,nextYear today',
+                    left: 'prev,next today',
                     center: 'title',
                     right: 'dayGridMonth,dayGridWeek,dayGridDay'
                 },
@@ -21,6 +25,7 @@
                 navLinks: true, // can click day/week names to navigate views
                 editable: true,
                 // Create new event
+                
                 select: function (arg) {
                     Swal.fire({
                         html: "<div class='mb-7'>Create new event?</div><div class='fw-bold mb-5'>Event Name:</div><input type='text' class='form-control' name='event_name' />",
@@ -152,11 +157,17 @@
         });
 
     </script>
+    <script>
+    $('#fc-dom-280').click(function(){
+    	alert("");
+	});
+    
+    </script>
   </head>
   <body>
 <section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
     
-      <div class="overlay"></div>
+      <div class="overlay"></div>                            
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate pb-5 text-center">
@@ -165,8 +176,65 @@
           </div>
         </div>
       </div>
-</section> 
+	</section> 
+    <div style="margin:auto;">
 	<br><br><br>
+	<div align="center">
+   		<a class="navbar-brand" >날짜 선택</a>
+   </div>
+	<br>
     <div id='calendar' style="width:700px; height:700px; margin:auto;"></div>
+    <br>
+    <section>
+    <div align="center">
+   		<a class="navbar-brand" >시간 선택</a>
+   </div>
+    <br>
+    <div style="margin:auto">
+    	<ul style="list-style:none; text-align : center">
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">09:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+		    	<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">10:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">11:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">12:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+		    	<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">13:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">14:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">15:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+		    	<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">16:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">17:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">18:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">19:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">20:00</button><br><br>
+    		</li>
+    		<li style="display : inline-block;">
+	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">21:00</button><br><br>
+    		</li>
+    	</ul>
+    </div>
+    </section>
+    </div>
+    <br><br><br>
   </body>
 </html>
