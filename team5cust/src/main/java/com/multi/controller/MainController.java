@@ -60,7 +60,6 @@ public class MainController {
 	            if(pwd.equals(cust.getCustpwd())) {
 	            	model.addAttribute("status", "1");
 	               session.setAttribute("logincust", cust);
-	               System.out.println("success");
 	            } else {
 	            	 model.addAttribute("status", "0");
 	            	 model.addAttribute("center", "login");
