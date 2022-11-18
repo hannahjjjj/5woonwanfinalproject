@@ -123,11 +123,13 @@ marker.setMap(map);
           </div>
           <div class="sidebar-box ftco-animate" >
 
-            <div class="categories">
+            <div class="categories" style="height:3000px;">
               <h3>Categories</h3>
               <li class="m"><a th:href="@{#container1}" class="menu-01">시설정보</a></li>
               <li class="m"><a th:href="@{#container2}" class="menu-02">강사진</a></li>
               <li class="m"><a th:href="@{#container3}" class="menu-03">요금상세</a></li>
+              <li class="m"><a th:href="@{#container4}" class="menu-04">이용후기</a></li>
+              <li class="m"><a th:href="@{#container5}" class="menu-05">상세위치</a></li>
 
 
 
@@ -144,19 +146,18 @@ marker.setMap(map);
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid" style="width:100%; height:500px;">
+                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid" style="width:80%; height:400px;">
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <p class="facility_name" th:text="${fd.facilityname}" style=font-size:120%;></p>
-            <p class="facility_number" th:text="${fd.facilitynumber}"></p>
-            <p class="facility_addr" th:text="${fd.facilityaddr}"></p>
+          <div class="col-lg-5">
+            <strong><p class="facility_name" th:text="${fd.facilityname}" style="font-size:200%;"></p></strong>
+            <div style="border-top: 1px solid lightgray;  border-bottom: 1px solid lightgray;">
+            <p class="facility_number" th:text="${fd.facilitynumber}" style="font-color:lightgray;"></p>
+            <p class="facility_addr" th:text="${fd.facilityaddr}" style="font-color:lightgray;"></p>
+            </div>
 
 
-            <div class="d-block agent-box p-7">
-            <div id="map" style="width:100%;height:350px;"></div>
-              </div>
              
             </div>
           </div>
@@ -167,11 +168,12 @@ marker.setMap(map);
  
  	<section class="ftco-section ftco-agent">
     	<div class="container2" id="container2">
+        <h4>강사진</h4>
+        <br>
         <div class="row">
        	<div class="col-md-3" th:each="i:${ins}">
 		
        		<div class="agent" >
-       		
 					<div class="img">
 					 <a th:href="@{/instructordetail(instructorid=${i.instructorid})}"><img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
  				</div>
@@ -185,9 +187,21 @@ marker.setMap(map);
  			</div>	
   		</div>
        	</div>
+       	<br>
        	
        	<div class="container3" id="container3">
-       	
+       	<h4>이용요금</h4>
+       	</div>
+       	<br>
+       	<div class="container4" id="container4">
+       	<h4>이용후기</h4>
+       	</div>
+       	<br>
+       	<h4>상세위치</h4>
+       	<div class="container5" id="container5">
+            <div class="d-block agent-box p-7">
+            <div id="map" style="width:50%;height:350px;"></div>
+        </div>       	
        	</div>
      
        	
