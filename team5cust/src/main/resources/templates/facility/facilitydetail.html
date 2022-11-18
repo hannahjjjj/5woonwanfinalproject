@@ -127,9 +127,10 @@ marker.setMap(map);
               <h3>Categories</h3>
               <li class="m"><a th:href="@{#container1}" class="menu-01">시설정보</a></li>
               <li class="m"><a th:href="@{#container2}" class="menu-02">강사진</a></li>
-              <li class="m"><a th:href="@{#container3}" class="menu-03">요금상세</a></li>
-              <li class="m"><a th:href="@{#container4}" class="menu-04">이용후기</a></li>
-              <li class="m"><a th:href="@{#container5}" class="menu-05">상세위치</a></li>
+              <li class="m"><a th:href="@{#container3}" class="menu-03">운영시간</a></li>
+              <li class="m"><a th:href="@{#container4}" class="menu-04">요금상세</a></li>
+              <li class="m"><a th:href="@{#container5}" class="menu-05">이용후기</a></li>
+              <li class="m"><a th:href="@{#container6}" class="menu-06">상세위치</a></li>
 
 
 
@@ -189,16 +190,24 @@ marker.setMap(map);
        	</div>
        	<br>
        	
-       	<div class="container3" id="container3">
-       	<h4>이용요금</h4>
+       	<div class="container3" id="container3" th:each="fd:${facilitydetail}">
+       	<h4>운영시간</h4>
+       		
+			<h6>평일<br><a th:text="${fd.facilitytime}" ></a></h6>
+			<br>
+			<h6>주말<br><a th:text="${fd.facilitytime2}"></a></h6>
        	</div>
        	<br>
        	<div class="container4" id="container4">
+       	<h4>이용요금</h4>
+       	</div>
+       	<br>
+       	<div class="container5" id="container5">
        	<h4>이용후기</h4>
        	</div>
        	<br>
        	<h4>상세위치</h4>
-       	<div class="container5" id="container5">
+       	<div class="container6" id="container6">
             <div class="d-block agent-box p-7">
             <div id="map" style="width:50%;height:350px;"></div>
         </div>       	
