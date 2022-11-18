@@ -1,63 +1,47 @@
-<meta charset="utf-8">
-
-<style>
-
-.btn:hover{
-background-color: #FE6B00;
-color:white;
-	}
-	
-</style>
+<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate pb-5 text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>MY PAGE<i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-3 bread">내 정보</h1>
+          </div>
+        </div>
+      </div>
+</section>
+ 
+ <body>
+      <section class="ftco-section ftco-degree-bg">
+		<div class="col-md-2 sidebar ftco-animate">
+          <div class="sidebar-box ftco-animate" >
+            <div class="categories">
+              <h3>My Page 메뉴</h3>
+              <li><a th:href="@{/mypage(id=${custdetail.custid})}">내 정보</a></li>
+              <li><a th:href="@{/custupdate(id=${custdetail.custid})}">회원정보 수정</a></li>
+              <li><a th:href="@{/custschedule(id=${custdetail.custid})}">스케줄 관리</a></li>
+              <li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li>
+            </div>
+          </div>
+          </div>
+       
+          
+       
+			<div class="container">
+				<div class="col-md-50 order-md-last ftco-animate" style=text-align:center;>
+				<div th:each="fd:${facilitydetail}">
+				<div class="property-wrap ftco-animate">
+			   </div>
+					<div class="col-md-25 order-md-last ftco-animate"  style=text-align:center;>
+        			<div id="map" style="width:100%;height:350px;"></div>
+			   </div>
+	           </div>
+			   </div>
+			   </div>
+  </body>
+  <meta charset="utf-8">
 
 <!-- Detail Area -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h1 class="h3 mb-0 text-gray-800">회원정보</h1>
-    </div>
-    <div class="card-body">
-    	<form id="cust_form">
-		    <div class="form-group" width: 60px;>
-		      <label for="id">아이디:</label>
-		      <input type="text" readonly=readonly class="form-control" id="custid" th:value="${mypage.custid}" name="custid">
-		      <span id="ispan"></span>
-		    </div>
-		    <div class="form-group">
-		      <label for="pwd">패스워드:</label>
-		      <input type="text" readonly=readonly class="form-control" id="custpwd" th:value="${mypage.custpwd}" name="custpwd">
-		    </div>
-		    <div class="form-group">
-		      <label for="name">이름:</label>
-		      <input type="text" readonly=readonly class="form-control" id="custname" th:value="${mypage.custname}" name="custname">
-		    </div>
-		    <div class="form-group">
-		      <label for="contect">전화번호:</label>
-		      <input type="text" readonly=readonly class="form-control" id="contect" th:value="${mypage.contect}" name="contect">
-		    </div>		    
-		    <div class="form-group">
-		      <label for="gender">성별:</label>
-		      <input type="text" readonly=readonly class="form-control" id="gender" th:value="${mypage.gender}" name="gender">
-		    </div>
-   		    <div class="form-group">
-		      <label for="birth">생일:</label>
-		      <input type="text" readonly=readonly class="form-control" id="birth" th:value="${mypage.birth}" name="birth">
-		    </div>
-		    <div class="form-group">
-		      <label for="email">이메일 주소:</label>
-		      <input type="text" readonly=readonly class="form-control" id="email" th:value="${mypage.email}" name="email">
-		    </div>
-		    <div class="form-group">
-		      <label for="membership">회원권 유무:</label>
-		      <input type="text" readonly=readonly class="form-control" id="membership" th:value="${mypage.membership}" name="membership">
-		    </div>
-		    <div class="form-group">
-		      <label for="expiration">회원권 만료 예정일</label>
-		      <input type="text" readonly=readonly class="form-control" id="expiration" th:value="${mypage.expiration}" name="expiration">
-		    </div>
-		    <div class="form-group">
-		      <label for="rdate">회원가입 날짜:</label>
-		      <input type="text" readonly=readonly class="form-control" id="custrdate" th:value="${#dates.format(mypage.custrdate, 'yyyy-MM-dd')}" name="custrdate">
-		    </div>
-		  </form>
-		  <button id="update_btn" class="btn btn-default"><a th:href="@{/custupdate(id=${mypage.custid})}">회원정보 수정</a></button>
-    </div>
-</div>
+
+<div th:insert = "${custcenter} ? ${custcenter} : custdetail"></div>
+

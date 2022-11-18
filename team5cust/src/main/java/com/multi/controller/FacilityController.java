@@ -79,7 +79,6 @@ public class FacilityController {
 			model.addAttribute("ins",ins);
 			model.addAttribute("instructordetail",inst);
 			model.addAttribute("center","facility/instructordetail");
-			System.out.println(ins);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

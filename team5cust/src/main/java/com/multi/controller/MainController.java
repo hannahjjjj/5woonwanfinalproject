@@ -150,15 +150,15 @@ public class MainController {
 		return "index";
 	}
 	
-
-
-	@RequestMapping("/custdetail")
-	public String custdetail(Model model, String id) {
+	@RequestMapping("/mypage")
+	public String mypage(Model model, String id) {
 		CustDTO cust = null;
 		try {
 			cust = custservice.get(id);
 			model.addAttribute("custdetail", cust);
-			model.addAttribute("center","/cust/custdetail");
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter","/cust/custdetail");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -170,8 +170,9 @@ public class MainController {
 		CustDTO cust = null;
 		try {
 			cust = custservice.get(id);
-			model.addAttribute("custupdate", cust);
-			model.addAttribute("center", "/cust/custupdate");
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter","/cust/custupdate");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -183,8 +184,9 @@ public class MainController {
 		CustDTO cust = null;
 		try {
 			cust = custservice.get(id);
-			model.addAttribute("custschedule", cust);
-			model.addAttribute("center", "/cust/custschedule");
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter", "/cust/custschedule");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -196,8 +198,9 @@ public class MainController {
 		CustDTO cust = null;
 		try {
 			cust = custservice.get(id);
-			model.addAttribute("custdelete", cust);
-			model.addAttribute("center", "/cust/custdelete");
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("center", "/cust/mypage");
+			model.addAttribute("custcenter", "/cust/custdelete");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
