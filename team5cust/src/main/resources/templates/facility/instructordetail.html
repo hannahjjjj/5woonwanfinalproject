@@ -26,23 +26,23 @@
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
- 				<img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'" style="width:95%; height:800px;" alt="" >
+ 				<img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'" style="width:95%; height:800px; " alt="" >
               </div>
             </div>
           </div>
           <div class="col-lg-4">
-            <h2 class="heading text-primary" th:text="${i.instructorname}"></h2>
-            <h5 class="mb-3 bread" th:text="${i.instructorcon}"></h5>
-            <img th:src="@{/fimages/}+${i.instructorimg2}+'.jpg'" style="width:70%; height:500px;" alt="" >
-
-
-                <ul class="list-unstyled social dark-hover d-flex" style="font-size:25px;" >
+            <h2 class="heading text-primary" th:text="${i.instructorname}" style="font-color:black;"></h2>
+            <h5 class="mb-3 bread" th:text="${i.instructorcon}" ></h5>
+                <ul class="list-unstyled social dark-hover d-flex" style="font-size:30px;" >
                   <li class="me-1">
                     <a href="#"><span class="icon-instagram" ></span></a>
                   </li>
 
          
                 </ul>
+            <img th:src="@{/fimages/}+${i.instructorimg2}+'.jpg'" style="width:100%; height:500px;" alt="" >
+
+
               </div>
             </div>
           </div>
