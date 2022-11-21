@@ -143,20 +143,24 @@ marker.setMap(map);
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid" style="width:80%; height:400px;">
+                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid" >
               </div>
             </div>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-5" style=" padding:0px 300px 0px 0px;">
             <strong><p class="facility_name" th:text="${fd.facilityname}" style="font-size:200%;"></p></strong>
             <div style="border-top: 1px solid lightgray;  border-bottom: 1px solid lightgray;">
             <p class="facility_number" th:text="${fd.facilitynumber}" style="font-color:lightgray;"></p>
             <p class="facility_addr" th:text="${fd.facilityaddr}" style="font-color:lightgray;"></p>
+
             </div>
+
 
 
              
             </div>
+            
+            
           </div>
         </div>
       </div>
@@ -165,7 +169,7 @@ marker.setMap(map);
  
  	<section class="ftco-section ftco-agent">
     	<div class="container2" id="container2">
-        <h4>강사진</h4>
+        <h4><strong>강사진</strong></h4>
         <br>
         <div class="row">
        	<div class="col-md-3" th:each="i:${ins}">
@@ -208,6 +212,7 @@ marker.setMap(map);
             <div id="map" style="width:50%;height:350px;"></div>
         </div>       	
        	</div>
+
      
        	
        	</section>
