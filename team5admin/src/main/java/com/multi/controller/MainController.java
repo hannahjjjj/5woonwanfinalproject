@@ -18,134 +18,91 @@ public class MainController {
 		model.addAttribute("center", "index");
 		return "redirect:/";
 	}
-
 	
-	@RequestMapping("/about")
-	public String about(Model model) {
-		model.addAttribute("center", "about");
-		return "index";
-	}
-	@RequestMapping("/contact")
-	public String contact(Model model) {
-		model.addAttribute("center", "contact");
-		return "index";
+	@RequestMapping("/general")
+	public String general(Model model) {
+		model.addAttribute("center", "general");
+		return "general";
 	}
 	
-	//login 관련
+	@RequestMapping("/button")
+	public String button(Model model) {
+		model.addAttribute("center", "button");
+		return "button";
+	}
+	
+	@RequestMapping("/panels")
+	public String panels(Model model) {
+		model.addAttribute("center", "panels");
+		return "panels";
+	}
+	
+	@RequestMapping("/todo_list")
+	public String todo_list(Model model) {
+		model.addAttribute("center", "todo_list");
+		return "index";
+	}
+	
+	@RequestMapping("/calendar")
+	public String calendar(Model model) {
+		model.addAttribute("center", "calendar");
+		return "index";
+	}
+	
+	@RequestMapping("/gallery")
+	public String gallery(Model model) {
+		model.addAttribute("center", "gallery");
+		return "index";
+	}
+	
+	@RequestMapping("/blank")
+	public String blank(Model model) {
+		model.addAttribute("center", "blank");
+		return "index";
+	}
+	
 	@RequestMapping("/login")
 	public String login(Model model) {
-		model.addAttribute("status", "1");
 		model.addAttribute("center", "login");
 		return "index";
 	}
 	
-//	 @RequestMapping("/loginimpl")
-//	   public String loginimpl(String id, String pwd, Model model, HttpSession session) {   
-//	      CustDTO cust = null;
-//	      try {
-//	         cust = custservice.get(id);
-//	         if(cust == null) {
-//	        	 model.addAttribute("status", "0");
-//	        	 model.addAttribute("center", "login");
-//	         } else {
-//	            if(pwd.equals(cust.getCustpwd())) {
-//	            	model.addAttribute("status", "1");
-//	               session.setAttribute("logincust", cust);
-//	               System.out.println("success");
-//	            } else {
-//	            	 model.addAttribute("status", "0");
-//	            	 model.addAttribute("center", "login");
-//	            	 }
-//	         }
-//	      } catch (Exception e) {      
-//	         e.printStackTrace();
-//	      }
-//
-//	      return "index";
-//	   }
-
-	   @RequestMapping("/logout")
-		public String logout(Model model,HttpSession session) {
-			
-			if(session != null) {
-				session.invalidate();
-			}
-			return "index";
-		}
-	   
-	 
-	// login 관련 end
-	@RequestMapping("/agent")
-	public String agent(Model model) {
-		model.addAttribute("center", "agent");
+	@RequestMapping("/lock_screen")
+	public String lock_screen(Model model) {
+		model.addAttribute("center", "lock_screen");
 		return "index";
 	}
 	
-	@RequestMapping("/services")
-	public String services(Model model) {
-		model.addAttribute("center", "services");
+	@RequestMapping("/form_component")
+	public String form_component(Model model) {
+		model.addAttribute("center", "form_component");
 		return "index";
 	}
 	
-
-	
-//	   @RequestMapping("/facility")
-//	   public String facility(Model model) { 
-//		   List<FacilityDTO> list = null;
-//		  try {
-//			  list=fservice.get();
-//			  model.addAttribute("facilitylist",list);
-//			  model.addAttribute("center", "facility"); 
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	      return "index";
-//	   }
-	@RequestMapping("/blog")
-	public String blog(Model model) {
-		model.addAttribute("center", "blog");
+	@RequestMapping("/basic_table")
+	public String basic_table(Model model) {
+		model.addAttribute("center", "basic_table");
 		return "index";
 	}
 	
-	@RequestMapping("/blog-single")
-	public String blogsingle(Model model) {
-		model.addAttribute("center", "blog-single");
+	@RequestMapping("/responsive_table")
+	public String responsive_table(Model model) {
+		model.addAttribute("center", "responsive_table");
 		return "index";
 	}
 	
-	@RequestMapping("/search")
-	public String search(Model model) {
-		model.addAttribute("center", "search");
-		return "index";
-	}
-	@RequestMapping("/register")
-	public String register(Model model) {
-		model.addAttribute("center", "register");
-		model.addAttribute("registatus", "1");
+	@RequestMapping("/morris")
+	public String morris(Model model) {
+		model.addAttribute("center", "morris");
 		return "index";
 	}
 	
-//	@RequestMapping("/registerimpl")
-//	public String registerimpl(Model model, CustDTO cust) {
-////		System.out.println(cust);
-//		try {
-//			custservice.register(cust);
-//			model.addAttribute("center","login");
-//			model.addAttribute("registatus", "1");
-//			
-//		} catch (Exception e) {
-//			model.addAttribute("center", "register");
-//			model.addAttribute("registatus", "0");
-//			e.printStackTrace();
-//		}
-//		
-//		return "index";
-//	}
-	
+	@RequestMapping("/chartjs")
+	public String chartjs(Model model) {
+		model.addAttribute("center", "chartjs");
+		return "index";
+	}
 }
-
-
-
 
 
 
