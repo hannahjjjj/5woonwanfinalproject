@@ -1,6 +1,9 @@
 package com.multi.controller;
 
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.dto.CustDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.SchedulesDTO;
 import com.multi.service.CustService;
 import com.multi.service.FacilityService;
+import com.multi.service.SchedulesService;
 
 @RestController
 public class AJAXController {
@@ -22,6 +27,9 @@ public class AJAXController {
 	
 	@Autowired
 	FacilityService fservice;
+	
+	@Autowired
+	SchedulesService schedulesService; 
 	
 	@RequestMapping("/kakkologin")
 	public String kakkologin(String id,String name,String birthday,String email,String gender,HttpSession session) {
@@ -78,8 +86,22 @@ public class AJAXController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		return ja;
+	}
+	@RequestMapping("/schedulelist")
+	public Object schedulelist(String selectday) {
+		List<SchedulesDTO> list=null;
+		JSONArray ja = new JSONArray();
+		try {
+			list=schedulesService.selectday(selectday);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		//데이터 받아온거 시간으로 나눠서 넘겨주기.
+		SimpleDateFormat sDate = new SimpleDateFormat("hh:mm");
+		for(SchedulesDTO l:list) {
+			ja.add(sDate.format(l.getStarttime()));
+		}
 		return ja;
 	}
 }
