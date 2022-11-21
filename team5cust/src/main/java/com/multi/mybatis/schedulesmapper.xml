@@ -19,4 +19,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="select" parameterType="Integer" resultType="SchedulesDTO">
 		SELECT * FROM schedules WHERE schedulesid = #{schedulesid}
 	</select>
+	<select id="selectday" parameterType="String" resultType="SchedulesDTO">
+		SELECT * FROM schedules WHERE starttime like #{selectday}"%"
+	</select>
 </mapper>

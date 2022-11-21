@@ -1,5 +1,7 @@
-<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-    
+<meta charset="utf-8">
+
+<body>
+	<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
@@ -9,39 +11,26 @@
           </div>
         </div>
       </div>
-</section>
- 
- <body>
- <br><br><br><br><br><br>
-		<div class="col-md-2 sidebar ftco-animate">
-          <div class="sidebar-box ftco-animate" >
-            <div class="categories">
-              <h3>My Page 메뉴</h3>
-              <li><a th:href="@{/mypage(id=${custdetail.custid})}">내 정보</a></li>
-              <li><a th:href="@{/custupdate(id=${custdetail.custid})}">회원정보 수정</a></li>
-              <li><a th:href="@{/custschedule(id=${custdetail.custid})}">스케줄 관리</a></li>
-              <li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li>
+	</section>
+
+	<section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 order-md-last ftco-animate">
+			<div th:insert = "${custcenter} ? ${custcenter} : custdetail"></div>
+          </div> <!-- .col-md-8 -->
+          <div class="col-md-2 sidebar ftco-animate">
+            <div class="sidebar-box ftco-animate">
+              <div class="categories">
+                <h3>Categories</h3>
+                <li><a th:href="@{/mypage(id=${custdetail.custid})}">내 정보</a></li>
+             	<li><a th:href="@{/custupdate(id=${custdetail.custid})}">회원정보 수정</a></li>
+              	<li><a th:href="@{/custschedule(id=${custdetail.custid})}">스케줄 관리</a></li>
+              	<li><a th:href="@{/custdelete(id=${custdetail.custid})}">회원 탈퇴하기</a></li>
+              </div>
             </div>
-          </div>
-          </div>
-       
-          
-       
-			<div class="container">
-				<div class="col-md-50 order-md-last ftco-animate" style=text-align:center;>
-				<div th:each="fd:${facilitydetail}">
-				<div class="property-wrap ftco-animate">
-			   </div>
-					<div class="col-md-25 order-md-last ftco-animate"  style=text-align:center;>
-        			<div id="map" style="width:100%;height:350px;"></div>
-			   </div>
-	           </div>
-			   </div>
-			   </div>
-  </body>
-  <meta charset="utf-8">
-
-<!-- Detail Area -->
-
-<div th:insert = "${custcenter} ? ${custcenter} : custdetail"></div>
-
+        </div>
+      </div>
+      </div>
+    </section> <!-- .section -->
+</body>

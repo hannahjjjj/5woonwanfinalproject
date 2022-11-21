@@ -44,4 +44,8 @@ public class SchedulesService implements MyService<Integer, SchedulesDTO>{
 		return mapper.selectAll();
 	}
 	
+	public List<SchedulesDTO> selectday(String selectday) throws Exception{
+		return mapper.selectday(selectday);
+	}
+	
 }
