@@ -69,6 +69,7 @@ public class FacilityController {
 	@RequestMapping("/instructordetail")
 	public String instructordetail(Model model,int instructorid) {
 		InstructorDTO inst = null;
+		FacilityDTO facility = null;
 		List<FacilityDTO> fac = null;	
 		List<InstructorDTO> ins = null;
 		try {
@@ -78,6 +79,7 @@ public class FacilityController {
 			model.addAttribute("facilitylist",fac);
 			model.addAttribute("ins",ins);
 			model.addAttribute("instructordetail",inst);
+			model.addAttribute("facilitydetail",facility);
 			model.addAttribute("center","facility/instructordetail");
 		} catch (Exception e) {
 			e.printStackTrace();
