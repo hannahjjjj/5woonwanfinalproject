@@ -151,17 +151,17 @@
           </div>
           <br> <br>
           <ul id="tabs">
-    <li><a href="#" title="tab1">경력</a></li>
-    <li><a href="#" title="tab2">이력</a></li>
+    <li><a href="#" title="tab1">이력</a></li>
+    <li><a href="#" title="tab2">수상</a></li>
     <li><a href="#" title="tab3">시간표</a></li>    
 </ul>
 
-<div id="content"> 
-    <div id="tab1">
-        
+<div id="content" th:each="i:${ins}" style="padding:0px 0px 0px 0px;"> 
+    <div id="tab1" style="padding:0px 0px 0px 400px;">
+        <img th:src="@{/fimages/}+${i.instructorimg2}+'.jpg'" style="width:50%; height:400px; " alt="" >
     </div>
-    <div id="tab2">
-       
+    <div id="tab2" style="padding:50px 0px 0px 400px;">
+		<img th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'" style="width:40%; height:300px; " alt="" > 
     </div>
     <div id="tab3">
       

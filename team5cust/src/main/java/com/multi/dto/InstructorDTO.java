@@ -20,6 +20,7 @@ public class InstructorDTO {
 	String instructorcon;
 	String instructorimg;
 	String instructorimg2;
+	String instructorimg3;
 	String instructoremail;
 	String instructorphone;
 	

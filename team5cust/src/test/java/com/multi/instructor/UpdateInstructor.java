@@ -15,7 +15,7 @@ class UpdateInstructor {
 	
 	@Test
 	void contextLoads() {
-		InstructorDTO item = new InstructorDTO(102,100,"윤진호","헬린이","b","b-1","vvv@vv.com","01000000000");
+		InstructorDTO item = new InstructorDTO(102,100,"윤진호","헬린이","b","b-1","a-3","vvv@vv.com","01000000000");
 		try {
 			service.modify(item);
 		} catch (Exception e) {
