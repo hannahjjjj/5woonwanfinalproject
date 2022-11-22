@@ -18,19 +18,19 @@ public class MainController {
 	@RequestMapping("/general")
 	public String general(Model model) {
 		model.addAttribute("center", "general");
-		return "general";
+		return "index";
 	}
 	
-	@RequestMapping("/button")
-	public String button(Model model) {
-		model.addAttribute("center", "button");
-		return "button";
+	@RequestMapping("/buttons")
+	public String buttons(Model model) {
+		model.addAttribute("center", "buttons");
+		return "index";
 	}
 	
 	@RequestMapping("/panels")
 	public String panels(Model model) {
 		model.addAttribute("center", "panels");
-		return "panels";
+		return "index";
 	}
 	
 	@RequestMapping("/todo_list")
