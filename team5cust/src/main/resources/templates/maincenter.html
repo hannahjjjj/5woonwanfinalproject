@@ -8,6 +8,13 @@ $(document).ready(function(){
 		$('#search_form').submit();
 	});
 });
+$(document).ready(function(){
+function enterkey() {
+    if (window.event.keyCode == 13) {
+    	$('#search_form').submit();
+    }
+}
+});
 
 </script>
 
@@ -29,7 +36,7 @@ $(document).ready(function(){
 		        			<div class="col-lg-20 align-items-end">
 		        				<div class="form-group">
 		          				<div class="form-field">
-				                <input name="txt" type="text" class="search_input" placeholder="Search" required="required">
+				                <input name="txt" type="text" class="form-control" placeholder="Search" required="required" onkeyup="enterkey();">
 				                <button id="search_btn" class="search_button" type="button"><span class="ion-ios-search"></span></button>
 				              </div>
 			              </div>
