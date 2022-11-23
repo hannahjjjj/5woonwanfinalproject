@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CustDTO;
 import com.multi.service.CustService;
 import com.multi.dto.FacilityDTO;
+import com.multi.mapper.FacilityMapper;
 import com.multi.service.FacilityService;
 @Controller
 public class MainController {	
@@ -21,6 +22,8 @@ public class MainController {
 	
 	@Autowired
 	FacilityService fservice;
+	@Autowired
+	FacilityMapper fmapper;
 
 	@RequestMapping("/index")
 	public String index(Model model) {
@@ -122,9 +125,17 @@ public class MainController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model) {
-		model.addAttribute("center", "search");
-		return "index";
+	public String search(Model model, String txt) {
+		List<FacilityDTO> list=null;		 
+		try {
+			list=fmapper.searchFacility(txt);
+			model.addAttribute("facilitylist",list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			model.addAttribute("center","search");
+			System.out.println(txt);
+			return "index";
 	}
 	@RequestMapping("/register")
 	public String register(Model model) {
