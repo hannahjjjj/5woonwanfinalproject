@@ -87,19 +87,6 @@ public class FacilityController {
 		return "index";
 	}
 	
-	@RequestMapping("/search2")
-	public String searchFacility(Model model, String txt) {
-		List<FacilityDTO>fac=null;
-		try {
-			fac=fmapper.searchFacility(txt);
-			model.addAttribute("fac",fac);		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("center","search");
-		
-		return"index";
-	}
+	
 
 }
