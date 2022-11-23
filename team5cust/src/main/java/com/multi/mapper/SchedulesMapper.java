@@ -11,5 +11,5 @@ import com.multi.frame.MyMapper;
 @Repository
 @Mapper
 public interface SchedulesMapper extends MyMapper<Integer,SchedulesDTO>{
-	public List<SchedulesDTO> selectday(String selectday) throws Exception;
+	public List<SchedulesDTO> selectday(String selectday,String insid) throws Exception;
 }

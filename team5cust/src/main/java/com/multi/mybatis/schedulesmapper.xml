@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.mapper.SchedulesMapper">
 	<insert id="insert" parameterType="SchedulesDTO">
-		INSERT INTO schedules VALUES (NULL, #{instructorid}, #{custid},#{starttime},DATE_ADD(NOW(),INTERVAL #{period} MONTH))
+		INSERT INTO schedules VALUES (NULL, #{instructorid}, #{custid},#{starttime},DATE_ADD(#{starttime},INTERVAL 1 HOUR),"NO")
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM schedules WHERE schedulesid=#{schedulesid}
@@ -20,6 +20,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM schedules WHERE schedulesid = #{schedulesid}
 	</select>
 	<select id="selectday" parameterType="String" resultType="SchedulesDTO">
-		SELECT * FROM schedules WHERE starttime like #{selectday}"%"
+		SELECT * FROM schedules 
+		WHERE starttime like #{selectday}"%"
+		AND instructorid=#{insid}
 	</select>
 </mapper>

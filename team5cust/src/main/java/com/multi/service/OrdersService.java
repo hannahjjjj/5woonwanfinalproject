@@ -47,6 +47,10 @@ public class OrdersService implements MyService<Integer, OrdersDTO> {
 		return mapper.orderall(custid);
 	}
 	
+	public List<OrdersDTO> mymembership(String custid) throws Exception{
+		return mapper.mymembership(custid);
+	}
+	
 	
 	// 주문상세 인서트할때
 //	fun insertUserData (user: User, hobby: Hobby) {
