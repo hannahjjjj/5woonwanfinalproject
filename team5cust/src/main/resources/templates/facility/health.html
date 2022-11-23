@@ -55,7 +55,6 @@ $('#search_btn2').click(function(){
         <div class="row">
         	<div class="col-md-4" th:each="fl:${facilitylist}">
         		<div class="property-wrap ftco-animate">
-<!--         			<a th:href="@{/facility(facilityid=${fl.facilityid})}"class="img"><img id="flimg" th:src="@{/images/}+${fl.facilityimg}+'.jpg'"></a> -->
          			<a th:href="@{/facilitydetail(facilityid=${fl.facilityid})}"class="img" th:style="'background-image: url('+@{fimages/}+${fl.facilityimg}+@{.jpg}+');'"></a> 
 
         			<div class="facility_name" th:text="${fl.facilityname}"> </div>

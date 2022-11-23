@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script>
-$('#search').click(function(){
-	$('#search').attr({
+$(document).ready(function(){
+$('#search_btn2').click(function(){
+	$('#search_form2').attr({
 		method:'get',
-		action:'[[@{/search2}]]'
+		action:'[[@{/search}]]'
 	});
-	$('#search').submit();
+	$('#search_form2').submit();
 });
+});
+
 
 </script>
  
@@ -29,10 +32,10 @@ $('#search').click(function(){
 		<section class="ftco-section">
     	<div class="col-md-2 sidebar ftco-animate">
  		<div class="sidebar-box">
-            <form action="#" class="search-form">
+			<form id="search_form2" action="#" class="search-form">
               <div class="form-group">
-                <span class="icon icon-search"></span>
-                <input id="search2" type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                <span id="search_btn2" class="icon icon-search"></span>
+                 <input name="txt" type="text" class="form-control" placeholder="Type a keyword and hit enter">
               </div>
             </form>
           </div>
