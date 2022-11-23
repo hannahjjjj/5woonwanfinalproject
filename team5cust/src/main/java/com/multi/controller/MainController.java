@@ -1,7 +1,8 @@
 package com.multi.controller;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,16 +10,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CustDTO;
+import com.multi.dto.OrdersDTO;
 import com.multi.service.CustService;
 import com.multi.dto.FacilityDTO;
 import com.multi.mapper.FacilityMapper;
 import com.multi.service.FacilityService;
+import com.multi.service.OrdersService;
 @Controller
 public class MainController {	
 
 	@Autowired
 	CustService custservice;
 	
+	@Autowired
+	OrdersService orderservice;
 	
 	@Autowired
 	FacilityService fservice;
@@ -30,13 +35,13 @@ public class MainController {
 		model.addAttribute("center", "index");
 		return "redirect:/";
 	}
-
 	
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("center", "about");
 		return "index";
 	}
+	
 	@RequestMapping("/contact")
 	public String contact(Model model) {
 		model.addAttribute("center", "contact");
@@ -51,8 +56,8 @@ public class MainController {
 		return "index";
 	}
 	
-	 @RequestMapping("/loginimpl")
-	   public String loginimpl(String id, String pwd, Model model, HttpSession session) {   
+	@RequestMapping("/loginimpl")
+	public String loginimpl(String id, String pwd, Model model, HttpSession session) {   
 	      CustDTO cust = null;
 	      try {
 	         cust = custservice.get(id);
@@ -75,15 +80,14 @@ public class MainController {
 	      return "index";
 	   }
 
-	   @RequestMapping("/logout")
-		public String logout(Model model,HttpSession session) {
+	@RequestMapping("/logout")
+	public String logout(Model model,HttpSession session) {
 			
 			if(session != null) {
 				session.invalidate();
 			}
 			return "index";
 		}
-	   
 	 
 	// login 관련 end
 	@RequestMapping("/agent")
@@ -98,20 +102,6 @@ public class MainController {
 		return "index";
 	}
 	
-
-	
-//	   @RequestMapping("/facility")
-//	   public String facility(Model model) { 
-//		   List<FacilityDTO> list = null;
-//		  try {
-//			  list=fservice.get();
-//			  model.addAttribute("facilitylist",list);
-//			  model.addAttribute("center", "facility"); 
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	      return "index";
-//	   }
 	@RequestMapping("/blog")
 	public String blog(Model model) {
 		model.addAttribute("center", "blog");
@@ -137,6 +127,7 @@ public class MainController {
 			System.out.println(txt);
 			return "index";
 	}
+	
 	@RequestMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("center", "register");
@@ -191,13 +182,31 @@ public class MainController {
 	}
 	
 	@RequestMapping("/custschedule")
-	public String custschedule(Model model, String id) {
+	public String custschedule(Model model, String id, String insid) {
 		CustDTO cust = null;
 		try {
 			cust = custservice.get(id);
 			model.addAttribute("custdetail", cust);
+			model.addAttribute("insid", insid);
 			model.addAttribute("center","/cust/mypage");
 			model.addAttribute("custcenter", "/cust/custschedule");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/custorderlist")
+	public String custorderlist(Model model, String id) {
+		CustDTO cust = null;
+		List<OrdersDTO> order = null;
+		try {
+			cust = custservice.get(id);
+			order = orderservice.mymembership(id);
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("orderlist", order);
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter", "/cust/custorderlist");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -243,3 +252,17 @@ public class MainController {
 	}
 	
 }
+
+
+//	   @RequestMapping("/facility")
+//	   public String facility(Model model) { 
+//		   List<FacilityDTO> list = null;
+//		  try {
+//			  list=fservice.get();
+//			  model.addAttribute("facilitylist",list);
+//			  model.addAttribute("center", "facility"); 
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	      return "index";
+//	   }

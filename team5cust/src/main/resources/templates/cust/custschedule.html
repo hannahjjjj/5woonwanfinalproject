@@ -5,135 +5,202 @@
     <link href='/fullcalendar/main.css' rel='stylesheet' />
     <script src='/fullcalendar/main.js'></script>
     <script>
-    function selectSchedules(data){
-    	alert(data);
+    var selectday;
+    function select_time(time){
+    	var id="[[${session.logincust.custid}]]";
+    	var insid="[[${insid}]]";
+    	var c =confirm('예약 하시겠습니까?');
+    	if(c==true){
+	    	$.ajax({
+	            url:"/scheduletime",
+	            data:{"id":id,
+	            	"time":time.value,
+	            	"selectday":selectday,
+	            	"insid":insid
+	          	  },
+	            Type:"post",
+	            success:function(){
+	            	alert("예약이 완료 되었습니다.")
+	            }
+	         });
+    	}
+    	
     }
-    	document.addEventListener('DOMContentLoaded', function() {
-        	var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-            	
-            	dateClick: function(info) {
-            		var selectday=new Date(info.dateStr);
-            		selectday=selectday.getFullYear() +
-            		'-' + ( (selectday.getMonth()+1) <= 9 ? "0" + (selectday.getMonth()+1) : (selectday.getMonth()+1) )+
-            		'-' + ( (selectday.getDate()) <= 9 ? "0" + (selectday.getDate()) : (selectday.getDate()) );
-            		
-            		
-            		var today=new Date();
-            		today= today.getFullYear() +
-            		'-' + ( (today.getMonth()+1) <= 9 ? "0" + (today.getMonth()+1) : (today.getMonth()+1) )+
-            		'-' + ( (today.getDate()) <= 9 ? "0" + (today.getDate()) : (today.getDate()) );
-            		
-            		
-            		if(selectday<=today){
-	            		alert("오늘 날짜 이 후로 선택해주세요.");
-	            		return;
-            		}
-            		
-            		$.ajax({
-                        url:"/schedulelist",
-                        data:{"selectday":selectday 
-                      	  },
-                        Type:"post",
-                        success:function(data){
-                        	//여기에 함수 넣어주면 되려나..? 데이터 받아와 밑에 시간선택 부분 바꿔야함
-                        	selectSchedules(data);
-                        }
-                     });
-            		
-            	},
-                // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
-                headerToolbar: {
-                    right: 'prev,next',
-                    center: 'title',
-                    left:'today'
-                    
-                },
-                
-				// 테이블 속성
-                selectable: true, // 날짜 선택 가능하게 하는 속성
-                selectMirror: false,
-                navLinks: false, // can click day/week names to navigate views
-                editable: false, //날짜 여러개 선택 할 수 있는 속성
-                dayMaxEvents: false, // allow "more" link when too many events
-                // ------------------------------------
-                
-                // 이벤트 넣어주는 속성...근데 이걸 해줘야 되나 고민중.. 데이터를 다가져오면 나중에가면 데이터가 커질테니
-                /* events: [
-                    {
-                    title: 'All Day Event',
-                    start: '2022-07-01'
-                    },
-                    {
-                    title: 'Long Event',
-                    start: '2022-07-07',
-                    end: '2022-07-10'
-                    },
-                    {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2022-07-09T16:00:00'
-                    },
-                    {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2022-07-16T16:00:00'
-                    },
-                    {
-                    title: 'Conference',
-                    start: '2022-07-11',
-                    end: '2022-07-13'
-                    },
-                    {
-                    title: 'Meeting',
-                    start: '2022-07-12T10:30:00',
-                    end: '2022-07-12T12:30:00'
-                    },
-                    {
-                    title: 'Lunch',
-                    start: '2022-07-12T12:00:00'
-                    },
-                    {
-                    title: 'Meeting',
-                    start: '2022-07-12T14:30:00'
-                    },
-                    {
-                    title: 'Happy Hour',
-                    start: '2022-07-12T17:30:00'
-                    },
-                    {
-                    title: 'Dinner',
-                    start: '2022-07-12T20:00:00'
-                    },
-                    {
-                    title: 'Birthday Party',
-                    start: '2022-07-13T07:00:00'
-                    },
-                    {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2022-07-28'
-                    }
-                ] */
-            });
+    function selectSchedules(data){
+    	//버튼 css 변경위한 값 받아오기
+    	{
+	    	var a = document.getElementById("schedules_button_09");
+	    	var b = document.getElementById("schedules_button_10");
+	    	var c = document.getElementById("schedules_button_11");
+	    	var d = document.getElementById("schedules_button_12");
+	    	var e = document.getElementById("schedules_button_13");
+	    	var f = document.getElementById("schedules_button_14");
+	    	var g = document.getElementById("schedules_button_15");
+	    	var h = document.getElementById("schedules_button_16");
+	    	var i = document.getElementById("schedules_button_17");
+	    	var j = document.getElementById("schedules_button_18");
+	    	var k = document.getElementById("schedules_button_19");
+	    	var l = document.getElementById("schedules_button_20");
+	    	var n = document.getElementById("schedules_button_21");
+	    	var m = document.getElementById("schedules_button_22");
+	    	var o = document.getElementById("schedules_button_23");
+    	}
+    	var arr_schedules={
+    			"09:00":a,
+    			"10:00":b,
+    			"11:00":c,
+    			"12:00":d,
+    			"13:00":e,
+    			"14:00":f,
+    			"15:00":g,
+    			"16:00":h,
+    			"17:00":i,
+    			"18:00":j,
+    			"19:00":k,
+    			"20:00":l,
+    			"21:00":n,
+    			"22:00":m,
+    			"23:00":o
+    		};
+    	for (var key in arr_schedules) {
+    		  arr_schedules[key].style.backgroundColor = 'yellow';
+    		}
+    	for(var i=0;i<data.length;i++){
+    		var val=data[i];
+    		arr_schedules[val].style.backgroundColor = 'grey';
+    	}
+    	
+    }
+  	document.addEventListener('DOMContentLoaded', function() {
+      	var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+          	
+          	dateClick: function(info) {
+          		selectday=new Date(info.dateStr);
+          		selectday=selectday.getFullYear() +
+          		'-' + ( (selectday.getMonth()+1) <= 9 ? "0" + (selectday.getMonth()+1) : (selectday.getMonth()+1) )+
+          		'-' + ( (selectday.getDate()) <= 9 ? "0" + (selectday.getDate()) : (selectday.getDate()) );
+          		
+          		
+          		var today=new Date();
+          		today= today.getFullYear() +
+          		'-' + ( (today.getMonth()+1) <= 9 ? "0" + (today.getMonth()+1) : (today.getMonth()+1) )+
+          		'-' + ( (today.getDate()) <= 9 ? "0" + (today.getDate()) : (today.getDate()) );
+          		
+          		
+          		if(selectday<=today){
+           		alert("오늘 날짜 이 후로 선택해주세요.");
+           		return;
+          		}
+          	    var insid="[[${insid}]]";
+          		$.ajax({
+                      url:"/schedulelist",
+                      data:{"selectday":selectday,
+                    	  	"insid":insid
+                    	  },
+                      Type:"post",
+                      success:function(data){
+                      	//여기에 함수 넣어주면 되려나..? 데이터 받아와 밑에 시간선택 부분 바꿔야함
+                      	selectSchedules(data);
+                      }
+                   });
+          		
+          	},
+              // Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
+              headerToolbar: {
+                  right: 'prev,next',
+                  center: 'title',
+                  left:'today'
+                  
+              },
+              
+		// 테이블 속성
+              selectable: true, // 날짜 선택 가능하게 하는 속성
+              selectMirror: false,
+              navLinks: false, // can click day/week names to navigate views
+              editable: false, //날짜 여러개 선택 할 수 있는 속성
+              dayMaxEvents: false, // allow "more" link when too many events
+              // ------------------------------------
+              
+              // 이벤트 넣어주는 속성...근데 이걸 해줘야 되나 고민중.. 데이터를 다가져오면 나중에가면 데이터가 커질테니
+              /* events: [
+                  {
+                  title: 'All Day Event',
+                  start: '2022-07-01'
+                  },
+                  {
+                  title: 'Long Event',
+                  start: '2022-07-07',
+                  end: '2022-07-10'
+                  },
+                  {
+                  groupId: 999,
+                  title: 'Repeating Event',
+                  start: '2022-07-09T16:00:00'
+                  },
+                  {
+                  groupId: 999,
+                  title: 'Repeating Event',
+                  start: '2022-07-16T16:00:00'
+                  },
+                  {
+                  title: 'Conference',
+                  start: '2022-07-11',
+                  end: '2022-07-13'
+                  },
+                  {
+                  title: 'Meeting',
+                  start: '2022-07-12T10:30:00',
+                  end: '2022-07-12T12:30:00'
+                  },
+                  {
+                  title: 'Lunch',
+                  start: '2022-07-12T12:00:00'
+                  },
+                  {
+                  title: 'Meeting',
+                  start: '2022-07-12T14:30:00'
+                  },
+                  {
+                  title: 'Happy Hour',
+                  start: '2022-07-12T17:30:00'
+                  },
+                  {
+                  title: 'Dinner',
+                  start: '2022-07-12T20:00:00'
+                  },
+                  {
+                  title: 'Birthday Party',
+                  start: '2022-07-13T07:00:00'
+                  },
+                  {
+                  title: 'Click for Google',
+                  url: 'http://google.com/',
+                  start: '2022-07-28'
+                  }
+              ] */
+          });
 
-            calendar.render();
-        });
+          calendar.render();
+      });
 
     </script>
     
     <style>
     #u{
     	display:block;
-    	background-color:rgb(255, 255, 128);
+    	background-color:yellow;
     	width:20px;
     	height:20px;
     }
     #un{
     	display:block;
-    	background-color:rgb(192, 192, 192);
+    	background-color:grey;
     	width:20px;
     	height:20px;
+    }
+    div>ul>li>input{
+    	width:150px; height:50px; background-color:yellow; margin-right:2px;margin-bottom:5px;
     }
     </style> 
   </head>
@@ -148,55 +215,55 @@
     	</div>
     	<ul style="list-style:none; margin-bottom:50px;">
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">09:00</button><br><br>
+	    		<input type="button" id="schedules_button_09" value="09:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">10:00</button><br><br>
+	    		<input type="button" id="schedules_button_10" value="10:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">11:00</button><br><br>
+	    		<input type="button" id="schedules_button_11" value="11:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">12:00</button><br><br>
+	    		<input type="button" id="schedules_button_12" value="12:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">13:00</button><br><br>
-	    	</li>
-	    </ul>
-    	<ul style="list-style:none;">
-    		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">14:00</button><br><br>
-	    	</li>
-    		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">15:00</button><br><br>
-	    	</li>
-    		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">16:00</button><br><br>
-	    	</li>
-    		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">17:00</button><br><br>
+	    		<input type="button" id="schedules_button_13" value="13:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
 	    </ul>
     	<ul style="list-style:none;">
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">18:00</button><br><br>
+	    		<input type="button" id="schedules_button_14" value="14:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">19:00</button><br><br>
+	    		<input type="button" id="schedules_button_15" value="15:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">20:00</button><br><br>
+	    		<input type="button" id="schedules_button_16" value="16:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">21:00</button><br><br>
+	    		<input type="button" id="schedules_button_17" value="17:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
 	    </ul>
     	<ul style="list-style:none;">
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">22:00</button><br><br>
+	    		<input type="button" id="schedules_button_18" value="18:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
     		<li style="float:left;">
-	    		<button id="login_btn" style="width:150px; height:50px; background-color:rgb(255, 255, 128); margin-right:2px;margin-bottom:5px;">23:00</button><br><br>
+	    		<input type="button" id="schedules_button_19" value="19:00" onclick="select_time(this);"></input><br><br>
+	    	</li>
+    		<li style="float:left;">
+	    		<input type="button" id="schedules_button_20" value="20:00" onclick="select_time(this);"></input><br><br>
+	    	</li>
+    		<li style="float:left;">
+	    		<input type="button" id="schedules_button_21" value="21:00" onclick="select_time(this);"></input><br><br>
+	    	</li>
+	    </ul>
+    	<ul style="list-style:none;">
+    		<li style="float:left;">
+	    		<input type="button" id="schedules_button_22" value="22:00" onclick="select_time(this);"></input><br><br>
+	    	</li>
+    		<li style="float:left;">
+	    		<input type="button" id="schedules_button_23" value="23:00" onclick="select_time(this);"></input><br><br>
 	    	</li>
 	    </ul>
     </div>

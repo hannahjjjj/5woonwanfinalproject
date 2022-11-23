@@ -25,6 +25,7 @@ public class OrdersDTO {
 	private int item_count;
 	private int total_cnt;
 	private String instructor_name;
-
+	private int instructorid;
+	private String facility_name;
 }
 

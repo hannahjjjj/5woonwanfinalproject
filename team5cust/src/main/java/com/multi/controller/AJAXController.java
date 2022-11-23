@@ -1,7 +1,9 @@
 package com.multi.controller;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -89,19 +91,44 @@ public class AJAXController {
 		return ja;
 	}
 	@RequestMapping("/schedulelist")
-	public Object schedulelist(String selectday) {
+	public Object schedulelist(String selectday,String insid) {
 		List<SchedulesDTO> list=null;
 		JSONArray ja = new JSONArray();
 		try {
-			list=schedulesService.selectday(selectday);
+			list=schedulesService.selectday(selectday,insid);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		//데이터 받아온거 시간으로 나눠서 넘겨주기.
-		SimpleDateFormat sDate = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat sDate = new SimpleDateFormat("HH:mm");
 		for(SchedulesDTO l:list) {
 			ja.add(sDate.format(l.getStarttime()));
 		}
 		return ja;
+	}
+
+	@RequestMapping("/scheduletime")
+	public Object scheduletime(String time,String id,String selectday,int insid) {
+		String dateStr=selectday;
+		dateStr+=" "+time;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date sDate;
+		SchedulesDTO sc = null;
+		try {
+			sDate = formatter.parse(dateStr);
+			sc= new SchedulesDTO(0, insid, id, sDate, null, 0);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			schedulesService.register(sc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//데이터 받아온거 시간으로 나눠서 넘겨주기.
+		return "";
 	}
 }

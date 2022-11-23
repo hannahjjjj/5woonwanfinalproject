@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset='utf-8' />
+  </head>
+    <div style="margin:auto;">
+    	<div class="login-card">
+			<h3>나의 회원권</h3>
+			<table id="otb" class="table">
+				<thead>
+					<tr class="active">
+						<th>시설</th>
+						<th>강사</th>
+						<th>회원권</th>
+						<th>남은 횟수</th>
+						<th>만료 기간</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c:${orderlist}">
+						<td th:text="${c.facility_name}" id="facility_name">
+						<td th:text="${c.instructor_name}" id="instructor_name"></td>
+						<td><a th:text="${c.item_name}" id="item_name" th:href="@{/custschedule(id=${c.custid},insid=${c.instructorid})}"></a></td>
+						<td th:text="${c.item_count}" id="item_count"></td>
+						<td th:text="${c.item_count}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+		</div>
+    </div>
+  </body>
+</html>
