@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
+
+
+
 <body>
+
 
 <script>
   
@@ -16,11 +20,11 @@ function getdata(facilityid){
 };
 $(document).ready(function(){
   var fid=$('#fid').text();  
-  	getdata(fid);
-	   
+     getdata(fid);
+      
 });
 function display(data){
-	
+   
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = { 
     center: new kakao.maps.LatLng(data[0].lat,data[0].lng), // 지도의 중심좌표
@@ -42,55 +46,55 @@ marker.setMap(map);
 
 }
 
-	$('.categories>li>a').click(function(e){
-		var href=$(this).attr('href');
-		var targetTop = $(href).offset().top;
-	    $('html').stop().animate({scrollTop:targetTop}, 300);
-	    
-	    e.preventDefault();
-		});
+   $('.categories>li>a').click(function(e){
+      var href=$(this).attr('href');
+      var targetTop = $(href).offset().top;
+       $('html').stop().animate({scrollTop:targetTop}, 300);
+       
+       e.preventDefault();
+      });
 
 
-	function Page__updateIndicatorActive() {
-	    var scrollTop = $(window).scrollTop();
-	    
-	    // 역순으로 검색해야 편하다
-	    $($('.page').get().reverse()).each(function(index, node) {
-	        var $node = $(this);
-	        var offsetTop = parseInt($node.attr('data-offset-top'));
-	        
-	        if ( scrollTop >= offsetTop ) {
-	            // 기존 녀석에게 활성화 풀고
-	            $('.page-indicator > ul > li.active').removeClass('active');
-	            // 해당하는 녀석에게 활성화 넣고
-	            
-	            var currentPageIndex = $node.index();
-	            $('.page-indicator > ul > li').eq(currentPageIndex).addClass('active');
-	            
-	            $('html').attr('data-current-page-index', currentPageIndex);
-	            
-	            return false; // 더 이상 다른 페이지를 검사하지 않는다.
-	        }
-	    });
-	}
-	
-	// 각 페이지의 offsetTop 속성을 업데이트
-	function Page__updateOffsetTop() {
-	    
-	    $('.page').each(function(index, node) {
-	        var $page = $(node);
-	        var offsetTop = $page.offset().top;
-	        
-	        $page.attr('data-offset-top', offsetTop);
-	    });
-	    
-	    // 계산이 바뀌었으니까, 다시 상태 업데이트
-	    Page__updateIndicatorActive();
-	}
-	
-	function Page__init() {
-	    Page__updateOffsetTop();
-	}
+   function Page__updateIndicatorActive() {
+       var scrollTop = $(window).scrollTop();
+       
+       // 역순으로 검색해야 편하다
+       $($('.page').get().reverse()).each(function(index, node) {
+           var $node = $(this);
+           var offsetTop = parseInt($node.attr('data-offset-top'));
+           
+           if ( scrollTop >= offsetTop ) {
+               // 기존 녀석에게 활성화 풀고
+               $('.page-indicator > ul > li.active').removeClass('active');
+               // 해당하는 녀석에게 활성화 넣고
+               
+               var currentPageIndex = $node.index();
+               $('.page-indicator > ul > li').eq(currentPageIndex).addClass('active');
+               
+               $('html').attr('data-current-page-index', currentPageIndex);
+               
+               return false; // 더 이상 다른 페이지를 검사하지 않는다.
+           }
+       });
+   }
+   
+   // 각 페이지의 offsetTop 속성을 업데이트
+   function Page__updateOffsetTop() {
+       
+       $('.page').each(function(index, node) {
+           var $page = $(node);
+           var offsetTop = $page.offset().top;
+           
+           $page.attr('data-offset-top', offsetTop);
+       });
+       
+       // 계산이 바뀌었으니까, 다시 상태 업데이트
+       Page__updateIndicatorActive();
+   }
+   
+   function Page__init() {
+       Page__updateOffsetTop();
+   }
 
 
 
@@ -102,7 +106,7 @@ marker.setMap(map);
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate pb-5 text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Facility<i class="ion-ios-arrow-forward"></i></span></p>
+             <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Facility<i class="ion-ios-arrow-forward"></i></span></p>
             <h1 class="mb-3 bread">FacilityDetail</h1>
           </div>
         </div>
@@ -112,8 +116,8 @@ marker.setMap(map);
     <br>
     
     <section class="ftco-section">
-    	<div class="col-md-2 sidebar ftco-animate">
- 		<div class="sidebar-box">
+       <div class="col-md-2 sidebar ftco-animate">
+       <div class="sidebar-box">
 
           </div>
           <div class="sidebar-box ftco-animate" >
@@ -143,11 +147,11 @@ marker.setMap(map);
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid" >
+                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid"style="width:80%;hegiht:100%;">
               </div>
             </div>
           </div>
-          <div class="col-lg-5" style="padding:0px 300px 0px 0px;">
+          <div class="col-lg-5" style="padding:0px 250px 0px 50px;">
             <strong><p class="facility_name" th:text="${fd.facilityname}" style="font-size:200%;"></p></strong>
             <div style="border-top: 1px solid lightgray;  border-bottom: 1px solid lightgray;">
             <p class="facility_number" th:text="${fd.facilitynumber}" style="font-color:lightgray;"></p>
@@ -167,55 +171,50 @@ marker.setMap(map);
       <br>
  
  
- 	<section class="ftco-section ftco-agent">
-    	<div class="container2" id="container2">
+    <section class="ftco-section ftco-agent">
+       <div class="container2" id="container2">
         <h4><strong>강사진</strong></h4>
         <br>
         <div class="row">
-       	<div class="col-md-3" th:each="i:${ins}">
-		
-       		<div class="agent" >
-					<div class="img">
-					 <a th:href="@{/instructordetail(instructorid=${i.instructorid})}"><img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
- 				</div>
- 				
- 				<div class="desc">
- 					<h3><strong><a th:text="${i.instructorname}" ></a></strong></h3>
- 					<h3><a th:text="${i.instructorcon}"></a></h3>
- 				</div>
-			  
- 			</div>
- 			</div>	
-  		</div>
-       	</div>
-       	<br>
-       	
-       	<div class="container3" id="container3" th:each="fd:${facilitydetail}">
-       	<h4><strong>운영시간</strong></h4>
-		<br>
-			<h5>평일<br><a th:text="${fd.facilitytime}" ></a></h5>
-			<br>
-			<h5>주말<br><a th:text="${fd.facilitytime2}"></a></h5>
-       	</div>
-       	<br>
-       	<div class="container4" id="container4">
-       	<h4><strong>이용요금</strong></h4>
-       	</div>
-       	<br>
-       	<div class="container5" id="container5">
-       	<h4><strong>이용후기</strong></h4>
-       	</div>
-       	<br>
-       	<h4><strong>상세위치</strong></h4>
-       	<div class="container6" id="container6">
-            <div class="d-block agent-box p-7">
-            <div id="map" style="width:50%;height:350px;"></div>
-        </div>       	
-       	</div>
+          <div class="col-md-3" th:each="i:${ins}">
+      
+             <div class="agent" >
+               <div class="img">
+                <a th:href="@{/instructordetail(instructorid=${i.instructorid})}"><img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
+             </div>
+             
+             <div class="desc">
+                <h3><strong><a th:text="${i.instructorname}" ></a></strong></h3>
+                <h3><a th:text="${i.instructorcon}"></a></h3>
+             </div>
+           
+          </div>
+          </div>   
+        </div>
+          </div>
+          <br>
+          
+          <div class="container3" id="container3" th:each="fd:${facilitydetail}">
+          <h4><strong>운영시간</strong></h4>
+      <br>
+         <h5>평일<br><a th:text="${fd.facilitytime}" ></a></h5>
+         <br>
+         <h5>주말<br><a th:text="${fd.facilitytime2}"></a></h5>
+          </div>
+          <br>
+          <div class="container4" id="container4">
+          <h4><strong>이용요금</strong></h4>
+          </div>
+          <br>
+          <div class="container5" id="container5">
+          <h4><strong>이용후기</strong></h4>
+          
+        </div>          
+
 
      
-       	
-       	</section>
+          
+          </section>
 
 
 
