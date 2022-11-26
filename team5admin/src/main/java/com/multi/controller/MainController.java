@@ -1,13 +1,20 @@
 package com.multi.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.dto.AdminDTO;
+import com.multi.service.AdminService;
 
 
 @Controller
 public class MainController {	
 
+
+	private AdminService adminService;
 
 	@RequestMapping("/index")
 	public String index(Model model) {
@@ -59,9 +66,36 @@ public class MainController {
 	
 	@RequestMapping("/login")
 	public String login(Model model) {
+		model.addAttribute("status", "1");
 		model.addAttribute("center", "login");
 		return "index";
 	}
+
+	@RequestMapping("/loginimpl")
+	public String loginimpl(String aid, String apwd, Model model, HttpSession session) {   
+	      AdminDTO admin = null;
+	      try {
+	         admin = adminService.get(aid);
+	         if(admin == null) {
+	        	 model.addAttribute("status", "0");
+	        	 model.addAttribute("center", "login");
+	         } else {
+	            if(apwd.equals(admin.getApwd())) {
+	            	model.addAttribute("status", "1");
+	               session.setAttribute("loginadmin", admin);
+	            } else {
+	            	 model.addAttribute("status", "0");
+	            	 model.addAttribute("center", "login");
+	            	 }
+	         }
+	      } catch (Exception e) {      
+	         e.printStackTrace();
+	      }
+
+	      return "index";
+	   }	
+	
+	
 	
 	@RequestMapping("/lock_screen")
 	public String lock_screen(Model model) {

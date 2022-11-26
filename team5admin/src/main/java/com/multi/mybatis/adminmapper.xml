@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.AdminMapper">
+	
+	<select id="select" parameterType="String" resultType="AdminDTO">
+		SELECT * FROM admin WHERE aid=#{aid}
+	</select>
+	
+<!-- 	<select id="selectkakkoid" parameterType="String" resultType="AdminDTO">
+		SELECT * FROM admin WHERE kakkoid=#{kakkoid}
+	</select> -->
+
+	<select id="selectAll" resultType="AdminDTO">
+		SELECT * FROM admin
+	</select>
+
+	<update id="update" parameterType="AdminDTO">
+		UPDATE admin SET apwd=#{apwd},aname=#{aname},acontact=#{acontact},aemail=#{aemail},grade=#{grade}<!-- ,kakkoid=#{kakkoid}  -->
+		WHERE aid=#{aid}
+	</update>
+ 
+	<insert id="insert" parameterType="AdminDTO">
+		INSERT INTO admin VALUES (#{aid},#{apwd},#{aname},#{acontact},#{aemail},#{grade}<!-- ,#{kakkoid}) -->
+	</insert>
+	
+	<delete id="delete" parameterType="AdminDTO">
+		DELETE FROM admin WHERE aid=#{aid}
+	</delete>
+</mapper>
