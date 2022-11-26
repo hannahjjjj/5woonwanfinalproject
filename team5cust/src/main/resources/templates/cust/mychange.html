@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset='utf-8' />
+<!-- chart script -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<!-- chart end -->
+<script>
+$(document).ready(function(){
+	displaychart();
+	var status = "[[${modalflag}]]";
+	$('#register_btn').click(function(){
+		$('#inbody_form').attr({
+			'enctype':'multipart/form-data',
+			'method':'post',
+			'action':'[[@{/ocrimpl}]]'
+		})
+		$('#register_form').submit();
+	});
+/* 
+	if(status=='1'){
+		$('#testModal').modal();
+	}  */
+});
+
+function displaychart(){
+	Highcharts.chart('container', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: 'Monthly Average Temperature'
+	    },
+	    subtitle: {
+	        text: 'Source: ' +
+	            '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+	            'target="_blank">Wikipedia.com</a>'
+	    },
+	    xAxis: {
+	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'Temperature (°C)'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: [{
+	        name: 'Reggane',
+	        data: [16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
+	            22.0, 17.8]
+	    }, {
+	        name: 'Tallinn',
+	        data: [-2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
+	            2.0, -0.9]
+	    }]
+	});
+}
+
+</script>
+
+
+</head>
+<body>
+<!-- 모달 -->
+	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					</button>
+				</div>
+				<div class="modal-body">입력사항을 모두 입력해주세요.</div>
+				<div class="modal-footer">
+					<button class="btn" type="button" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 모달 end -->
+	<div class="card-body">
+                <div id="container"></div>
+    </div>
+	<div class="card shadow mb-4" style="width: 1050px;">
+		<div class="card-header py-3" style="width: 1050px;">
+			<h1 class="h3 mb-0 text-gray-800">인바디 사진 등록</h1>
+		</div>
+		<div class="card-body" style="width: 1040px;">
+			<form id="inbody_form">
+				<div class="form-group">
+					<input type="file" class="form-control" id="img" name="img">
+					<input type="hidden" class="form-control" id="custid" name="custid" th:value="${custdetail.custid}">
+				</div>
+				<button id="register_btn" class="btn btn-default">등록</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

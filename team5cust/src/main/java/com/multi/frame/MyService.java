@@ -2,8 +2,6 @@ package com.multi.frame;
 
 import java.util.List;
 
-import com.multi.dto.CateDTO;
-
 public interface MyService<K,V> {
 	public void register(V v) throws Exception;
 	public void remove(K k) throws Exception;

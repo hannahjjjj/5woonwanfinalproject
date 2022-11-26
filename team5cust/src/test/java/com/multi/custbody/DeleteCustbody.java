@@ -1,6 +1,4 @@
-package com.multi.custbody.copy;
-
-import java.util.List;
+package com.multi.custbody;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,28 +8,19 @@ import com.multi.dto.CustbodyDTO;
 import com.multi.service.CustbodyService;
 
 @SpringBootTest
-class GetAllCustbody {
+class DeleteCustbody {
 
 	@Autowired
 	CustbodyService service;
 	
 	@Test
 	void contextLoads() {
-		List<CustbodyDTO> list = null;
 		try {
-			list = service.get();
+			service.remove(1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		for(CustbodyDTO c:list) {
-			System.out.println(c);
-		}
+		System.out.println("DELETE OK");
 	}
-
 }
-
-
-
-

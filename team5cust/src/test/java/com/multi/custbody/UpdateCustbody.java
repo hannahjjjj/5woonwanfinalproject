@@ -1,4 +1,4 @@
-package com.multi.custbody.copy;
+package com.multi.custbody;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

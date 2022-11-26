@@ -1,4 +1,4 @@
-package com.multi.custbody.copy;
+package com.multi.custbody;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ class InsertCustbody {
 	@Test
 	void contextLoads() {
 		
-		CustbodyDTO custbody= new CustbodyDTO(10, "id02", null, 0, 0, 0, 186);
+		CustbodyDTO custbody= new CustbodyDTO(0, null, null, 0, 0, 0, 0, null, null);
 		
 		try {
 			service.register(custbody);

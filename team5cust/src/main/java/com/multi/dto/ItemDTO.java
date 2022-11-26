@@ -18,7 +18,7 @@ public class ItemDTO {
 	private int instructorid;
 	private String itemname;
 	private String itemimg;
-	private int count;
+	private int counting;
 	private int period;
 	private int itemprice;
 	private String itemstate;

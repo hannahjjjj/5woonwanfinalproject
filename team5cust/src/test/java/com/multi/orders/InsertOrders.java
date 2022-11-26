@@ -19,7 +19,7 @@ class InsertOrders {
 	@Test
 	void contextLoads() {
 		Date day=new Date();
-		OrdersDTO order = new OrdersDTO(0, 100,"id08", day,null,0,0,0,"","");
+		OrdersDTO order = new OrdersDTO(0, 100,"id08", day,null,0,0,0,"",0,"");
 		try {
 			service.register(order);
 		} catch (Exception e) {

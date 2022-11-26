@@ -18,5 +18,4 @@ public class ItemController {
 		model.addAttribute("center", "item");
 		return "index";
 	}
-	
 }

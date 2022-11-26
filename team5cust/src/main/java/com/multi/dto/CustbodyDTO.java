@@ -2,6 +2,8 @@ package com.multi.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +22,10 @@ public class CustbodyDTO {
 	String custid;
 	Date bdate;
 	int height;
-	int bodyfat;
-	int muscle;
-	int weight;
+	double bodyfat;
+	double muscle;
+	double weight;
+	//ocr 파일 읽기위한 변수
+	private MultipartFile img;
+	private String imgname;
 }

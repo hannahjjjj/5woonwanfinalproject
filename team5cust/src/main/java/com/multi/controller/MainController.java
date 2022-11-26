@@ -4,18 +4,26 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CustDTO;
-import com.multi.dto.OrdersDTO;
-import com.multi.service.CustService;
+import com.multi.dto.CustbodyDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.OrdersDTO;
+import com.multi.frame.ORCUtil;
+import com.multi.frame.Util;
 import com.multi.mapper.FacilityMapper;
+import com.multi.service.CustService;
 import com.multi.service.FacilityService;
 import com.multi.service.OrdersService;
+
 @Controller
 public class MainController {	
 
@@ -27,8 +35,16 @@ public class MainController {
 	
 	@Autowired
 	FacilityService fservice;
+	
 	@Autowired
 	FacilityMapper fmapper;
+	
+	@Value("${admindir}")
+	String admindir;
+
+	@Value("${custdir}")
+	String custdir;
+	
 
 	@RequestMapping("/index")
 	public String index(Model model) {
@@ -90,6 +106,7 @@ public class MainController {
 		}
 	 
 	// login 관련 end
+
 	@RequestMapping("/agent")
 	public String agent(Model model) {
 		model.addAttribute("center", "agent");
@@ -128,6 +145,7 @@ public class MainController {
 			return "index";
 	}
 	
+	// 회원가입
 	@RequestMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("center", "register");
@@ -151,6 +169,7 @@ public class MainController {
 		
 		return "index";
 	}
+	//회원가입 end
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model, String id) {
@@ -180,6 +199,8 @@ public class MainController {
 		}
 		return "index";
 	}
+	
+	// 마이 페이지 내에 개인 스케줄 
 	
 	@RequestMapping("/custschedule")
 	public String custschedule(Model model, String id, String insid) {
@@ -212,6 +233,74 @@ public class MainController {
 		}
 		return "index";
 	}
+	
+	// 개인 스케줄 end
+	
+	// ocr 및 정보 변화
+	
+	@RequestMapping("/mychange")
+	public String mychange(Model model, String id) {
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(id);
+			model.addAttribute("custdetail", cust);
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter", "/cust/mychange");
+			model.addAttribute("modalflag", "0");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	
+
+	@RequestMapping("/ocrimpl")
+	public String ocrimpl(Model model, CustbodyDTO obj) {
+		CustDTO cust = null;
+		String imgname = obj.getImg().getOriginalFilename(); // 파일덩어리 안에있는 파일이름을 꺼낸다.
+		CustbodyDTO custbody=null;
+		
+		obj.setImgname(imgname);
+		try {
+			Util.saveFile(obj.getImg(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
+			String result = ORCUtil.getText(imgname);
+			
+			JSONParser jsonparser = new JSONParser();
+			JSONObject jo = (JSONObject) jsonparser.parse(result);
+
+			JSONArray ja1 = (JSONArray) jo.get("images");
+			JSONObject jo1 = (JSONObject) ja1.get(0);
+			JSONArray ja2 = (JSONArray) jo1.get("fields");
+
+			JSONObject f1 = (JSONObject) ja2.get(0);
+			JSONObject f2 = (JSONObject) ja2.get(1);
+			JSONObject f3 = (JSONObject) ja2.get(2);
+
+			String bodyfat = (String) f1.get("inferText");
+			String weight= (String) f2.get("inferText");
+			String muscle = (String) f3.get("inferText");
+
+			model.addAttribute("bodyfat", bodyfat);
+			model.addAttribute("weight", weight);
+			model.addAttribute("muscle", muscle);
+			
+			cust = custservice.get(obj.getCustid());
+			model.addAttribute("custdetail", cust);
+			
+			 model.addAttribute("center","/cust/mypage");
+			 model.addAttribute("custcenter","/cust/mychange");
+			 
+			model.addAttribute("modalflag", "1");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	// ocr 및 정보 변화 end
+	
 	
 	@RequestMapping("/custdelete")
 	public String custdelete(Model model, String id) {
