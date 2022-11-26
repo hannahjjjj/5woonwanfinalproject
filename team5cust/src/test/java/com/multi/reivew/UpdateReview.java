@@ -1,5 +1,7 @@
 package com.multi.reivew;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +17,8 @@ class UpdateReview {
 	
 	@Test
 	void contextLoads() {
-		ReviewDTO item = new ReviewDTO(100,100,"dbswlsgh","쏘쏘","2");
+		Date day=new Date();
+		ReviewDTO item = new ReviewDTO(100,100,"dbswlsgh","쏘쏘",2,day);
 		try {
 			service.modify(item);
 		} catch (Exception e) {

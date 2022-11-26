@@ -5,13 +5,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.multi.mapper.ReviewMapper">
 	
 	<insert id="insert" parameterType="ReviewDTO">
-		INSERT INTO review VALUES (NULL, #{instructorid}, #{custid},#{reviewcon},#{starpoint},NOW())
+		INSERT INTO review VALUES (NULL, #{facilityid}, #{custid},#{reviewcon},#{starpoint},NOW())
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM review WHERE reviewid=#{reviewid}
 	</delete>
 	<update id="update" parameterType="ReviewDTO">
-		UPDATE review SET instructorid=#{instructorid}, custid=#{custid},reviewcon=#{reviewcon}, starpoint=#{starpoint},rdate=NOW()
+		UPDATE review SET facilityid=#{facilityid}, custid=#{custid},reviewcon=#{reviewcon}, starpoint=#{starpoint},rdate=NOW()
 		WHERE reviewid=#{reviewid}
 	</update> 
 	<select id="selectAll" resultType="ReviewDTO">
@@ -20,5 +20,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="select" parameterType="Integer" resultType="ReviewDTO">
 		SELECT * FROM review WHERE reviewid = #{reviewid}
 	</select>
-	
+	<select id="showReview" parameterType="Integer" resultType="ReviewDTO">
+		SELECT * FROM review WHERE facilityid = #{facilityid}
+	</select>
 </mapper>

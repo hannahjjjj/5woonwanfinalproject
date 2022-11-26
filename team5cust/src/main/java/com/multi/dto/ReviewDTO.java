@@ -16,9 +16,11 @@ import lombok.ToString;
 public class ReviewDTO {
 	// 리뷰 테이블 기본 컬럼
 	int reviewid;
-	int instructorid;
+	int facilityid;
 	String custid;
 	String reviewcon;
-	String starpoint;
+	int starpoint;
+	Date rdate;
+	
 	
 }

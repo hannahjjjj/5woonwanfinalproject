@@ -1,5 +1,97 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+<script>
+function modal(){
+	$('#testModal').modal();
+};
+
+$(document).ready(function(){
+
+	var status = "[[${status}]]";
+	
+	if(status=="0"){
+		modal();
+	}
+	
+	$('#login_btn').click(function(){
+		 $('#login_form').attr(
+			{
+				'action':'/loginimpl',
+				'method':'post'
+			}		 
+		);	
+		$('#login_form').submit();
+		
+		
+	});
+
+});
+</script>
+<!-- kakko login test -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script>
+
+window.Kakao.init('f4363fcc8b7b65aa79629e4cb5604c80');
+        
+function kakaologin() {
+    Kakao.Auth.login({
+      scope: 'profile_nickname,account_email,gender,birthday',
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+              $.ajax({
+                  url:"/kakkologin",
+                  data:{"id":response.id, 
+                	  "kakko_account":response.kakao_account,
+                	  "name":JSON.stringify(response.properties.nickname),
+                	  "email":JSON.stringify(response.kakao_account.email),
+                	  "gender":JSON.stringify(response.kakao_account.gender),
+                	  "birthday":JSON.stringify(response.kakao_account.birthday)
+                	  },
+                  Type:"post",
+                  success:function(data){
+                      //�꽦怨듭쟻�쑝濡� �븯怨좊굹硫� �씠�룞�븷 url
+                      location.href="/";  
+                  }
+                  
+               });
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+ }
+const login = document.querySelector('#kakaologin');
+login.addEventListener('click', kakaoLogin);
+
+</script>
+<script>
+function naverLogin() {
+	  var naverLogin = new naver.LoginWithNaverId(
+				{
+					clientId: "ftBRzhRgpIJDkToc4CQX", //�궡 �븷�뵆由ъ��씠�뀡 �젙蹂댁뿉 cliendId瑜� �엯�젰�빐以띾땲�떎.
+					callbackUrl: "http://127.0.0.1", // �궡 �븷�뵆由ъ��씠�뀡 API�꽕�젙�쓽 Callback URL �쓣 �엯�젰�빐以띾땲�떎.
+					isPopup: false,
+					callbackHandle: false
+				}
+			);	
+	  naverLogin.init();
+}
+</script>
+
+  <script>
+
+  </script>
+</head>
+
 
   <body>
 
@@ -9,19 +101,18 @@
 
 	  <div id="login-page">
 	  	<div class="container">
-	  	
-		      <form class="form-login">
+		      <form class="form-login" id="login_form">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="User ID" autofocus>
+		            <input type="text" class="form-control" placeholder="User ID" id="id" name="aid" autofocus>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password">
+		            <input type="password" class="form-control" placeholder="Password" id="pwd" name="apwd">
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" th:onclick="|location.href='@{/index}'|"><i class="fa fa-lock"></i> LogIn</button>
+		            <button id="login_btn" class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            
 		            <div class="login-social-link centered">
@@ -59,7 +150,23 @@
 		              </div>
 		          </div>
 		          <!-- modal -->
-		
+		     <!-- 紐⑤떖 -->
+	<div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+
+					</button>
+
+				</div>
+				<div class="modal-body">ID�삉�뒗鍮꾨�踰덊샇媛� �씪移섑븯吏��븡�뒿�땲�떎. �떎�떆 �떆�룄�빐二쇱꽭�슂.</div>
+				<div class="modal-footer">
+					<button class="btn" type="button" data-dismiss="modal">�솗�씤</button>
+				</div>
+			</div>
+		</div>
+	</div>
 		      </form>	  	
 	  	
 	  	</div>
