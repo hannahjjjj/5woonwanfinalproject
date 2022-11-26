@@ -1,8 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
+<head>
+<link href="/assets/css/star.css" rel="stylesheet"/>
+</head>
 
 
+<style>
+
+ #myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 70%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+} 
+</style>
 
 <body>
 
@@ -95,6 +136,21 @@ marker.setMap(map);
    function Page__init() {
        Page__updateOffsetTop();
    }
+   
+    $(document).ready(function() {
+       $('#review_btn').click(function(){
+   		$('review_form').attr({
+   			'method':'post',
+   			'action':'reviewimpl'
+   		});
+   		$('review_form').submit();
+   	});
+       $('textarea[name="text"]').keyup(function(){
+    		var text = $(this).val();
+    			$('#cinfo').text((250-text.length)+' characters left');
+    		
+    	});
+    });
 
 
 
@@ -141,21 +197,21 @@ marker.setMap(map);
           </section>
     
     <div class="section">
-      <div class="container1" id="container1" th:each="fd:${facilitydetail}">
-      <div id="fid" th:text="${fd.facilityid}" style="display:none"></div>
+      <div class="container1" id="container1">
+      <div id="fid" th:text="${facilitydetail.facilityid}" style="display:none"></div>
         <div class="row justify-content-between">
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide">
-                <img th:src="@{/fimages/}+${fd.facilityimg}+'.jpg'"alt="" class="img-fluid"style="width:80%;hegiht:100%;">
+                <img th:src="@{/fimages/}+${facilitydetail.facilityimg}+'.jpg'"alt="" class="img-fluid"style="width:80%;hegiht:100%;">
               </div>
             </div>
           </div>
           <div class="col-lg-5" style="padding:0px 250px 0px 50px;">
-            <strong><p class="facility_name" th:text="${fd.facilityname}" style="font-size:200%;"></p></strong>
+            <strong><p class="facility_name" th:text="${facilitydetail.facilityname}" style="font-size:200%;"></p></strong>
             <div style="border-top: 1px solid lightgray;  border-bottom: 1px solid lightgray;">
-            <p class="facility_number" th:text="${fd.facilitynumber}" style="font-color:lightgray;"></p>
-            <p class="facility_addr" th:text="${fd.facilityaddr}" style="font-color:lightgray;"></p>
+            <p class="facility_number" th:text="${facilitydetail.facilitynumber}" style="font-color:lightgray;"></p>
+            <p class="facility_addr" th:text="${facilitydetail.facilityaddr}" style="font-color:lightgray;"></p>
 
             </div>
 
@@ -176,16 +232,16 @@ marker.setMap(map);
         <h4><strong>강사진</strong></h4>
         <br>
         <div class="row">
-          <div class="col-md-3" th:each="i:${ins}">
+          <div class="col-md-3"th:each="ins:${ins}">
       
              <div class="agent" >
                <div class="img">
-                <a th:href="@{/instructordetail(instructorid=${i.instructorid})}"><img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
+                <a th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
              </div>
              
              <div class="desc">
-                <h3><strong><a th:text="${i.instructorname}" ></a></strong></h3>
-                <h3><a th:text="${i.instructorcon}"></a></h3>
+                <h3><strong><a th:text="${ins.instructorname}" ></a></strong></h3>
+                <h3><a th:text="${ins.instructorcon}"></a></h3>
              </div>
            
           </div>
@@ -194,12 +250,12 @@ marker.setMap(map);
           </div>
           <br>
           
-          <div class="container3" id="container3" th:each="fd:${facilitydetail}">
+          <div class="container3" id="container3">
           <h4><strong>운영시간</strong></h4>
       <br>
-         <h5>평일<br><a th:text="${fd.facilitytime}" ></a></h5>
+         <h5>평일<br><a th:text="${facilitydetail.facilitytime}" ></a></h5>
          <br>
-         <h5>주말<br><a th:text="${fd.facilitytime2}"></a></h5>
+         <h5>주말<br><a th:text="${facilitydetail.facilitytime2}"></a></h5>
           </div>
           <br>
           <div class="container4" id="container4">
@@ -207,9 +263,57 @@ marker.setMap(map);
           </div>
           <br>
           <div class="container5" id="container5">
-          <h4><strong>이용후기</strong></h4>
+          <h4><strong>이용후기</strong></h4>	
+           <div class="comment-wrapper">
+               <form id="myform" class="comment-form" method='post' th:if="${session.logincust!=null}">
+                    	<input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
+                    	<input name=custid th:value=${session.logincust.custid} type="hidden"> 
+				<fieldset>		
+					<input type="radio" name="reviewStar" value="5" id="rate1"><label
+						for="rate1">★</label>
+					<input type="radio" name="reviewStar" value="4" id="rate2"><label
+						for="rate2">★</label>
+					<input type="radio" name="reviewStar" value="3" id="rate3"><label
+						for="rate3">★</label>
+					<input type="radio" name="reviewStar" value="2" id="rate4"><label
+						for="rate4">★</label>
+					<input type="radio" name="reviewStar" value="1" id="rate5"><label
+						for="rate5">★</label>
+				</fieldset>
+				<div class="review__rate"><div class="score"><input name="star" type="hidden"></div> <span class="review__rating"></span></div>
+                            <textarea name="text" class="comment-form__text" placeholder='후기를 남겨주세요.'></textarea>
+                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn">후기 남기기</button> 
+                        </form>	
+                        <div class="comment-sets">
+
+                     <div class="comment" th:each="r:${rlist}">
+                            <a href='#' class="comment__author" th:text="${r.custid}"></a>
+                            <p class="comment__date" th:text="${#dates.format(r.rdate,'yyyy-MM-dd E요일')}">today</p>
+                            <p class="comment__message" th:text="${r.reviewcon}"></p>
+                            <div class="review__rate">
+                            	<div class="star-ratings" style="width:50%;height:20px;">
+									<div class="star-ratings-fill space-x-2 text-lg"
+								   th:style="${'width:'+r.starpoint*20+'%'}" th:value ="${r.starpoint}">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div>
+<!-- 									<div class="star-ratings-base space-x-2 text-lg">
+										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+									</div> -->
+								</div> 
+							</div>                          
+                        </div>
+                        </div>
           
+          </div> 
+          </div>         
+        
+        <h4><strong>상세위치</strong></h4>
+          <div class="container6" id="container6">
+            <div class="d-block agent-box p-7">
+            <div id="map" style="width:50%;height:350px;"></div>
         </div>          
+        </div>
+        
 
 
      

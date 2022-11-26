@@ -2,18 +2,23 @@ package com.multi.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
+import com.multi.dto.CustDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
+import com.multi.dto.ReviewDTO;
 import com.multi.mapper.FacilityMapper;
 import com.multi.service.CateService;
 import com.multi.service.FacilityService;
 import com.multi.service.InstructorService;
+import com.multi.service.ReviewService;
 
 @Controller
 public class FacilityController {
@@ -25,6 +30,8 @@ public class FacilityController {
 	InstructorService iservice;
 	@Autowired
 	FacilityMapper fmapper;
+	@Autowired
+	ReviewService rservice;
 	
 
 	
@@ -39,6 +46,7 @@ public class FacilityController {
 			model.addAttribute("center","facility/health");
 			fac = fservice.selectFacilityAll(cateid);
 			model.addAttribute("facilitylist", fac);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -46,19 +54,23 @@ public class FacilityController {
 	}
 	
 	@RequestMapping("/facilitydetail")
-	public String facilitydetail(Model model,int facilityid) {
+	public String facilitydetail(Model model,int facilityid,HttpSession session) {
 		FacilityDTO facility = null;
 		List<CateDTO> list = null;
 		List<FacilityDTO> fac = null;
 		List<InstructorDTO> ins = null;
+		CustDTO cust = (CustDTO) session.getAttribute("cust");
+		List<ReviewDTO>rlist = null;
 		try {
 			facility = fservice.get(facilityid);
 			list=cservice.viewCateName(facilityid);
 			ins=iservice.selectFacilityList(facilityid);
+			rlist=rservice.showtReview(facilityid);
 			model.addAttribute("catelist",list);
 			model.addAttribute("facilitydetail",facility);
 			model.addAttribute("ins",ins);
 			model.addAttribute("center","facility/facilitydetail");
+			model.addAttribute("rlist",rlist);
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
@@ -72,6 +84,7 @@ public class FacilityController {
 		FacilityDTO facility = null;
 		List<FacilityDTO> fac = null;	
 		List<InstructorDTO> ins = null;
+		List<ReviewDTO> review = null;
 		try {
 			inst = iservice.get(instructorid);
 			fac = fservice.viewFacilityName(instructorid);
@@ -80,7 +93,20 @@ public class FacilityController {
 			model.addAttribute("ins",ins);
 			model.addAttribute("instructordetail",inst);
 			model.addAttribute("facilitydetail",facility);
+			model.addAttribute("review",review);			
 			model.addAttribute("center","facility/instructordetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/reviewimpl")
+	public String reviewimpl(Model model, ReviewDTO review) {
+		int reviewid = 0;
+		try {
+			reviewid = review.getFacilityid();
+			rservice.register(review);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
