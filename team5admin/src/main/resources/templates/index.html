@@ -186,11 +186,26 @@
                 </ul>
                 <!--  notification end -->
             </div>
-            <div class="top-menu">
+            <div class="nav top-menu">
+            <div>
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" th:href="@{/login}">Login</a></li>
+                    <li th:if="${session.loginadmin == null}"><a class="logout" th:href="@{/login}">Login</a></li>
             	</ul>
             </div>
+            <div>
+             <ul class="nav pull-right top-menu">
+           	 	<li  th:if="${session.loginadmin != null}"><a th:href="@{/logout}" class="logout">logout</a></li>
+             </ul> 
+            </div>
+ 			<div>      
+            <ul class="nav pull-right top-menu">
+	         	  <li  th:if="${session.loginadmin != null}" ><a class="logout" th:href="@{/index#}">
+	         	  	<span  th:text="${session.loginadmin.aid}" ></span></a>
+				  </li> 
+           </ul> 
+           </div>
+
+         </div>
         </header>
       <!--header end-->
       
