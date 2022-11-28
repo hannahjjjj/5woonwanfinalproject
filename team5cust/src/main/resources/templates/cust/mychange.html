@@ -19,13 +19,35 @@ $(document).ready(function(){
 			'action':'[[@{/ocrimpl}]]'
 		})
 		$('#register_form').submit();
-	});
-/* 
-	if(status=='1'){
-		$('#testModal').modal();
-	}  */
-});
 
+		
+	});
+
+	if(status=='1'){
+		var bodyfat="[[${bodyfat}]]";
+		var weight="[[${weight}]]";
+		var muscle="[[${muscle}]]";
+		
+		var winWidth = 500;
+	    var winHeight = 500;
+	    var popupOption= "width="+winWidth+", height="+winHeight;    //팝업창 옵션(optoin)
+	    
+		window.open("/ocrdata?bodyfat="+bodyfat+"&weight="+weight+"&muscle="+muscle,"",popupOption);
+	}  
+});
+function getchangedata(){
+	var id="[[session.logincust.custid]]";
+	
+	$.ajax({
+		url:'[[@{/mychangedata}]]',
+		data:{
+			'id':id
+			},
+		success:function(data){
+			displaychart(data);
+		}
+	}); 
+}
 function displaychart(){
 	Highcharts.chart('container', {
 	    chart: {

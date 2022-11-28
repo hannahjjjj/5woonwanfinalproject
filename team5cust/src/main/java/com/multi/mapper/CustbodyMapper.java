@@ -12,7 +12,5 @@ import com.multi.frame.MyMapper;
 @Repository
 @Mapper
 public interface CustbodyMapper extends MyMapper<Integer,CustbodyDTO>{
-
-	List<CustbodyDTO> custbodyall(String custid);
-
+	List<CustbodyDTO> custbodylatest(String custid);
 }

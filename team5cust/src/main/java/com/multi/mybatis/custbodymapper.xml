@@ -8,8 +8,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM custbody WHERE bodyinfoid=#{bodyinfoid}
 	</select>
 
-	<select id="selectAll" resultType="CustbodyDTO">
-		SELECT * FROM custbody
+	<select id="custbodylatest" resultType="CustbodyDTO">
+		SELECT bdate,bodyfat,muscle,weight FROM custbody
+		WHERE custid=#{custid}
+		ORDER BY bdate desc
+		LIMIT 10;
 	</select>
 
 	<update id="update" parameterType="CustbodyDTO">

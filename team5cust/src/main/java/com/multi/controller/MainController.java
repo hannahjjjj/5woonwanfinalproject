@@ -21,6 +21,7 @@ import com.multi.frame.ORCUtil;
 import com.multi.frame.Util;
 import com.multi.mapper.FacilityMapper;
 import com.multi.service.CustService;
+import com.multi.service.CustbodyService;
 import com.multi.service.FacilityService;
 import com.multi.service.OrdersService;
 
@@ -35,7 +36,6 @@ public class MainController {
 	
 	@Autowired
 	FacilityService fservice;
-	
 	@Autowired
 	FacilityMapper fmapper;
 	
@@ -237,12 +237,24 @@ public class MainController {
 	// 개인 스케줄 end
 	
 	// ocr 및 정보 변화
+	@RequestMapping("/ocrdata")
+	public String ocrdata(String bodyfat,String weight,String muscle,Model model) {
+		
+		model.addAttribute("bodyfat", bodyfat);
+		model.addAttribute("weight", weight);
+		model.addAttribute("muscle", muscle);
+		
+		return "cust/ocrdata";
+	}
 	
 	@RequestMapping("/mychange")
 	public String mychange(Model model, String id) {
 		CustDTO cust = null;
+
 		try {
 			cust = custservice.get(id);
+			
+			
 			model.addAttribute("custdetail", cust);
 			model.addAttribute("center","/cust/mypage");
 			model.addAttribute("custcenter", "/cust/mychange");
@@ -292,7 +304,6 @@ public class MainController {
 			 model.addAttribute("custcenter","/cust/mychange");
 			 
 			model.addAttribute("modalflag", "1");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

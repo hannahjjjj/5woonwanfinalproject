@@ -1,0 +1,88 @@
+<meta charset="utf-8">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    
+    <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+
+    <link rel="stylesheet" th:href="@{/css/aos.css}">
+
+    <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+
+    
+    <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- jquery start  -->
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+  <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+  <script th:src="@{/js/jquery.waypoints.min.js}"></script>
+  <script th:src="@{/js/jquery.stellar.min.js}"></script>
+  <script th:src="@{/js/jquery.timepicker.min.js}"></script>
+  <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+  <script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+    <!-- end -->
+    
+
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/aos.js}"></script>
+  <script th:src="@{/js/bootstrap-datepicker.js}"></script>
+  <script th:src="@{/js/scrollax.min.js}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script th:src="@{/js/popper.min.js}"></script>
+  <script th:src="@{/js/main.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+</head>
+<!-- Detail Area -->
+<style>
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+	font-family: 'NanumSquareRound';
+}
+.btn:hover{
+background-color: #FE6B00;
+color:white;
+	}
+</style>
+
+<body>
+<div class="card shadow mb-4" style="width:550px;">
+    <div class="card-header py-3" style="width:550px;">
+        <h1 class="h3 mb-0 text-gray-800">인바디 결과 값</h1>
+    </div>
+    <div class="card-body" style="width:500px;">
+    	 <form id="ocrdata_form">
+		    <div class="form-group" >
+		      <label for="weight">체중:</label>
+		      <input type="text" class="form-control" id="custid" th:value="${weight}" name="weight">
+		      <span id="ispan"></span>
+		    </div>
+		    <div class="form-group">
+		      <label for="bodyfat">체지방:</label>
+		      <input type="text" class="form-control" id="custpwd" th:value="${bodyfat}" name="bodyfat">
+		    </div>
+		    <div class="form-group">
+		      <label for="muscle">근육량:</label>
+		      <input type="text" class="form-control" id="custname" th:value="${muscle}" name="muscle">
+		    </div>
+		    <button class="btn py-3 px-4 btn-primary" id="login_btn" style="width:150px; height:50px;">확인</button><br><br>
+		  </form> 
+		</div>
+	</div>
+</body>

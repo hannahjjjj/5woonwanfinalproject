@@ -46,8 +46,8 @@ public class CustbodyService implements MyService<Integer, CustbodyDTO>{
 	}
 	
 	
-	public List<CustbodyDTO> custbodyall(String custid) throws Exception {
-		return mapper.custbodyall(custid);
+	public List<CustbodyDTO> custbodylatest(String custid) throws Exception {
+		return mapper.custbodylatest(custid);
 	}
 	
 	
