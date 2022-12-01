@@ -5,13 +5,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.multi.mapper.OrdersMapper">
 	
 	<insert id="insert" parameterType="OrdersDTO">
-		INSERT INTO orders VALUES (NULL, #{itemid}, #{custid}, NOW())
+		INSERT INTO orders VALUES (NULL, #{itemid}, #{custid}, #{instructorid}, NOW())
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM orders WHERE orderid=#{orderid}
 	</delete>
 	<update id="update" parameterType="OrdersDTO">
-		UPDATE orders SET itemid=#{itemid}, custid=#{custid}, odate=NOW()
+		UPDATE orders SET itemid=#{itemid}, custid=#{custid}, instructorid=#{instructorid}, odate=NOW()
 		WHERE orderid=#{orderid}
 	</update> 
 	<select id="selectAll" resultType="OrdersDTO">
@@ -22,19 +22,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="orderall" parameterType="String" resultType="OrdersDTO">
-		SELECT o.orderid as orderid, it.itemname as item_name, o.odate as odate, it.itemprice as item_price, it.counting as item_count,it.period , ins.instructorname as instructor_name 
+		SELECT o.orderid as orderid, it.itemname as item_name, o.odate as odate, it.itemprice as item_price, it.counting as counting, it.period as period,ins.instructorid as instructorid, ins.instructorname as instructor_name 
 		FROM item it
 		INNER JOIN orders as o ON it.itemid=o.itemid
-		INNER JOIN instructor ins ON ins.instructorid=it.instructorid
+		LEFT OUTER JOIN instructor ins ON ins.instructorid=o.instructorid
 		WHERE o.custid = #{custid}
 	</select>
-
-	<select id="mymembership" parameterType="String" resultType="OrdersDTO">
-		SELECT f.facilityname as facility_name, ins.instructorname as instructor_name, i.itemname as item_name, i.counting as item_count, i.period as period , o.custid as custid ,ins.instructorid as instructorid FROM orders o
+	
+		<select id="mymembership" parameterType="String" resultType="OrdersDTO">
+		SELECT f.facilityname as facility_name, ins.instructorname as instructor_name, i.itemname as item_name, i.counting as counting , o.custid as custid ,ins.instructorid as instructorid FROM orders o
 		INNER JOIN item i ON i.itemid=o.itemid
-		INNER JOIN instructor ins ON ins.instructorid=o.instructorid
+		LEFT OUTER JOIN instructor ins ON ins.instructorid=o.instructorid
 		INNER JOIN facility f ON f.facilityid=i.facilityid
 		WHERE custid=#{custid}
 	</select>
-	
 </mapper>

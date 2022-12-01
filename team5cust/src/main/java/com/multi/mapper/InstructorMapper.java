@@ -13,4 +13,5 @@ import com.multi.frame.MyMapper;
 public interface InstructorMapper extends MyMapper<Integer,InstructorDTO>{
 	public List<InstructorDTO> selectFacilityList(int facilityid) throws Exception;
 	public List<InstructorDTO> selectInstructorList(int instructorid) throws Exception;
+	public Integer selectname(String instructorname) throws Exception;
 }
