@@ -11,16 +11,19 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.dto.CustDTO;
 import com.multi.dto.CustbodyDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.ReviewDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.CustService;
 import com.multi.service.CustbodyService;
 import com.multi.service.FacilityService;
+import com.multi.service.ReviewService;
 import com.multi.service.SchedulesService;
 
 @RestController
@@ -37,6 +40,10 @@ public class AJAXController {
 	
 	@Autowired
 	CustbodyService custbodyservice;
+	
+	@Autowired
+	ReviewService rservice;
+	
 	
 	@RequestMapping("/kakkologin")
 	public String kakkologin(String id,String name,String birthday,String email,String gender,HttpSession session) {

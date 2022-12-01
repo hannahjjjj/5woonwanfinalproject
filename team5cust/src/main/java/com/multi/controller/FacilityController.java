@@ -107,6 +107,7 @@ public class FacilityController {
 		try {
 			reviewid = review.getFacilityid();
 			rservice.register(review);
+			System.out.println(review);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
