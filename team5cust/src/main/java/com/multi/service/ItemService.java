@@ -40,4 +40,10 @@ public class ItemService implements MyService<Integer, ItemDTO> {
 		return mapper.selectAll();
 	}
 
+	public List<ItemDTO> selectItemList(int instructorid) throws Exception{
+		return mapper.selectItemList(instructorid);
+	}
+	public List<ItemDTO> selectfacilityList(int facilityid) throws Exception{
+		return mapper.selectfacilityList(facilityid);
+	}
 }

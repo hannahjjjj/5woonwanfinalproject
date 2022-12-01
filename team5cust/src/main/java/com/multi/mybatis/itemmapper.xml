@@ -4,50 +4,21 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.multi.mapper.ItemMapper">
 
-<!-- 
-	<select id="selectall1" parameterType="Integer"
-		resultType="itemDTO">
-		SELECT c.cateid, i.facilityid, i.instructorid, i.counting, i.period, i.itemprice,  i.itemname,
-		i.itemprice, i.itemstate
-		FROM item AS i
-		INNER JOIN facility AS f ON f.facilityid = i.facilityid
-		INNER JOIN cate AS c ON f.cateid = c.cateid
-		WHERE c.cateid=#{cateid}
-	</select>
-
-	<select id="selectallcate" parameterType="Integer"
-		resultType="itemDTO">
-		SELECT i.itemname,i.itemimg, i.itemno FROM item AS i
-		INNER
-		JOIN cate AS c ON c.cateno=i.cateno
-		WHERE i.cateno=#{cateno}
-	</select> -->
-
-	<select id="selecttype1"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 100 AND 103
-	</select>
-
-	<select id="selecttype2"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 104 AND 107
+ 	<select id="selectItemList" parameterType="Integer" resultType="itemDTO">
+		SELECT * FROM item WHERE instructorid = #{instructorid}
 	</select>
 	
-	<select id="selecttype3"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 108 AND 111
+	<select id="itemList" parameterType="Integer" resultType="itemDTO">
+		SELECT * FROM facility f
+		INNER JOIN item i ON f.facilityid = i.facilityid
+		INNER JOIN cate c ON f.cateid = c.cateid
+		WHERE c.cateid = #{cateid} and i.instructorid != "0"
 	</select>
-
-	<select id="selecttype4"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 112 AND 115
-	</select>	
 	
-
+ 	<select id="selectfacilityList" parameterType="Integer" resultType="itemDTO">
+		SELECT * FROM item WHERE facilityid = #{facilityid} and instructorid = "0"
+	</select>
+	
 	<select id="select" parameterType="Integer" resultType="itemDTO">
 		SELECT * FROM item 
 		WHERE itemid=#{itemid}

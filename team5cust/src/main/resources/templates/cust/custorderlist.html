@@ -20,10 +20,12 @@
 				<tbody>
 					<tr th:each="c:${orderlist}">
 						<td th:text="${c.facility_name}" id="facility_name">
-						<td th:text="${c.instructor_name}" id="instructor_name"></td>
+						<td th:if="${c.instructor_name != null}" th:text="${c.instructor_name}" id="instructor_name"></td>
+						<td th:unless="${c.instructor_name != null}" th:text="없음"></td>
 						<td th:text="${c.item_name}" id="item_name"></td>
 						<td th:text="${c.counting}" id="counting"></td>
-						<td th:text="${c.period}" id="period"></td>
+						<td th:if="${c.period != 0}" th:text="${c.period}"></td>
+						<td th:unless="${c.period != 0}" th:text="없음"></td>	
 						<td><a th:href="@{/custschedule(id=${c.custid},insid=${c.instructorid})}"><strong>관리</strong></a></td>
 					</tr>
 				</tbody>

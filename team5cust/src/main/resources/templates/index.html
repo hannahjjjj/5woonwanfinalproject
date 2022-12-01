@@ -66,10 +66,6 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a th:href="@{/index}" class="nav-link">Home</a></li>
 	          <li class="nav-item"><a th:href="@{/about}" class="nav-link">About</a></li>
-	          <li class="nav-item"><a th:href="@{/item}" class="nav-link">Item</a></li>
-	          <li class="nav-item" th:if="${session.logincust != null}"><a th:href="@{/orderdetail(id=${session.logincust.custid})}" class="nav-link">OrderDetail</a></li>
-	          <li class="nav-item"><a th:href="@{/agent}" class="nav-link">Agent</a></li>
-	          <li class="nav-item"><a th:href="@{/services}" class="nav-link">Services</a></li>
 	          <li class="nav-item"><a th:href="@{/facility(cateid=10)}" class="nav-link">Facility</a></li>
 	          <li class="nav-item"><a th:href="@{/blog}" class="nav-link">Blog</a></li>
 	          <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Contact</a></li>
