@@ -7,7 +7,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
  	<select id="selectItemList" parameterType="Integer" resultType="itemDTO">
 		SELECT * FROM item WHERE instructorid = #{instructorid}
 	</select>
-
+	
+	<select id="itemList" parameterType="Integer" resultType="itemDTO">
+		SELECT * FROM facility f
+		INNER JOIN item i ON f.facilityid = i.facilityid
+		INNER JOIN cate c ON f.cateid = c.cateid
+		WHERE c.cateid = #{cateid} and i.instructorid != "0"
+	</select>
+	
  	<select id="selectfacilityList" parameterType="Integer" resultType="itemDTO">
 		SELECT * FROM item WHERE facilityid = #{facilityid} and instructorid = "0"
 	</select>

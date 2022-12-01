@@ -325,7 +325,7 @@ marker.setMap(map);
           <br>
           <div class="container4" id="container4">
           <h4><strong>이용요금</strong></h4>
-          
+          <br>
          <tr >
 			<td th:each="it:${itemlist}">
 				<button th:onclick="moveorder([[${it.itemid}]]);" class="button"
@@ -335,7 +335,7 @@ marker.setMap(map);
 					<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
 				</button>
 		</td>
-          
+          <br>
           
           </div>
           <br>

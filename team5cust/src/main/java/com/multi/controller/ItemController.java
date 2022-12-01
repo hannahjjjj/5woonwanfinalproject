@@ -21,25 +21,21 @@ public class ItemController {
 	ItemMapper mapper;
 	
 	@RequestMapping("/item")
-	public String item(Model model, Integer itemid) {
+	public String item(Model model, Integer itemid, Integer cateid) {
+		List<ItemDTO> list = null;
 		List<ItemDTO> list1 = null;
 		List<ItemDTO> list2 = null;
-		List<ItemDTO> list3 = null;
-		List<ItemDTO> list4 = null;
+		
 		try {
-			list1 = mapper.selecttype1();
-			list2 = mapper.selecttype2();
-			list3 = mapper.selecttype3();
-			list4 = mapper.selecttype4();
-			model.addAttribute("list1",list1);
+			list = mapper.itemList(cateid);
+			model.addAttribute("list1",list);
+			cateid = 20;
+			list1 = mapper.itemList(cateid);
+			model.addAttribute("list2",list1);
+			cateid = 30;
+			list2 = mapper.itemList(cateid);
 			model.addAttribute("list2",list2);
-			model.addAttribute("list3",list3);
-			model.addAttribute("list4",list4);
 			model.addAttribute("center", "item");
-			System.out.println(list1);
-			System.out.println(list2);
-			System.out.println(list3);
-			System.out.println(list4);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
