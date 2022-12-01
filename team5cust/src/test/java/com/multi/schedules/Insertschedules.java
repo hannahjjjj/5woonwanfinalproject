@@ -20,7 +20,7 @@ class Insertschedules {
 	void contextLoads() {
 		Date today=new Date();
         
-		SchedulesDTO schedules = new SchedulesDTO(100,100,"dbswlsgh",today,today,3);
+		SchedulesDTO schedules = new SchedulesDTO(0, 0, null, today, today, null, 0, null, null, null, 0, null);
 		
 		try {
 			service.register(schedules);

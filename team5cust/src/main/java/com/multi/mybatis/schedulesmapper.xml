@@ -24,4 +24,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE starttime like #{selectday}"%"
 		AND instructorid=#{insid}
 	</select>
+	
+	<select id="myschedulsestatus" parameterType="String" resultType="SchedulesDTO">
+		SELECT f.facilityname , ins.instructorname , i.itemname , i.counting ,ins.instructorid ,o.custid,s.status,DATE_FORMAT(s.starttime,'%Y-%m-%d %H:%i') as time FROM orders o
+		INNER JOIN item i ON i.itemid=o.itemid
+		INNER JOIN instructor ins ON ins.instructorid=o.instructorid 
+		INNER JOIN facility f ON f.facilityid=i.facilityid
+		INNER JOIN schedules s ON ins.instructorid=s.instructorid
+		WHERE o.custid=#{custid}
+		AND s.starttime>NOW();
+	</select>
 </mapper>

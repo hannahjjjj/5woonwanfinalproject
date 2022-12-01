@@ -50,4 +50,8 @@ public class InstructorService implements MyService<Integer, InstructorDTO>{
 	public List<InstructorDTO> selectInstructorList(int instructorid) throws Exception{
 		return mapper.selectInstructorList(instructorid);
 	}
+	
+	public Integer selectname(String instructorname) throws Exception{
+		return mapper.selectname(instructorname);
 	}
+}

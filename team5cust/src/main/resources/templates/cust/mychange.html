@@ -10,7 +10,8 @@
 <!-- chart end -->
 <script>
 $(document).ready(function(){
-	displaychart();
+	getchangedata();
+	
 	var status = "[[${modalflag}]]";
 	$('#register_btn').click(function(){
 		$('#inbody_form').attr({
@@ -19,8 +20,6 @@ $(document).ready(function(){
 			'action':'[[@{/ocrimpl}]]'
 		})
 		$('#register_form').submit();
-
-		
 	});
 
 	if(status=='1'){
@@ -36,8 +35,7 @@ $(document).ready(function(){
 	}  
 });
 function getchangedata(){
-	var id="[[session.logincust.custid]]";
-	
+	var id="[[${session.logincust.custid}]]";
 	$.ajax({
 		url:'[[@{/mychangedata}]]',
 		data:{
@@ -48,7 +46,7 @@ function getchangedata(){
 		}
 	}); 
 }
-function displaychart(){
+function displaychart(data){
 	Highcharts.chart('container', {
 	    chart: {
 	        type: 'line'
@@ -62,7 +60,7 @@ function displaychart(){
 	            'target="_blank">Wikipedia.com</a>'
 	    },
 	    xAxis: {
-	        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	        categories: data["date"]
 	    },
 	    yAxis: {
 	        title: {
@@ -77,15 +75,7 @@ function displaychart(){
 	            enableMouseTracking: false
 	        }
 	    },
-	    series: [{
-	        name: 'Reggane',
-	        data: [16.0, 18.2, 23.1, 27.9, 32.2, 36.4, 39.8, 38.4, 35.5, 29.2,
-	            22.0, 17.8]
-	    }, {
-	        name: 'Tallinn',
-	        data: [-2.9, -3.6, -0.6, 4.8, 10.2, 14.5, 17.6, 16.5, 12.0, 6.5,
-	            2.0, -0.9]
-	    }]
+	    series: data["result"]
 	});
 }
 

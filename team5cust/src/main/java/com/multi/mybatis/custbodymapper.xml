@@ -9,10 +9,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="custbodylatest" resultType="CustbodyDTO">
-		SELECT bdate,bodyfat,muscle,weight FROM custbody
-		WHERE custid=#{custid}
-		ORDER BY bdate desc
-		LIMIT 10;
+		SELECT * FROM (SELECT bdate,bodyfat,muscle,weight FROM custbody
+			WHERE custid=#{custid}
+			ORDER BY bdate desc
+			LIMIT 10) sb
+		ORDER BY sb.bdate
 	</select>
 
 	<update id="update" parameterType="CustbodyDTO">
@@ -22,8 +23,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
 
 	<insert id="insert" parameterType="CustbodyDTO">
-		INSERT INTO cart VALUES (#{bodyinfoid},#{custid},sysdate(),#{height},
-		#{bodyfat},#{muscle},#{weight})
+		INSERT INTO custbody VALUES (#{bodyinfoid},#{custid},NOW(),#{height},#{bodyfat},#{muscle},#{weight})
 	</insert>
 	
 	<delete id="delete" parameterType="Integer">

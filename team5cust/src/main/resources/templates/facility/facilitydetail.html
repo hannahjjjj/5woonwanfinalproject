@@ -7,7 +7,72 @@
 
 
 <style>
+ html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
+	pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins,
+	kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl,
+	dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
+	tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
+	figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
+	section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
 
+h1, .h1, br {	
+	font-size: 2.5rem;
+	color: black !important;
+}
+
+#body div#kakaoPlusFriend-chat-button {
+	right: 5px;
+	bottom: 5px;
+}
+
+@media screen and (max-width: 640px) {
+	#body div#kakaoPlusFriend-chat-button {
+		right: 5px;
+		bottom: 5px;
+	}
+}
+
+button {
+	/* 	height: 80px;
+    font-size: 25px;
+    padding: 15px 30px;
+    border: 3px solid gold;
+    background-color: transparent;
+    color: gold;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    position: relative;
+    transition: all 0.4s;
+    overflow: hidden;  */
+	width: 250px;
+	height: 115px;
+	background: black;
+	color: white;
+	padding: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	transition: background .5s;
+	margin-right: 12px;
+	margin: 10px;
+}
+
+.button:hover {
+	background-color: rgba(0, 0, 0, .85);
+	cursor: pointer;
+}
+
+.item-element {
+	font-size: 50px;
+	color: brown;
+}  
  #myform fieldset{
     display: inline-block;
     direction: rtl;
@@ -295,6 +360,18 @@ marker.setMap(map);
           <br>
           <div class="container4" id="container4">
           <h4><strong>이용요금</strong></h4>
+          <br>
+         <tr >
+			<td th:each="it:${itemlist}">
+				<button th:onclick="moveorder([[${it.itemid}]]);" class="button"
+					id="btn">
+					<div id="itemname" th:text="${it.itemname}"></div>
+					<div style="display: none;" id="itemid" th:text="${it.itemid}"></div>
+					<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
+				</button>
+		</td>
+          <br>
+          
           </div>
           <br>
           <div class="container5" id="container5">

@@ -18,14 +18,15 @@ public class OrdersDTO {
 	private int orderid;
 	private int itemid;
 	private String custid;
+	private int instructorid;
 	private Date odate;
 	
 	private String item_name;
 	private int item_price;
-	private int item_count;
-	private int total_cnt;
+	private int counting;
+	private int period;
 	private String instructor_name;
-	private int instructorid;
 	private String facility_name;
 }
+
 
