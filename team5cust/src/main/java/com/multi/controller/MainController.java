@@ -235,7 +235,6 @@ public class MainController {
 			cust = custservice.get(id);
 			order = orderservice.mymembership(id);
 			schedules=scuedulesservice.myschedulsestatus(id);
-
 			model.addAttribute("custdetail", cust);
 			model.addAttribute("orderlist", order);
 			model.addAttribute("center","/cust/mypage");

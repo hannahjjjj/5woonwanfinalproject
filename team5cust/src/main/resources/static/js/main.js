@@ -27,9 +27,7 @@
 			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 		}
 	};
-
-
-	$(window).stellar({
+$(window).stellar({
     responsive: true,
     parallaxBackgrounds: true,
     parallaxElements: true,
@@ -37,6 +35,8 @@
     hideDistantElements: false,
     scrollProperty: 'scroll'
   });
+
+	
 
 
 	var fullHeight = function() {
