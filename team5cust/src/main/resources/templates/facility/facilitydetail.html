@@ -115,6 +115,7 @@ button {
 		  unicode-bidi: bidi-override;
 		  width: max-content;
 		  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+		  -webkit-text-stroke-width: 1.2px;
 		  -webkit-text-stroke-color: #2b2a29;
 		}
 		 
@@ -127,16 +128,24 @@ button {
 		  top: 0;
 		  left: 0;
 		  overflow: hidden;
-		  -webkit-text-fill-color: #c0c0c0;
+		  -webkit-text-fill-color: gold;
 		}
 		 
 		.star-ratings-base {
 		  z-index: 0;
+		  height:50px;
+		  display: flex;
 		  padding: 0;
 		}
 
-
-
+textarea{
+	width:500px; 
+	height:100px; 
+    resize:none;/* 크기고정 */ 
+    border: solid 2px #aaa9a9; 
+/*   resize: horizontal; // 가로크기만 조절가능 
+	resize: vertical;  세로크기만 조절가능  */
+}
 </style>
 
 <body>
@@ -375,7 +384,8 @@ marker.setMap(map);
           </div>
           <br>
           <div class="container5" id="container5">
-          <h4><strong>이용후기</strong></h4>	        
+          <h4><strong>이용후기</strong></h4>	  
+          <br>      
            <div class="comment-wrapper">
                <form id="myform" class="comment-form" method='post' th:if="${session.logincust!=null}">
                     	<input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
@@ -393,13 +403,14 @@ marker.setMap(map);
 						for="rate5">★</label>
 			</fieldset>
 				<div class="review__rate"><div class="score"><input name="starpoint" type="hidden"></div> <span class="review__rating"></span></div> 
-                            <input type="text" name="reviewcon" class="comment-form__text" placeholder='Add you comment here'></input>
-                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn">후기 남기기</button> 
+                            <textarea name="reviewcon" class="comment-form__text" placeholder='Add you comment here'></textarea>
+                           	<br>
+                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn" style="margin:auto; padding:0; height:1%; width:6.5%">후기 남기기</button> 
                         </form>	
                         <div class="comment-sets">
-
+						<br>
                      <div class="comment" th:each="r:${rlist}">
-                    	<div class="faility__rate">
+                    	<div class="faility__rate" style="padding:0px 0px 0px 16%;">
                     	    <a class="comment__author" th:text="${r.custid}"></a>
                             <p class="comment__date" th:text="${#dates.format(r.rdate,'yyyy-MM-dd E요일')}">today</p>
                             <p class="comment__message" th:text="${r.reviewcon}"></p> 
@@ -408,7 +419,7 @@ marker.setMap(map);
 										th:style="${'width:'+r.starpoint*20+'%'}" th:value="${r.starpoint}">
 										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 									</div>
- 									<div class="star-ratings-base space-x-2 text-lg">
+ 									<div class="star-ratings-base space-x-2 text-xs">
 										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 									</div>
 								</div>

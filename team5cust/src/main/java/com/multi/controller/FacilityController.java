@@ -123,7 +123,7 @@ public class FacilityController {
 	}
 	
 	@RequestMapping("/reviewimpl")
-	public String reviewimpl(Model model, ReviewDTO review) {
+	public String reviewimpl(Model model, ReviewDTO review,FacilityDTO facility) {
 		int reviewid = 0;
 		try {
 			reviewid = review.getFacilityid();
@@ -132,9 +132,9 @@ public class FacilityController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return "index";
 	}
-	
 	
 
 }
