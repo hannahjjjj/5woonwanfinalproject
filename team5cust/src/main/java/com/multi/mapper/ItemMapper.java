@@ -15,4 +15,5 @@ public interface ItemMapper extends MyMapper<Integer, ItemDTO>{
 	public List<ItemDTO> selecttype2() throws Exception;
 	public List<ItemDTO> selecttype3() throws Exception;
 	public List<ItemDTO> selecttype4() throws Exception;
+	public List<ItemDTO> selectItemList(int instructorid) throws Exception;
 }

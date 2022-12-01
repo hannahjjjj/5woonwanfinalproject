@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 		<select id="mymembership" parameterType="String" resultType="OrdersDTO">
-		SELECT f.facilityname as facility_name, ins.instructorname as instructor_name, i.itemname as item_name, i.counting as counting , o.custid as custid ,ins.instructorid as instructorid FROM orders o
+		SELECT f.facilityname as facility_name, ins.instructorname as instructor_name, i.itemname as item_name, i.counting as counting , i.period as period, o.custid as custid ,ins.instructorid as instructorid FROM orders o
 		INNER JOIN item i ON i.itemid=o.itemid
 		LEFT OUTER JOIN instructor ins ON ins.instructorid=o.instructorid
 		INNER JOIN facility f ON f.facilityid=i.facilityid
