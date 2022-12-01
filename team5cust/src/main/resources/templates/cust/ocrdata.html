@@ -45,6 +45,22 @@
   <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 </head>
 <!-- Detail Area -->
+<script>
+$(document).ready(function(){
+	$('#ocrdata_btn').click(function(){
+		$('#ocrdata_form').attr({
+			'method':'post',
+			'action':'[[@{/mydatainput}]]'
+		})
+		$('#ocrdata_form').submit();
+	})
+	var status = "[[${modalflag}]]";
+	if(status=="1"){
+		self.opener = self;
+		self.close();
+	}
+});
+</script>
 <style>
 @font-face {
     font-family: 'NanumSquareRound';
@@ -60,7 +76,6 @@ background-color: #FE6B00;
 color:white;
 	}
 </style>
-
 <body>
 <div class="card shadow mb-4" style="width:550px;">
     <div class="card-header py-3" style="width:550px;">
@@ -81,7 +96,10 @@ color:white;
 		      <label for="muscle">근육량:</label>
 		      <input type="text" class="form-control" id="custname" th:value="${muscle}" name="muscle">
 		    </div>
-		    <button class="btn py-3 px-4 btn-primary" id="login_btn" style="width:150px; height:50px;">확인</button><br><br>
+		    <div class="form-group">
+		      <input type="hidden" class="form-control" id="id" th:value="${session.logincust.custid}" name="id">
+		    </div>
+		  <button class="btn py-3 px-4 btn-primary" id="ocrdata_btn" style="width:150px; height:50px;">확인</button><br><br>
 		  </form> 
 		</div>
 	</div>

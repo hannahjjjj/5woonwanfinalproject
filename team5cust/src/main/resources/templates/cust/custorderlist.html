@@ -30,6 +30,31 @@
 			</table>
 			<br>
 		</div>
+		
+		<div class="login-card">
+			<h3>나의 예약 현황</h3>
+			<table id="otb" class="table">
+				<thead>
+					<tr class="active">
+						<th>시설</th>
+						<th>강사</th>
+						<th>회원권</th>
+						<th>시간</th>
+						<th>예약 현황</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="s:${schedulesstatus}">
+						<td th:text="${s.facilityname}" id="facility_name">
+						<td th:text="${s.instructorname}" id="instructor_name"></td>
+						<td th:text="${s.itemname}" id="item_name"></td>
+						<td th:text="${s.time}"></td>
+						<td th:text="${s.status}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+		</div>
     </div>
   </body>
 </html>

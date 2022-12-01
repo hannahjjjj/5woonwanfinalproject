@@ -17,6 +17,7 @@ import com.multi.dto.CustDTO;
 import com.multi.dto.CustbodyDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.OrdersDTO;
+import com.multi.dto.SchedulesDTO;
 import com.multi.frame.ORCUtil;
 import com.multi.frame.Util;
 import com.multi.mapper.FacilityMapper;
@@ -24,6 +25,7 @@ import com.multi.service.CustService;
 import com.multi.service.CustbodyService;
 import com.multi.service.FacilityService;
 import com.multi.service.OrdersService;
+import com.multi.service.SchedulesService;
 
 @Controller
 public class MainController {	
@@ -36,6 +38,13 @@ public class MainController {
 	
 	@Autowired
 	FacilityService fservice;
+	
+	@Autowired
+	SchedulesService scuedulesservice;
+
+	@Autowired
+	CustbodyService custbodyservice;
+	
 	@Autowired
 	FacilityMapper fmapper;
 	
@@ -221,13 +230,17 @@ public class MainController {
 	public String custorderlist(Model model, String id) {
 		CustDTO cust = null;
 		List<OrdersDTO> order = null;
+		List<SchedulesDTO> schedules=null;
 		try {
 			cust = custservice.get(id);
 			order = orderservice.mymembership(id);
+			schedules=scuedulesservice.myschedulsestatus(id);
+
 			model.addAttribute("custdetail", cust);
 			model.addAttribute("orderlist", order);
 			model.addAttribute("center","/cust/mypage");
 			model.addAttribute("custcenter", "/cust/custorderlist");
+			model.addAttribute("schedulesstatus", schedules);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -243,7 +256,7 @@ public class MainController {
 		model.addAttribute("bodyfat", bodyfat);
 		model.addAttribute("weight", weight);
 		model.addAttribute("muscle", muscle);
-		
+		model.addAttribute("modalflag", "0");
 		return "cust/ocrdata";
 	}
 	
@@ -253,8 +266,6 @@ public class MainController {
 
 		try {
 			cust = custservice.get(id);
-			
-			
 			model.addAttribute("custdetail", cust);
 			model.addAttribute("center","/cust/mypage");
 			model.addAttribute("custcenter", "/cust/mychange");
@@ -263,6 +274,31 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return "index";
+	}
+	
+	@RequestMapping("/mydatainput")
+	public String mydatainput(Model model, String id,String weight,String muscle, String bodyfat) {
+		System.out.println(id);
+		System.out.println(bodyfat);
+		System.out.println(muscle);
+		System.out.println(weight);
+		
+		double bf=Double.parseDouble(bodyfat);
+		double mc=Double.parseDouble(muscle);
+		double wg=Double.parseDouble(weight);
+	
+		model.addAttribute("bodyfat", bodyfat);
+		model.addAttribute("weight", weight);
+		model.addAttribute("muscle", muscle);
+		model.addAttribute("modalflag","1");
+		
+		CustbodyDTO custbody= new CustbodyDTO(0, id, null, 0, bf, mc, wg, null, null);
+		try {
+			custbodyservice.register(custbody);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "cust/ocrdata";
 	}
 	
 	

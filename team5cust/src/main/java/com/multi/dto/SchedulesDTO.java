@@ -21,8 +21,12 @@ public class SchedulesDTO {
 	String custid;
 	Date starttime;
 	Date endtime;
-	
-	//
+	String status;
 	
 	int period;
+	String facilityname;
+	String instructorname;
+	String itemname;
+	int counting;
+	String time;
 }

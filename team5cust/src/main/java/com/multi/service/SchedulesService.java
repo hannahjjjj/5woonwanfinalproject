@@ -48,4 +48,8 @@ public class SchedulesService implements MyService<Integer, SchedulesDTO>{
 		return mapper.selectday(selectday,insid);
 	}
 	
+	public List<SchedulesDTO> myschedulsestatus(String selectday) throws Exception{
+		return mapper.myschedulsestatus(selectday);
+	}
+	
 }

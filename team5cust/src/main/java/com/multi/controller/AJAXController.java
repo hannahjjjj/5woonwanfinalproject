@@ -119,9 +119,10 @@ public class AJAXController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date sDate;
 		SchedulesDTO sc = null;
+		SchedulesDTO sc1 = null;
 		try {
 			sDate = formatter.parse(dateStr);
-			sc= new SchedulesDTO(0, insid, id, sDate, null, 0);
+			sc1= new SchedulesDTO(0, insid, id, sDate, null, null, 0, null, null, null, 0, null);
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -142,43 +143,45 @@ public class AJAXController {
 		List<CustbodyDTO> list =null;
 		JSONObject result = new JSONObject();
         JSONArray ja = new JSONArray();
-        JSONObject mobj = new JSONObject();
-        JSONObject fobj = new JSONObject();
-        JSONArray mja = new JSONArray();
-        JSONArray fja = new JSONArray();
-        JSONArray month_ja = new JSONArray();
+        
+        JSONObject bodyfat = new JSONObject();
+        JSONObject weight = new JSONObject();
+        JSONObject muscle = new JSONObject();
+        
+        JSONArray bodyfatja = new JSONArray();
+        JSONArray wieghtja = new JSONArray();
+        JSONArray muscleja = new JSONArray();
+        
+        JSONArray date = new JSONArray();
 		try {
 			list=custbodyservice.custbodylatest(id);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		
-
-        mobj.put("name", "Male");
-        fobj.put("name", "Female");
-
-        
-        int m = 0;
-        
+        //차트 형식에 맞게 데이터 넣기
+        SimpleDateFormat sDate = new SimpleDateFormat("YYYY-MM-dd");
         for(CustbodyDTO c:list) {
-        	month_ja.add(m);
+        	date.add(sDate.format(c.getBdate()));
+        	bodyfatja.add(c.getBodyfat());
+        	wieghtja.add(c.getWeight());
+        	muscleja.add(c.getMuscle());
         }
+        result.put("date", date);
         
-        mobj.put("data", mja);
-        fobj.put("data", fja);
+        bodyfat.put("data", bodyfatja);
+        weight.put("data", wieghtja);
+        muscle.put("data", muscleja);
         
-        ja.add(mobj);
-        ja.add(fobj);
+        bodyfat.put("name", "Bodyfat");
+        weight.put("name", "Weight");
+        muscle.put("name", "Muscle");
         
-        // [{},{}]
-        // {"month":[1,2,3,4,5,6], "result":[{},{}]}
-        result.put("month", month_ja);
+        ja.add(bodyfat);
+        ja.add(weight);
+        ja.add(muscle);
+        
         result.put("result", ja);
-        
-		
-		
 		
 		return result;
 	}
