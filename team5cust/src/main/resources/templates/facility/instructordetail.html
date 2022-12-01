@@ -155,20 +155,26 @@ button {
   
   </style>
   <script>
-  $(document).ready(function() {
-		$("#content div").hide(); // Initially hide all content
-		$("#tabs li:first").attr("id","current"); // Activate first tab
-		$("#content div:first").fadeIn(); // Show first tab content
-	    
-	    $('#tabs a').click(function(e) {
-	        e.preventDefault();        
-	        $("#content div").hide(); //Hide all content
-	        $("#tabs li").attr("id",""); //Reset id's
-	        $(this).parent().attr("id","current"); // Activate this
-	        $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
-	    });
-	})();
-  </script>
+$(document).ready(function() {
+	$("#content div").hide(); // Initially hide all content
+	$("#tabs li:first").attr("id","current"); // Activate first tab
+	$("#content div:first").fadeIn(); // Show first tab content
+    
+    $('#tabs a').click(function(e) {
+        e.preventDefault();        
+        $("#content div").hide(); //Hide all content
+        $("#tabs li").attr("id",""); //Reset id's
+        $(this).parent().attr("id","current"); // Activate this
+        $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+    });
+})();
+</script>
+<script>
+function moveorder(itemid) {
+	var custid = '[[${session.logincust.custid}]]';
+		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
+}
+</script>
  
     
     <section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
@@ -246,15 +252,9 @@ button {
 
 </div>
           
-        </div>
  
 
   </body>
   
-  <script>
-function moveorder(itemid) {
-	var custid = '[[${session.logincust.custid}]]';
-		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
-}
-</script>
+
 </html>

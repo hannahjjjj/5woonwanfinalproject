@@ -8,31 +8,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM item WHERE instructorid = #{instructorid}
 	</select>
 
-	<select id="selecttype1"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 100 AND 103
-	</select>
-
-	<select id="selecttype2"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 104 AND 107
+ 	<select id="selectfacilityList" parameterType="Integer" resultType="itemDTO">
+		SELECT * FROM item WHERE facilityid = #{facilityid} and instructorid = "0"
 	</select>
 	
-	<select id="selecttype3"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 108 AND 111
-	</select>
-
-	<select id="selecttype4"  resultType="itemDTO">
-		SELECT * FROM item it		
-		WHERE it.itemid
-		BETWEEN 112 AND 115
-	</select>	
-	
-
 	<select id="select" parameterType="Integer" resultType="itemDTO">
 		SELECT * FROM item 
 		WHERE itemid=#{itemid}
