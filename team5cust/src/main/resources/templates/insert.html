@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,300,0,0" />
+
+
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>	
+<style>
+.card-body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+}
+
+#insert_form {
+	width: 80%;
+}
+
+#check {
+	text-align: center;
+	font-size: 17px;
+	font-weight: 600;
+	margin-top: 20px;
+}
+
+#insertbt {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#order {
+	font-size: 25px;
+	font-weight: 400;
+	margin-bottom: 60px;
+}
+
+#del {
+	font-size: 25px;
+	font-weight: 400;
+	margin-bottom: 60px;
+}
+</style>
+<!-- <script>
+	$(document).ready(function() {
+		$('#insert_btn').click(function() {
+			$('#insert_form').attr({
+				'method' : 'post',
+				'action' : '[[@{/insertimpl}]]'
+			});
+			$('#insert_form').submit();
+		});
+	});
+</script>	 -->
+
+<!-- <script>
+try {
+  function sendLinkDefault() {
+    Kakao.init('3e5a6abb2c9082aa164f143853587fd0')
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '결제내역',
+        description: '#헬스 #PT #CROSSFIT #운동 #인바디 #헬스강사',
+        imageUrl:
+          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        link: {
+          mobileWebUrl: 'https://127.0.0.1/insert',
+          webUrl: 'https://127.0.0.1/insert',
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: 'https://127.0.0.1/insert',
+            webUrl: 'https://127.0.0.1/insert',
+          },
+        },
+        {
+          title: '앱으로 보기',
+          link: {
+            mobileWebUrl: 'https://127.0.0.1/insert',
+            webUrl: 'https://127.0.0.1/insert',
+          },
+        },
+      ],
+    })
+  }
+; window.kakaoDemoCallback && window.kakaoDemoCallback() }
+catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
+</script> -->
+<script>  
+  function requestPay() {
+	  var IMP = window.IMP; 
+	  IMP.init(imp42382341);
+	  var today = new Date();   
+	  var hours = today.getHours(); // 시
+	  var minutes = today.getMinutes();  // 분
+	  var seconds = today.getSeconds();  // 초
+	  var milliseconds = today.getMilliseconds();
+	  var makeMerchantUid = hours +  minutes + seconds + milliseconds;  
+	  
+  	//결제시 전달되는 정보
+	IMP.request_pay({
+			    pg : 'html5_inicis', 
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '주문명:결제테스트'/*상품명*/,
+			    amount : 100/*상품 가격*/, 
+			    buyer_email : ""/*구매자 이메일*/,
+			    buyer_name : 'custid',
+			    buyer_tel : '010-1234-5678'/*구매자 연락처*/,
+			    buyer_addr : '서울특별시 강남구 삼성동'/*구매자 주소*/,
+			    buyer_postcode : '123-456'/*구매자 우편번호*/,
+/* 			    m.redirect_url : https://127.0.0.1/insertimpl?custid="
+			    	+ custid */
+
+			}, function(rsp) {
+				var result = '';
+			    if ( rsp.success ) {
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "", //cross-domain error가 발생하지 않도록 주의해주세요
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		
+			    	})
+					    if(result=='0') {
+					    	location.href= $.getContextPath()+"/Cart/Success";
+					    }
+					    alert(msg);
+			    }
+			});
+}
+  function(rsp) {
+		var result = '';
+	    if ( rsp.success ) {
+	        var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        result ='0';
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        result ='1';
+	    }
+	    if(result=='0') {
+	    	location.href= $.getContextPath()+"/Cart/Success";
+	    }
+	    alert(msg);
+	});
+}
+
+
+</script>
+	
+<head>
+
+</head>
+<body>
+			<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight"
+		style="background-image: url(https://contents.sixshop.com/thumbnails/uploadedFiles/110203/default/image_1658130845162_2500.jpeg);"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate pb-5 text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a th:href="@{/index}">Home <i
+								class="ion-ios-arrow-forward"></i></a></span> <span>Properties <i
+							class="ion-ios-arrow-forward"></i></span>
+					</p>
+					<h1 class="mb-3 bread">
+						Item list <br>Your Desired Home
+					</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- 주문/결제 -->
+<div class="card-body">
+	<div class="login-card">
+		<h3>주문&배송 정보</h3>
+		<form id="insert_form" th:each="o:${list}">
+			<div class="form-group1">
+				<div class="form-group">
+					<label>고객아이디 : </label><input type="text" name="custid"
+						th:value="${session.logincust.custid}" readonly="readonly">
+				</div>
+				<div class="form-group">
+					<label>상품명 : </label><input type="text" name="itemname"
+						th:value="${o.itemname}" readonly="readonly">
+				</div>
+				<div class="form-group">
+				<input type="hidden" name="itemid" th:value="${o.itemid}">
+				</div>
+
+				<div class="form-group">
+					<label>횟수 : </label><input type="text" name="counting"
+						th:value="${o.counting}" readonly="readonly">
+				</div>
+				
+				<div class="form-group">
+					<label>상품가격 : </label><input type="text" name="itemprice"
+						th:value="${o.itemprice + '원'}" readonly="readonly">
+				</div>
+				
+				<div class="form-group" th:if="${o.instructorid != 0 }">
+					<label>강사선택 : </label><select class="form-control" id="sel1">
+					<option th:each="in:${in}" th:text="${in.instructorname}" name ="instructor_name">
+					</option>					
+					</select>
+				</div>
+				
+				<div class="form-group" th:if="${o.instructorid == 0 }">
+					<label>강사선택 : </label><input type="" class="form-control" id="sel1" readonly="readonly">							
+				</div>
+				
+				<div>
+					<form method="post" action="/kakaoPay">
+						<button>카카오페이로 결제하기</button>
+					</form>
+				</div>
+				<br> <br>
+			<p id="check">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</p>
+			<br>
+			<div id="insertbt">
+					<button onclick="requestPay()">결제하기</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>
