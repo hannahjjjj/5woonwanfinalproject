@@ -23,6 +23,30 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE i.cateno=#{cateno}
 	</select> -->
 
+	<select id="selecttype1"  resultType="itemDTO">
+		SELECT * FROM item it		
+		WHERE it.itemid
+		BETWEEN 100 AND 103
+	</select>
+
+	<select id="selecttype2"  resultType="itemDTO">
+		SELECT * FROM item it		
+		WHERE it.itemid
+		BETWEEN 104 AND 107
+	</select>
+	
+	<select id="selecttype3"  resultType="itemDTO">
+		SELECT * FROM item it		
+		WHERE it.itemid
+		BETWEEN 108 AND 111
+	</select>
+
+	<select id="selecttype4"  resultType="itemDTO">
+		SELECT * FROM item it		
+		WHERE it.itemid
+		BETWEEN 112 AND 115
+	</select>	
+	
 
 	<select id="select" parameterType="Integer" resultType="itemDTO">
 		SELECT * FROM item 
@@ -33,12 +57,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert" parameterType="ItemDTO">
-		INSERT INTO item VALUES (NULL, #{facilityid}, #{instructorid}, #{itemname}, #{itemimg}, #{counting}, #{period},
+		INSERT INTO item VALUES (NULL, #{facilityid}, #{itemname}, #{itemimg}, #{counting}, #{period},
 		#{itemprice}, #{itemstate}	)
 	</insert>
 
 	<update id="update" parameterType="ItemDTO">
-		UPDATE item SET facilityid=#{facilityid}, instructorid=#{instructorid}, itemname=#{itemname}, itemimg=#{itemimg}, counting=#{counting},
+		UPDATE item SET facilityid=#{facilityid}, itemname=#{itemname}, itemimg=#{itemimg}, counting=#{counting},
 		period=#{period}, itemprice=#{itemprice}, itemstate=#{itemstate}
 		WHERE itemid=#{itemid}
 	</update>

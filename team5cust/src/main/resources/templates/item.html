@@ -78,7 +78,7 @@ button {
 
 function orv(cust_id) {
 	var c = confirm('결제진행 하시겠습니까?');
-}
+
 
 	var title = 'consult' || "consult";
 	var size = 'small' || "small";
@@ -92,23 +92,19 @@ function orv(cust_id) {
 		shape : 'pc',
 		supportMultipleDensities : true
 	});
-	
+}	
+
+function moveorder(itemid) {
+	var custid = '[[${session.logincust.custid}]]';
+	location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
+
+}
+
  $(document).ready(function(){
 	
-	$('#btn').click(function(){
-			var item_id = $('#item_id').text();
-		var item_num = $('#num').val(); 
-		
-
-		$.ajax({
-			url:'[[@{/orders}]]',
-			data:{'cust_id':cust_id, 'item_id':item_id, 'cnt':item_num},
-		success:function(data){
-			$('#cartModal').modal();
-			}
-		});
-	});
-}  
+	
+});
+ 
 	
 </script>
 
@@ -144,26 +140,11 @@ function orv(cust_id) {
 		</div>
 
 		<tr>  
-			<td>
-				<button  class="button" id= "btn">
-					<div>Pilates/Personal Training</div>
-					<div>1 Session</div>
-					150,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div>Personal Pilates LV.1</div>
-					<div>1 Month / 10 Session</div>
-					880,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div>Personal Pilates LV.2</div>
-					<div>2 Month / 20 Session</div>
-					1,760,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div>Group Training 4:1</div>
-					<div>1 Month / 24 Session</div>
-					264,000₩
+			<td th:each="it:${list1}">
+				<button th:onclick="moveorder([[${it.itemid}]]);"  class="button" id= "btn">
+					<div id	= "itemname" th:text="${it.itemname}"></div>			
+					<div style="display:none;" id = "itemid" th:text="${it.itemid}"></div>
+					<div id = "itemprice" th:text="${it.itemprice} + '₩' "></div>
 				</button>
 			</td>
 
@@ -171,76 +152,23 @@ function orv(cust_id) {
 				<p class="" style="text-align: left;">&nbsp;PT</p>
 			</div>
 
-			<td>
-				<button class="button" id= "btn">
-					<div name ="itemname">1:1 PT 10회</div>
-					<div>1 Session</div>
-					600,000₩
+			<td th:each="it:${list2}">
+				<button th:onclick="moveorder([[${it.itemid}]]);"  class="button" id= "btn">
+					<div id	= "itemname" th:text="${it.itemname}"></div>			
+					<div style="display:none;" id = "itemid" th:text="${it.itemid}"></div>
+					<div id = "itemprice" th:text="${it.itemprice} + '₩' "></div>
 				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">1:1 PT 20회</div>
-					<div>2 Session</div>
-					1,100,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">1:1 PT 30회</div>
-					<div>3 Session</div>
-					1,500,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">1:1 PT 40회</div>
-					<div>4 Session</div>
-					1,800,000₩
-				</button>
-			</td>
-
-			<td>
-				<button class="button" id= "btn">
-					<div name ="itemname">2:1 PT 10회</div>
-					<div>1 Session</div>
-					350,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">2:1 PT 20회</div>
-					<div>2 Session</div>
-					600,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">2:1 PT 30회</div>
-					<div>3 Session</div>
-					800,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">2:1 PT 40회</div>
-					<div>4 Session</div>
-					1,000,000₩
-				</button>
-			</td>
+			</td>		
 
 			<div class="item-element" style="">
 				<p class="" style="text-align: left;">&nbsp;Cross fit</p>
 			</div>
 
-			<td>
-				<button class="button" id= "btn">
-					<div name ="itemname">Cross fit 10회</div>
-					<div>1 Session</div>
-					330,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">Cross fit  20회</div>
-					<div>2 Session</div>
-					510,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">Cross fit  30회</div>
-					<div>3 Session</div>
-					700,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">Cross fit  40회</div>
-					<div>1 Month</div>
-					900,000₩
+			<td th:each="it:${list3}">
+				<button th:onclick="moveorder([[${it.itemid}]]);"  class="button" id= "btn">
+					<div id	= "itemname" th:text="${it.itemname}"></div>			
+					<div style="display:none;" id = "itemid" th:text="${it.itemid}"></div>
+					<div id = "itemprice" th:text="${it.itemprice} + '₩' "></div>
 				</button>
 			</td>
 
@@ -248,22 +176,11 @@ function orv(cust_id) {
 				<p class="" style="text-align: left;">&nbsp;Membership</p>
 			</div>
 			
-						<td>
-				<button class="button" id= "btn">
-					<div name ="itemname">1개월 이용권(1 Month)</div>
-					60,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">3개월 이용권(3 Month)</div>
-					170,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">6개월 이용권(6 Month)</div>
-					320,000₩
-				</button>
-				<button class="button" id= "btn">
-					<div name ="itemname">12개월 이용권(1 Year)</div>
-					540,000₩
+			<td th:each="it:${list4}">
+				<button th:onclick="moveorder([[${it.itemid}]]);"  class="button" id= "btn">
+					<div id	= "itemname" th:text="${it.itemname}"></div>			
+					<div style="display:none;" id = "itemid" th:text="${it.itemid}"></div>
+					<div id = "itemprice" th:text="${it.itemprice} + '₩' "></div>
 				</button>
 			</td>
 		</tr>
