@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
  
 	<insert id="insert" parameterType="AdminDTO">
-		INSERT INTO admin VALUES (#{aid},#{apwd},#{aname},#{acontact},#{aemail},#{grade}<!-- ,#{kakkoid}) -->
+		INSERT INTO admin VALUES (#{aid},#{apwd},#{aname},#{acontact},#{aemail},#{grade})<!-- ,#{kakkoid}) -->
 	</insert>
 	
 	<delete id="delete" parameterType="AdminDTO">

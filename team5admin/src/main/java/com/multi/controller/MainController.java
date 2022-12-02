@@ -2,6 +2,7 @@ package com.multi.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,37 @@ import com.multi.service.AdminService;
 @Controller
 public class MainController {	
 
-
-	private AdminService adminService;
+	@Autowired
+	AdminService adminService;
 
 	@RequestMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("center", "index");
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("status", "1");
+		model.addAttribute("center", "register");
+		return "index";
+	}
+	
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Model model, AdminDTO admin) {
+		try {
+			adminService.register(admin);
+			System.out.println(admin);
+			model.addAttribute("center","login");
+			model.addAttribute("registatus", "1");
+			
+		} catch (Exception e) {
+			model.addAttribute("center", "register");
+			model.addAttribute("registatus", "0");
+			e.printStackTrace();
+		}
+		
+		return "index";
 	}
 	
 	@RequestMapping("/general")
@@ -71,11 +96,20 @@ public class MainController {
 		return "index";
 	}
 
+	@RequestMapping("/logout")
+	public String logout(Model model,HttpSession session) {
+			
+			if(session != null) {
+				session.invalidate();
+			}
+			return "index";
+}
 	@RequestMapping("/loginimpl")
 	public String loginimpl(String aid, String apwd, Model model, HttpSession session) {   
 	      AdminDTO admin = null;
 	      try {
 	         admin = adminService.get(aid);
+	         System.out.println(admin);
 	         if(admin == null) {
 	        	 model.addAttribute("status", "0");
 	        	 model.addAttribute("center", "login");

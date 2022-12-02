@@ -193,6 +193,11 @@
             	</ul>
             </div>
             <div>
+            	<ul class="nav pull-right top-menu">
+                    <li th:if="${session.loginadmin == null}"><a class="logout" th:href="@{/register}">register</a></li>
+            	</ul>
+            </div> 
+            <div>
              <ul class="nav pull-right top-menu">
            	 	<li  th:if="${session.loginadmin != null}"><a th:href="@{/logout}" class="logout">logout</a></li>
              </ul> 
