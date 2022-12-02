@@ -108,48 +108,15 @@ button {
     font-size: 16px;
     resize: none;
 } 
-
-.star-ratings {
-		  color: #aaa9a9; 
-		  position: relative;
-		  unicode-bidi: bidi-override;
-		  width: max-content;
-		  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-		  -webkit-text-stroke-width: 1.2px;
-		  -webkit-text-stroke-color: #2b2a29;
-		}
-		 
-		.star-ratings-fill {
-		  color: #fff58c;
-		  padding: 0;
-		  position: absolute;
-		  z-index: 1;
-		  display: flex;
-		  top: 0;
-		  left: 0;
-		  overflow: hidden;
-		  -webkit-text-fill-color: gold;
-		}
-		 
-		.star-ratings-base {
-		  z-index: 0;
-		  height:50px;
-		  display: flex;
-		  padding: 0;
-		}
-
-textarea{
-	width:500px; 
-	height:100px; 
-    resize:none;/* 크기고정 */ 
-    border: solid 2px #aaa9a9; 
-/*   resize: horizontal; // 가로크기만 조절가능 
-	resize: vertical;  세로크기만 조절가능  */
-}
 </style>
 
 <body>
-
+<script>
+function moveorder(itemid) {
+	var custid = '[[${session.logincust.custid}]]';
+		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
+}
+</script>
 
 
 <script>
@@ -243,24 +210,18 @@ marker.setMap(map);
    
     $(document).ready(function() {
        $('#review_btn').click(function(){
-   		$('#myform').attr({
-   			'action':'[[@{/reviewimpl}]]',
-   			'method':'post'
+   		$('review_form').attr({
+   			'method':'post',
+   			'action':'reviewimpl'
    		});
-    	var selected = document.querySelector('input[type=radio][name=starpoint]:checked');
-    	alert(selected.value);
-    	
-   		$('#myform').submit();
+   		$('review_form').submit();
    	});
-/*        $('textarea[name="reviewcon"]').keyup(function(){
+       $('textarea[name="text"]').keyup(function(){
     		var text = $(this).val();
     			$('#cinfo').text((250-text.length)+' characters left');
-    		//몇글자 남았는지 알려주는 기능
-    	}); */
-     
+    		
+    	});
     });
-    
-
 
 
 
@@ -385,52 +346,49 @@ marker.setMap(map);
           </div>
           <br>
           <div class="container5" id="container5">
-          <h4><strong>이용후기</strong></h4>	  
-          <br>      
+          <h4><strong>이용후기</strong></h4>	
            <div class="comment-wrapper">
                <form id="myform" class="comment-form" method='post' th:if="${session.logincust!=null}">
                     	<input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
                     	<input name=custid th:value=${session.logincust.custid} type="hidden"> 
 				<fieldset>		
-					<input type="radio" name="starpoint" value="5" id="rate1"><label
+					<input type="radio" name="reviewStar" value="5" id="rate1"><label
 						for="rate1">★</label>
-					<input type="radio" name="starpoint" value="4" id="rate2"><label
+					<input type="radio" name="reviewStar" value="4" id="rate2"><label
 						for="rate2">★</label>
-					<input type="radio" name="starpoint" value="3" id="rate3"><label
+					<input type="radio" name="reviewStar" value="3" id="rate3"><label
 						for="rate3">★</label>
-					<input type="radio" name="starpoint" value="2" id="rate4"><label
+					<input type="radio" name="reviewStar" value="2" id="rate4"><label
 						for="rate4">★</label>
-					<input type="radio" name="starpoint" value="1" id="rate5"><label
+					<input type="radio" name="reviewStar" value="1" id="rate5"><label
 						for="rate5">★</label>
-			</fieldset>
-				<div class="review__rate"><div class="score"><input name="starpoint" type="hidden"></div> <span class="review__rating"></span></div> 
-                            <textarea name="reviewcon" class="comment-form__text" placeholder='Add you comment here'></textarea>
-                           	<br>
-                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn" style="margin:auto; padding:0; height:1%; width:6.5%">후기 남기기</button> 
+				</fieldset>
+				<div class="review__rate"><div class="score"><input name="star" type="hidden"></div> <span class="review__rating"></span></div>
+                            <textarea name="text" class="comment-form__text" placeholder='후기를 남겨주세요.'></textarea>
+                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn">후기 남기기</button> 
                         </form>	
                         <div class="comment-sets">
-						<br>
+
                      <div class="comment" th:each="r:${rlist}">
-                    	<div class="faility__rate" style="padding:0px 0px 0px 16%;">
-                    	    <a class="comment__author" th:text="${r.custid}"></a>
+                            <a href='#' class="comment__author" th:text="${r.custid}"></a>
                             <p class="comment__date" th:text="${#dates.format(r.rdate,'yyyy-MM-dd E요일')}">today</p>
-                            <p class="comment__message" th:text="${r.reviewcon}"></p> 
-								<div class="star-ratings">
-									<div class="star-ratings-fill space-x-2 text-xs" 
-										th:style="${'width:'+r.starpoint*20+'%'}" th:value="${r.starpoint}">
+                            <p class="comment__message" th:text="${r.reviewcon}"></p>
+                            <div class="review__rate">
+                            	<div class="star-ratings" style="width:50%;height:20px;">
+									<div class="star-ratings-fill space-x-2 text-lg"
+								   th:style="${'width:'+r.starpoint*20+'%'}" th:value ="${r.starpoint}">
 										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 									</div>
- 									<div class="star-ratings-base space-x-2 text-xs">
+<!-- 									<div class="star-ratings-base space-x-2 text-lg">
 										<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-									</div>
-								</div>
-							</div>
-<!-- 							<span class="starpoint" th:text="${r.starpoint}"></span> -->                          
-                        </div>                
+									</div> -->
+								</div> 
+							</div>                          
                         </div>
                         </div>
           
           </div> 
+          </div>         
         
         <h4><strong>상세위치</strong></h4>
           <div class="container6" id="container6">
