@@ -34,7 +34,6 @@ public class MainController {
 	public String registerimpl(Model model, AdminDTO admin) {
 		try {
 			adminService.register(admin);
-			System.out.println(admin);
 			model.addAttribute("center","login");
 			model.addAttribute("registatus", "1");
 			
@@ -115,8 +114,14 @@ public class MainController {
 	        	 model.addAttribute("center", "login");
 	         } else {
 	            if(apwd.equals(admin.getApwd())) {
+	            	session.setAttribute("loginadmin", admin);
 	            	model.addAttribute("status", "1");
-	               session.setAttribute("loginadmin", admin);
+	            	if(admin.getGrade()==2) {
+	            		model.addAttribute("center", "maincenter2");
+	            	}
+	            	else if(admin.getGrade()==3) {
+	            		model.addAttribute("center", "maincenter3");
+	            	}
 	            } else {
 	            	 model.addAttribute("status", "0");
 	            	 model.addAttribute("center", "login");

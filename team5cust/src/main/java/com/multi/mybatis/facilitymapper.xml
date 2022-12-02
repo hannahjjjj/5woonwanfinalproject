@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="searchFacility" resultType="FacilityDTO" parameterType="string">
-    	SELECT * FROM facility WHERE facilityname or facilityaddr LIKE CONCAT('%',#{txt},'%')
+    	SELECT * FROM facility WHERE facilityname LIKE CONCAT('%',#{txt},'%') or facilityaddr LIKE CONCAT('%',#{txt},'%')
     </select>
 	
 	<select id="viewFacilityName" parameterType="Integer" resultType="FacilityDTO">
