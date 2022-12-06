@@ -108,7 +108,6 @@ public class MainController {
 	      AdminDTO admin = null;
 	      try {
 	         admin = adminService.get(aid);
-	         System.out.println(admin);
 	         if(admin == null) {
 	        	 model.addAttribute("status", "0");
 	        	 model.addAttribute("center", "login");

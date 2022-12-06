@@ -20,6 +20,12 @@ public class AdminDTO {
 	String aname;
 	String acontact;
 	String aemail;
-	Integer grade;
-	/* String kakkoid; */
+	int grade;
+	
+	//월별 매출에 필요한 변수
+	String odate;
+	int profit;
+	//신규 고객 수
+	int cust_count;
+	
 }

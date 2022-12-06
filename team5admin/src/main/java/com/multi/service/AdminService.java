@@ -45,10 +45,12 @@ public class AdminService implements MyService<String,AdminDTO>{
 		return mapper.selectAll();
 	}
 	
-	/*
-	 * public AdminDTO selectkakkoid(String kakkoid) throws Exception{ return
-	 * mapper.selectkakkoid(kakkoid); }
-	 */
+	public List<AdminDTO> myprofit(String id) throws Exception{ 
+		return mapper.myprofit(id); 
+	}
+	public List<AdminDTO> newcust(String id) throws Exception{ 
+		return mapper.newcust(id); 
+	}
 
 }
 	
