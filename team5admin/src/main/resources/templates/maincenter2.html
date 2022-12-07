@@ -107,38 +107,18 @@ function gender_ratio(data){
 	        text: '연령대 별 성비 '
 	    },
 	    subtitle: {
-	        text: 'Source: WorldClimate.com'
 	    },
 	    xAxis: {
-	        categories: [
-	            'Jan',
-	            'Feb',
-	            'Mar',
-	            'Apr',
-	            'May',
-	            'Jun',
-	            'Jul',
-	            'Aug',
-	            'Sep',
-	            'Oct',
-	            'Nov',
-	            'Dec'
-	        ],
+	        categories: data['age'],
 	        crosshair: true
 	    },
 	    yAxis: {
 	        min: 0,
 	        title: {
-	            text: 'Rainfall (mm)'
+	            text: 'count'
 	        }
 	    },
 	    tooltip: {
-	        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-	        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-	            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-	        footerFormat: '</table>',
-	        shared: true,
-	        useHTML: true
 	    },
 	    plotOptions: {
 	        column: {
@@ -146,27 +126,7 @@ function gender_ratio(data){
 	            borderWidth: 0
 	        }
 	    },
-	    series: [{
-	        name: 'Tokyo',
-	        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
-	            194.1, 95.6, 54.4]
-
-	    }, {
-	        name: 'New York',
-	        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5,
-	            106.6, 92.3]
-
-	    }, {
-	        name: 'London',
-	        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3,
-	            51.2]
-
-	    }, {
-	        name: 'Berlin',
-	        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8,
-	            51.1]
-
-	    }]
+	    series: data['result']
 	});
 }
 </script>
@@ -258,13 +218,14 @@ function gender_ratio(data){
                   <!-- 15개  -->
                   <div class="col-lg-3 ds">
 						<h3>스케줄</h3>
-                      <div class="desc">
+                      <div class="desc" th:each="scheduleslist:${scheduleslist}">
                       	<div class="thumb">
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>2 Minutes Ago</muted><br/>
-                      		   <a href="#">James Brown</a> subscribed to your newsletter.<br/>
+                      		<p><muted th:text="${scheduleslist.time}"></muted><br/>
+                      		   <a>강사 : </a><a th:text="${scheduleslist.instructorname}"></a><br/>
+                      		   <a>회원 : </a><a th:text="${scheduleslist.custname}"></a><br/>
                       		</p>
                       	</div>
                       </div>

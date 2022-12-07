@@ -27,5 +27,7 @@ public class AdminDTO {
 	int profit;
 	//신규 고객 수
 	int cust_count;
+	String age_group;
+	String gender;
 	
 }

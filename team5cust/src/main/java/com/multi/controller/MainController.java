@@ -277,11 +277,6 @@ public class MainController {
 	
 	@RequestMapping("/mydatainput")
 	public String mydatainput(Model model, String id,String weight,String muscle, String bodyfat) {
-		System.out.println(id);
-		System.out.println(bodyfat);
-		System.out.println(muscle);
-		System.out.println(weight);
-		
 		double bf=Double.parseDouble(bodyfat);
 		double mc=Double.parseDouble(muscle);
 		double wg=Double.parseDouble(weight);

@@ -13,4 +13,5 @@ import com.multi.frame.MyMapper;
 public interface AdminMapper extends MyMapper<String,AdminDTO>{
 	public List<AdminDTO> myprofit(String id) throws Exception;
 	public List<AdminDTO> newcust(String id) throws Exception;
+	public List<AdminDTO> genderratio(String id) throws Exception;
 }
