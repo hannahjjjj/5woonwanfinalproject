@@ -21,6 +21,9 @@
    font: inherit;
    vertical-align: baseline;
 }
+span{
+	display:inline;
+}
 
 h1, .h1, br {   
    font-size: 2.5rem;
@@ -109,43 +112,69 @@ button {
     resize: none;
 } 
 
-.star-ratings {
-        color: #aaa9a9; 
-        position: relative;
-        unicode-bidi: bidi-override;
-        width: max-content;
-        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-        -webkit-text-stroke-width: 1.2px;
-        -webkit-text-stroke-color: #2b2a29;
-      }
-       
-      .star-ratings-fill {
-        color: #fff58c;
-        padding: 0;
-        position: absolute;
-        z-index: 1;
-        display: flex;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        -webkit-text-fill-color: gold;
-      }
-       
-      .star-ratings-base {
-        z-index: 0;
-        height:50px;
-        display: flex;
-        padding: 0;
-      }
-
-textarea{
-   width:500px; 
-   height:100px; 
-    resize:none;/* 크기고정 */ 
-    border: solid 2px #aaa9a9; 
-/*   resize: horizontal; // 가로크기만 조절가능 
-   resize: vertical;  세로크기만 조절가능  */
+.rating {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end
 }
+
+.rating>input {
+	display: none
+}
+
+.rating>label {
+	position: relative;
+	width: 1em;
+	font-size: 30px;
+	font-weight: 300;
+	color: #FFD600;
+	cursor: pointer
+}
+
+.rating>label::before {
+	content: "\2605";
+	position: absolute;
+	opacity: 0
+}
+
+.rating>label:hover:before, .rating>label:hover ~label:before {
+	opacity: 1 !important
+}
+
+.rating>input:checked ~label:before {
+	opacity: 1
+}
+
+.rating:hover>input:checked ~label:before {
+	opacity: 0.4
+}
+
+.rating2 {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end
+}
+
+.rating2>input {
+	display: none;
+}
+
+.rating2>p {
+	position: relative;
+	width: 1em;
+	font-size: 22px;
+	font-weight: 300;
+	color: #FFD600;
+	cursor: auto
+}		 
+
+  textarea {
+    width: 10%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+  }
+
 </style>
 
 <body>
@@ -240,26 +269,84 @@ marker.setMap(map);
        Page__updateOffsetTop();
    }
    
-    $(document).ready(function() {
-       $('#review_btn').click(function(){
-         $('#myform').attr({
-            'action':'[[@{/reviewimpl}]]',
-            'method':'post'
-         });
-       var selected = document.querySelector('input[type=radio][name=starpoint]:checked');
-       alert(selected.value);
-       
-         $('#myform').submit();
-      });
-/*        $('textarea[name="reviewcon"]').keyup(function(){
-          var text = $(this).val();
-             $('#cinfo').text((250-text.length)+' characters left');
-          //몇글자 남았는지 알려주는 기능
-       }); */
-     
-    });
-    
+	function review(result){
+		var review_form = $('#review_form').val();
+		if(result=="1"){
+			$.ajax({
+				url :'[[@{/reviewimpl}]]',
+				data :review_form.serialize(),
+				success:function(){
+						location.reload();
+				}
+			});0
+		}
+		if(result=="0"){
+			alert("회원권 구매 후 리뷰를 작성할 수 있습니다.");
+			return;
+		}
+		
+	}
+	$(function() {
+		const userid = $('input[name="userid"]').val();
+		const facilityid = $('input[name="facilityid"]').val();
+		
+		$('.reviewpoint').each(function(){
+			var starValue = $(this).data("value");
+			
+			switch(starValue){
+				case 1:
+					$(this).text("★☆☆☆☆");
+					break;
+				case 2:
+					$(this).text("★★☆☆☆");
+					break;
+				case 3:
+					$(this).text("★★★☆☆");
+					break;
+				case 4:
+					$(this).text("★★★★☆");
+					break;
+				case 5:
+					$(this).text("★★★★★");
+					break;
+			}
+		});
+	});
 
+	
+	
+	 $(document).ready(function() {
+		$('#review_btn').click(function() {
+			
+			var rate = $('input[name="rate"]:checked').val();
+			var reviewcon = $('textarea[name=reviewcon]').val().trim();
+			$('input[name="starpoint"]').val(rate);
+			
+			if ($('input[name="starpoint"]').val(rate) == "") {
+				alert("별점을 입력해 주세요.");
+				$('input[name=reviewcon]').focus();
+				return false;
+			}
+
+			if (reviewcon.trim() == "") {
+				alert("내용을 입력해 주세요.");
+				$('input[name=reviewcon]').focus();
+				return false;
+			}
+
+			$.ajax({
+				url : '[[@{/checkorder}]]',
+				type : 'post',
+				data : {
+					'custid' : custid,
+					'facilityid' : facilityid
+				},
+				success : function(result) {
+					review(result);
+				}
+			})
+		});
+	 });
 
 
 
@@ -287,7 +374,7 @@ marker.setMap(map);
           </div>
           <div class="sidebar-box ftco-animate" >
 
-            <div class="categories" style="height:3000px;">
+            <div class="categories">
               <h3><strong>Categories</strong></h3>
               <br>
               <li class="m"><a th:href="@{#container1}" class="menu-01">시설정보</a></li>
@@ -336,7 +423,7 @@ marker.setMap(map);
       <br>
  
  
-    <section class="ftco-section ftco-agent">
+    <section class="ftco-section ftco-agent" style="padding:0 0 0 16.5%;">
        <div class="container2" id="container2">
         <h4><strong>강사진</strong></h4>
         <br>
@@ -345,7 +432,7 @@ marker.setMap(map);
       
              <div class="agent" >
                <div class="img">
-                <a th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"style="width:100%; height:400px;"alt="" ></a>
+                <a th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"style="width:80%; height:400px;"alt="" ></a>
              </div>
              
              <div class="desc">
@@ -370,7 +457,7 @@ marker.setMap(map);
           <div class="container4" id="container4">
           <h4><strong>이용요금</strong></h4>
           <br>
-         <tr >
+         <tr>
          <td th:each="it:${itemlist}">
             <button th:onclick="moveorder([[${it.itemid}]]);" class="button"
                id="btn">
@@ -379,64 +466,73 @@ marker.setMap(map);
                <div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
             </button>
       </td>
+         </tr>
+         </div>
+          <br>        
           <br>
-          
-          </div>
-          <br>
-          <div class="container5" id="container5">
-          <h4><strong>이용후기</strong></h4>     
-          <br>      
-           <div class="comment-wrapper">
-               <form id="myform" class="comment-form" method='post' th:if="${session.logincust!=null}">
-                       <input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
-                       <input name=custid th:value=${session.logincust.custid} type="hidden"> 
-            <fieldset>      
-               <input type="radio" name="starpoint" value="5" id="rate1"><label
-                  for="rate1">★</label>
-               <input type="radio" name="starpoint" value="4" id="rate2"><label
-                  for="rate2">★</label>
-               <input type="radio" name="starpoint" value="3" id="rate3"><label
-                  for="rate3">★</label>
-               <input type="radio" name="starpoint" value="2" id="rate4"><label
-                  for="rate4">★</label>
-               <input type="radio" name="starpoint" value="1" id="rate5"><label
-                  for="rate5">★</label>
-         </fieldset>
-            <div class="review__rate"><div class="score"><input name="starpoint" type="hidden"></div> <span class="review__rating"></span></div> 
-                            <textarea name="reviewcon" class="comment-form__text" placeholder='Add you comment here'></textarea>
-                              <br>
-                            <button type='submit' id="review_btn" class="btn btn-md btn--danger comment-form__btn" style="margin:auto; padding:0; height:1%; width:6.5%">후기 남기기</button> 
-                        </form>   
-                        <div class="comment-sets">
-                  <br>
-                     <div class="comment" th:each="r:${rlist}">
-                       <div class="faility__rate" style="padding:0px 0px 0px 16%;">
-                           <a class="comment__author" th:text="${r.custid}"></a>
-                            <p class="comment__date" th:text="${#dates.format(r.rdate,'yyyy-MM-dd E요일')}">today</p>
-                            <p class="comment__message" th:text="${r.reviewcon}"></p> 
-                        <div class="star-ratings">
-                           <div class="star-ratings-fill space-x-2 text-xs" 
-                              th:style="${'width:'+r.starpoint*20+'%'}" th:value="${r.starpoint}">
-                              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                           </div>
-                            <div class="star-ratings-base space-x-2 text-xs">
-                              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                           </div>
-                        </div>
-                     </div>
-<!--                      <span class="starpoint" th:text="${r.starpoint}"></span> -->                          
-                        </div>                
-                        </div>
-                        </div>
-          
-          </div> 
-        
+        <div class="flex-container column" id="container5">
+        <h4><strong>이용후기</strong></h4>     
+        <!-- 리뷰 작성 -->
+        <div class="comment-form-wrap" style="padding:0; margin:0;">
+        <form id="review_form" th:if="${session.logincust!=null}" style="padding:2% 0px 0px 0px;">
+        <div class="form-group" style="width:65%;">
+        <div class="vcard bio mb-3">
+        <img src="/fimages/review.png" style="width:2%; height:2%;">
+        <span th:text="${session.logincust.custid}"></span>
+        </div>
+        <div class="rating d-flex justify-content-end">
+          <input type="radio" name="rate" value="5" id="rate5"><label
+                  for="rate5">☆</label>
+          <input type="radio" name="rate" value="4" id="rate4"><label
+             for="rate4">☆</label>
+          <input type="radio" name="rate" value="3" id="rate3"><label
+             for="rate3">☆</label>
+          <input type="radio" name="rate" value="2" id="rate2"><label
+             for="rate2">☆</label>
+          <input type="radio" name="rate" value="1" id="rate1"><label
+             for="rate1">☆</label>
+             <input type="hidden"
+						name="starpoint">
+             
+		</div>
+        <textarea name="reviewcon" id="reviewcon" class="form-control" ></textarea>
+        </div>
+		<div class="form-group d-flex justify-content-end" style="width:65%;">
+		<button id="review_btn" class="btn py-1 px-2 btn-primary" style="width:10%; height:10%;">리뷰등록하기</button>
+		</div>
+		<input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
+        <input name=custid th:value=${session.logincust.custid} type="hidden"> 
+        </form>
+        </div>
+        <div class="col-md-10" style="padding:2% 0 0 0;">
+		<ul class="review_list">
+		<li class="comment" th:each="r:${rlist}">
+		<div class="vcard bio mb-3">
+		<img src="/fimages/review.png" style="width:2%; height:2%; float:left;">
+		<h3 th:text="${r.custid}" style="font-weight:bolder;"></h3>
+		</div>
+		
+		<div class="comment-body">
+		<div class="meta" th:text="${#dates.format(r.rdate,'yyyy-MM-dd E요일')}"></div>
+		<p th:text="${r.reviewcon}"></p>
+		<div class="rating2 d-flex justify-content-end">
+		<p class="reviewpoint" th:id="${r.custid}" th:data-value="${r.starpoint}"></p>
+		</div>
+		</div>
+		</li>
+		</ul>
+        </div>
+		</div>
+		<div class="container6" id="container6"  style="display:inline;">
         <h4><strong>상세위치</strong></h4>
-          <div class="container6" id="container6">
+        <br>
             <div class="d-block agent-box p-7">
             <div id="map" style="width:50%;height:350px;"></div>
         </div>          
         </div>
+        
+		
+        
         
 
 

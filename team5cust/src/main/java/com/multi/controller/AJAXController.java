@@ -23,6 +23,7 @@ import com.multi.dto.SchedulesDTO;
 import com.multi.service.CustService;
 import com.multi.service.CustbodyService;
 import com.multi.service.FacilityService;
+import com.multi.service.OrdersService;
 import com.multi.service.ReviewService;
 import com.multi.service.SchedulesService;
 
@@ -43,6 +44,9 @@ public class AJAXController {
 	
 	@Autowired
 	ReviewService rservice;
+	
+	@Autowired
+	OrdersService oservice;
 	
 	
 	@RequestMapping("/kakkologin")
@@ -192,4 +196,23 @@ public class AJAXController {
 		
 		return result;
 	}
+	
+	@RequestMapping("checkfacility") //리뷰작성용
+		public String checkfacility(String custid, int facilityid) {
+			String result=null;
+			String status_check=null;
+			try {
+				status_check = oservice.checkorder(custid, facilityid);
+				if(status_check != null && status_check.equals("완료되었습니다.")) {
+					result="1";
+				}else {
+					result="0";
+				}
+			} catch (Exception e) {		
+				e.printStackTrace();
+			}
+			return result;
+		}
+
+	
 }

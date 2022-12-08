@@ -136,5 +136,14 @@ public class FacilityController {
 		return "index";
 	}
 	
-
+	@RequestMapping("/reviewupdate")
+	public String reviewupdate(Model model,FacilityDTO facility, ReviewDTO review, HttpSession session) {
+		try {
+			rservice.modify(review);
+			session.setAttribute("review",review);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:facilitydetail?id="+facility.getFacilityid();
+	}
 }
