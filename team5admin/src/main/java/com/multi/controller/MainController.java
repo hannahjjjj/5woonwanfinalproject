@@ -1,5 +1,7 @@
 package com.multi.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AdminDTO;
+import com.multi.dto.SchedulesDTO;
 import com.multi.service.AdminService;
+import com.multi.service.SchedulesService;
 
 
 @Controller
@@ -16,7 +20,10 @@ public class MainController {
 
 	@Autowired
 	AdminService adminService;
-
+	
+	@Autowired
+	SchedulesService schedulesservice;
+	
 	@RequestMapping("/index")
 	public String index(Model model) {
 		model.addAttribute("center", "index");
@@ -34,7 +41,6 @@ public class MainController {
 	public String registerimpl(Model model, AdminDTO admin) {
 		try {
 			adminService.register(admin);
-			System.out.println(admin);
 			model.addAttribute("center","login");
 			model.addAttribute("registatus", "1");
 			
@@ -107,16 +113,25 @@ public class MainController {
 	@RequestMapping("/loginimpl")
 	public String loginimpl(String aid, String apwd, Model model, HttpSession session) {   
 	      AdminDTO admin = null;
+	      List<SchedulesDTO> list =null;
+	      
 	      try {
 	         admin = adminService.get(aid);
-	         System.out.println(admin);
 	         if(admin == null) {
 	        	 model.addAttribute("status", "0");
 	        	 model.addAttribute("center", "login");
 	         } else {
 	            if(apwd.equals(admin.getApwd())) {
+	            	session.setAttribute("loginadmin", admin);
 	            	model.addAttribute("status", "1");
-	               session.setAttribute("loginadmin", admin);
+	            	if(admin.getGrade()==2) {
+	            		list=schedulesservice.myschedulelist(aid);
+	            		model.addAttribute("center", "maincenter2");
+	            		model.addAttribute("scheduleslist", list);
+	            	}
+	            	else if(admin.getGrade()==3) {
+	            		model.addAttribute("center", "maincenter3");
+	            	}
 	            } else {
 	            	 model.addAttribute("status", "0");
 	            	 model.addAttribute("center", "login");

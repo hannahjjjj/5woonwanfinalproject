@@ -238,65 +238,14 @@
                           <i class="fa fa-desktop"></i>
                           <span>UI Elements</span>
                       </a>
-                      <ul class="sub">
-                          <li class="active" ><a th:href="@{/general}">General</a></li>
-                          <li><a  th:href="@{/buttons}">Buttons</a></li>
-                          <li><a  th:href="@{/panels}">Panels</a></li>
+                      <ul class="sub" th:if="${session.loginadmin != null}">
+                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/general}">회원 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/buttons}">시설 등록</a></li>
+                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/panels}">시설 수정</a></li>
+                          <li th:if="${session.loginadmin.grade==1}"><a th:href="@{/panels}">리뷰 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=1}"><a th:href="@{/panels}">스케줄 관리</a></li>
                       </ul>
                   </li>
-
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Components</span>
-                      </a>
-                      <ul class="sub">
-                          <li class="active"><a  th:href="@{/calendar}">Calendar</a></li>
-                          <li><a  th:href="@{/gallery}">Gallery</a></li>
-                          <li><a  th:href="@{/todo_list}">Todo List</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  th:href="@{/blank}">Blank Page</a></li>
-                          <li><a  th:href="@{/login}">Login</a></li>
-                          <li><a  th:href="@{/lock_screen}">Lock Screen</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  th:href="@{/form_component}">Form Components</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Data Tables</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  th:href="@{/basic_table}">Basic Table</a></li>
-                          <li><a  th:href="@{/responsive_table}">Responsive Table</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  th:href="@{/morris}">Morris</a></li>
-                          <li><a  th:href="@{/chartjs}">Chartjs</a></li>
-                      </ul>
-                  </li>
-
               </ul>
               <!-- sidebar menu end-->
           </div>

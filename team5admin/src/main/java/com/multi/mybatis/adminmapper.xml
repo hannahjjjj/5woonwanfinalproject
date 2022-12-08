@@ -28,4 +28,45 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="AdminDTO">
 		DELETE FROM admin WHERE aid=#{aid}
 	</delete>
+	
+	<select id="myprofit" resultType="AdminDTO">
+		SELECT b.odate , b.profit FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate, SUM(i.itemprice) profit FROM admin a
+		INNER JOIN facility f ON a.facilityid=f.facilityid
+		INNER JOIN orders o ON f.facilityid=o.facilityid
+		INNER JOIN item i ON i.itemid=o.itemid
+		WHERE aid=#{aid}
+		GROUP BY odate
+		ORDER BY odate DESC
+		LIMIT 10) b
+		ORDER BY b.odate;
+	</select>
+	
+	<select id="newcust" resultType="AdminDTO">
+		SELECT b.odate , b.cust_count FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate, COUNT(*) cust_count FROM admin a
+		INNER JOIN facility f ON a.facilityid=f.facilityid
+		INNER JOIN orders o ON f.facilityid=o.facilityid
+		WHERE aid=#{aid}
+		GROUP BY odate
+		ORDER BY odate DESC
+		LIMIT 10) b
+		ORDER BY b.odate;
+	</select>
+	
+	<select id="genderratio" resultType="AdminDTO">
+		SELECT (CASE
+		WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 59 THEN '60대 이상'
+        WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 49 THEN '50대'
+        WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 39 THEN '40대'
+        WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 29 THEN '30대'
+        WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 19 THEN '20대'
+        WHEN (DATE_FORMAT(NOW(),'%Y')-DATE_FORMAT(c.birth,'%Y')+1) > 09 THEN '10대'
+       END) AS age_group, c.gender AS gender
+        FROM admin a
+		INNER JOIN facility f ON a.facilityid=f.facilityid
+		INNER JOIN orders o ON f.facilityid=o.facilityid
+        INNER JOIN cust c ON o.custid=c.custid
+		WHERE aid=#{aid}
+        ORDER BY o.odate DESC;
+	</select>
+	
 </mapper>

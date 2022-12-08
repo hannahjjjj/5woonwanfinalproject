@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.SchedulesMapper">
+	<insert id="insert" parameterType="SchedulesDTO">
+		INSERT INTO schedules VALUES (NULL, #{instructorid}, #{custid},#{starttime},DATE_ADD(#{starttime},INTERVAL 1 HOUR),"예약 진행 중")
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM schedules WHERE schedulesid=#{schedulesid}
+	</delete>
+	<update id="update" parameterType="SchedulesDTO">
+		UPDATE schedules SET instructorid=#{instructorid}, custid=#{custid},starttime=#{starttime}, endtime=DATE_ADD(NOW(),INTERVAL #{period} MONTH)
+		WHERE schedulesid=#{schedulesid}
+	</update> 
+	<select id="selectAll" resultType="SchedulesDTO">
+		SELECT * FROM schedules
+	</select>
+	<select id="select" parameterType="Integer" resultType="SchedulesDTO">
+		SELECT * FROM schedules WHERE schedulesid = #{schedulesid}
+	</select>
+	<select id="selectday" parameterType="String" resultType="SchedulesDTO">
+		SELECT * FROM schedules 
+		WHERE starttime like #{selectday}"%"
+		AND instructorid=#{insid}
+	</select>
+	
+	<select id="myschedulelist" parameterType="String" resultType="SchedulesDTO">
+		SELECT DATE_FORMAT(s.starttime,"%Y-%m-%d %H:%i") as time, i.instructorname , c.custname FROM schedules s
+		INNER join instructor i ON i.instructorid=s.instructorid
+		INNER join facility f ON f.facilityid=i.facilityid
+		INNER join admin a ON f.facilityid=a.facilityid
+		INNER join cust c ON c.custid=s.custid
+		WHERE s.starttime>NOW() AND status="예약 완료" AND a.aid=#{aid}
+		ORDER BY s.starttime;
+	</select>
+</mapper>
