@@ -70,6 +70,11 @@ public class MainController {
 		model.addAttribute("center", "panels");
 		return "index";
 	}
+	@RequestMapping("/facility_register")
+	public String facility_register(Model model) {
+		model.addAttribute("center", "facility_register");
+		return "index";
+	}
 	
 	@RequestMapping("/todo_list")
 	public String todo_list(Model model) {
@@ -77,9 +82,9 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/calendar")
+	@RequestMapping("/schedules")
 	public String calendar(Model model) {
-		model.addAttribute("center", "calendar");
+		model.addAttribute("center", "schedules");
 		return "index";
 	}
 	

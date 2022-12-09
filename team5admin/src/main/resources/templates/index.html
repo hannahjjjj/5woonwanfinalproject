@@ -240,10 +240,10 @@
                       </a>
                       <ul class="sub" th:if="${session.loginadmin != null}">
                           <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/general}">회원 관리</a></li>
-                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/buttons}">시설 등록</a></li>
-                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/panels}">시설 수정</a></li>
-                          <li th:if="${session.loginadmin.grade==1}"><a th:href="@{/panels}">리뷰 관리</a></li>
-                          <li th:if="${session.loginadmin.grade!=1}"><a th:href="@{/panels}">스케줄 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_register}">시설 등록</a></li>
+                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_update}">시설 수정</a></li>
+                          <li th:if="${session.loginadmin.grade==1}"><a th:href="@{/todo_list}">리뷰 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=1}"><a th:href="@{/schedules}">스케줄 관리</a></li>
                       </ul>
                   </li>
               </ul>
