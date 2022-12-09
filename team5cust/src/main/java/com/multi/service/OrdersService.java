@@ -50,7 +50,9 @@ public class OrdersService implements MyService<Integer, OrdersDTO> {
 	public List<OrdersDTO> mymembership(String custid) throws Exception{
 		return mapper.mymembership(custid);
 	}
-	
+	public String checkorder(String custid, int facilityid) throws Exception{
+		return mapper.checkorder(custid,facilityid);
+	}
 	
 	// 주문상세 인서트할때
 //	fun insertUserData (user: User, hobby: Hobby) {

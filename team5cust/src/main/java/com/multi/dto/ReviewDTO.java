@@ -22,5 +22,13 @@ public class ReviewDTO {
 	int starpoint;
 	Date rdate;
 	
+	public ReviewDTO(int facilityid,String custid, String reviewcon,int starpoint) {
+		super();
+		this.custid=custid;
+		this.facilityid=facilityid;
+		this.reviewcon=reviewcon;
+		this.starpoint=starpoint;
+	}
+	
 	
 }
