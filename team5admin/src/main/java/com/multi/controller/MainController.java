@@ -1,7 +1,10 @@
 package com.multi.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,10 +86,49 @@ public class MainController {
 	}
 	
 	@RequestMapping("/schedules")
-	public String calendar(Model model) {
+	public String calendar(Model model,String id,String selectday) {
+		List<SchedulesDTO> listadmin =null;
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		
+		if(selectday==null) {
+			selectday=sDate.format(new Date());
+		}
+		try {
+			listadmin=schedulesservice.selectdayadmin(selectday, id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("adminschedulelist", listadmin);
 		model.addAttribute("center", "schedules");
 		return "index";
 	}
+	
+	@RequestMapping("/schedulues/delete")
+	public String scheduluesdelete(Model model,int id) {
+		try {
+			schedulesservice.remove(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("center", "schedules");
+		return "index";
+	}
+	@RequestMapping("/schedulues/fix")
+	public String scheduluesfix(Model model,int id) {
+		try {
+			SchedulesDTO sc=schedulesservice.get(id);
+			schedulesservice.modify(sc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("center", "schedules");
+		return "index";
+	}
+	
+	
 	
 	@RequestMapping("/gallery")
 	public String gallery(Model model) {
