@@ -124,6 +124,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				<settings>
+				<setting name="jdbcTypeForNull" value="NULL" />
+				</settings>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

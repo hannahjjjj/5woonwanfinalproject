@@ -36,4 +36,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN facility f ON f.facilityid=i.facilityid
 		WHERE custid=#{custid}
 	</select>
+	
+	<select id="checkorder" parameterType="String" resultType="String">
+		SELECT orderid FROM orders WHERE custid=#{custid} <if test="custid!=null"></if> and facilityid=#{facilityid}<if test="facilityid!=null"></if>
+	</select>
 </mapper>

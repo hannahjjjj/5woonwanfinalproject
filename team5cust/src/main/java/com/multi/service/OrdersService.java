@@ -51,7 +51,7 @@ public class OrdersService implements MyService<Integer, OrdersDTO> {
 		return mapper.mymembership(custid);
 	}
 	public String checkorder(String custid, int facilityid) throws Exception{
-		return mapper.checkorder(custid,facilityid);
+		return mapper.checkorder(custid, facilityid);
 	}
 	
 	// 주문상세 인서트할때

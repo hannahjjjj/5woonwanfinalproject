@@ -123,27 +123,22 @@ public class FacilityController {
 	}
 	
 	@RequestMapping("/reviewimpl")
-	public String reviewimpl(Model model, ReviewDTO review,FacilityDTO facility) {
-		int reviewid = 0;
-		try {
-			reviewid = review.getFacilityid();
-			rservice.register(review);
-			System.out.println(review);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public String reviewimpl(Model model, ReviewDTO review) {
+			try {
+				rservice.register(review);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		return "index";
 	}
 	
-	@RequestMapping("/reviewupdate")
-	public String reviewupdate(Model model,FacilityDTO facility, ReviewDTO review, HttpSession session) {
-		try {
-			rservice.modify(review);
-			session.setAttribute("review",review);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:facilitydetail?id="+facility.getFacilityid();
-	}
+	/*
+	 * @RequestMapping("/reviewupdate") public String reviewupdate(Model
+	 * model,FacilityDTO facility, ReviewDTO review, HttpSession session) { try {
+	 * rservice.modify(review); session.setAttribute("review",review); } catch
+	 * (Exception e) { e.printStackTrace(); } return
+	 * "redirect:facilitydetail?id="+facility.getFacilityid(); }
+	 */
 }
