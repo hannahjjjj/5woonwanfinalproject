@@ -268,9 +268,9 @@ marker.setMap(map);
    function Page__init() {
        Page__updateOffsetTop();
    }
-   
+
 	function review(result){
-		var review_form = $('#review_form').val();
+		var review_form = $('#review_form');
 		if(result=="1"){
 			$.ajax({
 				url :'[[@{/reviewimpl}]]',
@@ -278,7 +278,7 @@ marker.setMap(map);
 				success:function(){
 						location.reload();
 				}
-			});0
+			});
 		}
 		if(result=="0"){
 			alert("회원권 구매 후 리뷰를 작성할 수 있습니다.");
@@ -286,6 +286,7 @@ marker.setMap(map);
 		}
 		
 	}
+
 	$(function() {
 		const userid = $('input[name="userid"]').val();
 		const facilityid = $('input[name="facilityid"]').val();
@@ -317,9 +318,11 @@ marker.setMap(map);
 	
 	 $(document).ready(function() {
 		$('#review_btn').click(function() {
-			
+			var custid = $('input[name="custid"]').val();
+			var facilityid = $('input[name="facilityid"]').val();	
 			var rate = $('input[name="rate"]:checked').val();
 			var reviewcon = $('textarea[name=reviewcon]').val().trim();
+			
 			$('input[name="starpoint"]').val(rate);
 			
 			if ($('input[name="starpoint"]').val(rate) == "") {
@@ -341,8 +344,8 @@ marker.setMap(map);
 					'custid' : custid,
 					'facilityid' : facilityid
 				},
-				success : function(result) {
-					review(result);
+				success : function(data) {
+					review(data);
 				}
 			})
 		});
@@ -500,8 +503,8 @@ marker.setMap(map);
 		<div class="form-group d-flex justify-content-end" style="width:65%;">
 		<button id="review_btn" class="btn py-1 px-2 btn-primary" style="width:10%; height:10%;">리뷰등록하기</button>
 		</div>
-		<input name=facilityid th:value="${facilitydetail.facilityid}" type="hidden">
-        <input name=custid th:value=${session.logincust.custid} type="hidden"> 
+		<input id="facilityid" name="facilityid" th:value="${facilitydetail.facilityid}" type="hidden">
+        <input id="custid" name="custid" th:value=${session.logincust.custid} type="hidden"> 
         </form>
         </div>
         <div class="col-md-10" style="padding:2% 0 0 0;">

@@ -197,20 +197,23 @@ public class AJAXController {
 		return result;
 	}
 	
-	@RequestMapping("checkfacility") //리뷰작성용
-		public String checkfacility(String custid, int facilityid) {
-			String result=null;
-			String status_check=null;
+	@RequestMapping("/checkorder") //리뷰작성용
+		public String checkorder(String custid, int facilityid) {
+			int orderid=0;
+			String orderid1 = Integer.toString(orderid);
+			String result = null;
 			try {
-				status_check = oservice.checkorder(custid, facilityid);
-				if(status_check != null && status_check.equals("완료되었습니다.")) {
+				orderid1 = oservice.checkorder(custid, facilityid);
+				if(orderid1 != null) {
 					result="1";
 				}else {
 					result="0";
 				}
+				
 			} catch (Exception e) {		
 				e.printStackTrace();
 			}
+			System.out.println(result);
 			return result;
 		}
 
