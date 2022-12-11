@@ -30,6 +30,16 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		ORDER BY s.starttime;
 	</select>
 	
+	<select id="selectdayins" parameterType="String" resultType="SchedulesDTO">
+		SELECT DATE_FORMAT(s.starttime,"%Y-%m-%d %H:%i") AS time, i.instructorname , c.custname, s.status, s.schedulesid FROM schedules s
+		INNER JOIN instructor i ON i.instructorid=s.instructorid
+		INNER JOIN facility f ON f.facilityid=i.facilityid
+		INNER JOIN admin a ON a.instructorid=i.instructorid
+		INNER JOIN cust c ON c.custid=s.custid
+		WHERE DATE_FORMAT(s.starttime,"%Y-%m-%d")=#{selectday} AND a.instructorid=#{instructorid}
+		ORDER BY s.starttime;
+	</select>
+	
 	<select id="myschedulelist" parameterType="String" resultType="SchedulesDTO">
 		SELECT DATE_FORMAT(s.starttime,"%Y-%m-%d %H:%i") as time, i.instructorname , c.custname FROM schedules s
 		INNER join instructor i ON i.instructorid=s.instructorid
@@ -37,6 +47,16 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER join admin a ON f.facilityid=a.facilityid
 		INNER join cust c ON c.custid=s.custid
 		WHERE s.starttime>NOW() AND status="예약 완료" AND a.aid=#{aid}
+		ORDER BY s.starttime;
+	</select>
+	
+	<select id="insschedulelist" parameterType="String" resultType="SchedulesDTO">
+		SELECT DATE_FORMAT(s.starttime,"%Y-%m-%d %H:%i") as time, i.instructorname , c.custname FROM schedules s
+		INNER join instructor i ON i.instructorid=s.instructorid
+		INNER join facility f ON f.facilityid=i.facilityid
+		INNER join admin a ON a.instructorid=i.instructorid
+		INNER join cust c ON c.custid=s.custid
+		WHERE s.starttime>NOW() AND status="예약 완료" AND a.instructorid=#{instructorid}
 		ORDER BY s.starttime;
 	</select>
 </mapper>

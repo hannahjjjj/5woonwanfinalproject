@@ -27,10 +27,33 @@ public class MainController {
 	@Autowired
 	SchedulesService schedulesservice;
 	
+	
 	@RequestMapping("/index")
-	public String index(Model model) {
-		model.addAttribute("center", "index");
-		return "redirect:/";
+	public String index(Model model,String id) {
+		AdminDTO admin = null;
+	    List<SchedulesDTO> list =null;
+		if(id==null) {
+			model.addAttribute("center", "index");
+		}
+		else {
+			try {
+				admin = adminService.get(id);
+				if(admin.getGrade()==2) {
+					list=schedulesservice.myschedulelist(id);
+					model.addAttribute("center", "maincenter2");
+            		model.addAttribute("scheduleslist", list);
+				}
+				else if(admin.getGrade()==3) {
+					String insid=String.valueOf(admin.getInstructorid());
+            		list=schedulesservice.insschedulelist(insid);
+            		model.addAttribute("scheduleslist", list);
+					model.addAttribute("center", "maincenter3");
+				}
+			} catch (Exception e) {      
+				e.printStackTrace();
+			}
+		}
+		return "/index";
 	}
 	
 	@RequestMapping("/register")
@@ -86,7 +109,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/schedules")
-	public String calendar(Model model,String id,String selectday) {
+	public String schedules(Model model,String id,String selectday) {
 		List<SchedulesDTO> listadmin =null;
 		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
 		
@@ -103,7 +126,6 @@ public class MainController {
 		model.addAttribute("center", "schedules");
 		return "index";
 	}
-	
 	@RequestMapping("/schedulues/delete")
 	public String scheduluesdelete(Model model,int id) {
 		try {
@@ -125,6 +147,53 @@ public class MainController {
 			e.printStackTrace();
 		}
 		model.addAttribute("center", "schedules");
+		return "index";
+	}
+	
+	@RequestMapping("/insschedules")
+	public String insschedules(Model model,String id,String selectday) {
+		List<SchedulesDTO> listins =null;
+		AdminDTO admin=null;
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		
+		if(selectday==null) {
+			selectday=sDate.format(new Date());
+		}
+		try {
+			admin=adminService.get(id);
+			String insid=String.valueOf(admin.getInstructorid());
+			listins=schedulesservice.selectdayins(selectday, insid);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("insschedulelist", listins);
+		model.addAttribute("center", "insschedules");
+		return "index";
+	}
+	
+	@RequestMapping("/insschedulues/delete")
+	public String insscheduluesdelete(Model model,int id) {
+		try {
+			schedulesservice.remove(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("center", "insschedules");
+		return "index";
+	}
+	@RequestMapping("/insschedulues/fix")
+	public String insscheduluesfix(Model model,int id) {
+		try {
+			SchedulesDTO sc=schedulesservice.get(id);
+			schedulesservice.modify(sc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("center", "insschedules");
 		return "index";
 	}
 	
@@ -172,11 +241,16 @@ public class MainController {
 	            	session.setAttribute("loginadmin", admin);
 	            	model.addAttribute("status", "1");
 	            	if(admin.getGrade()==2) {
+	            		
 	            		list=schedulesservice.myschedulelist(aid);
 	            		model.addAttribute("center", "maincenter2");
 	            		model.addAttribute("scheduleslist", list);
 	            	}
 	            	else if(admin.getGrade()==3) {
+	            		String insid=String.valueOf(admin.getInstructorid());
+	            		list=schedulesservice.insschedulelist(insid);
+	            		System.out.println(insid);
+	            		model.addAttribute("scheduleslist", list);
 	            		model.addAttribute("center", "maincenter3");
 	            	}
 	            } else {

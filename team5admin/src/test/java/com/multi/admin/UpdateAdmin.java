@@ -16,7 +16,7 @@ class UpdateAdmin {
 	@Test
 	void contextLoads() {
 
-		AdminDTO admin = new AdminDTO("admin01","pwd01","김부사장","01099999999","admin@a.aa",1);
+		//AdminDTO admin = new AdminDTO("admin01","pwd01","김부사장","01099999999","admin@a.aa",1);
 		try {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

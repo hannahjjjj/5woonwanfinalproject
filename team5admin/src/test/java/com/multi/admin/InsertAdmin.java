@@ -16,10 +16,10 @@ class InsertAdmin {
 	@Test
 	void contextLoads() {
 		
-		AdminDTO admin= new AdminDTO("admin03", "apwd03", "이차장", "01011111111", "admin99@a.aa",1);
+		//AdminDTO admin= new AdminDTO("admin03", "apwd03", "이차장", "01011111111", "admin99@a.aa",1);
 		
 		try {
-			service.register(admin);
+			//service.register(admin);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
