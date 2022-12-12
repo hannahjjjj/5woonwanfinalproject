@@ -5,18 +5,25 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.dto.AdminDTO;
+import com.multi.dto.SchedulesDTO;
 import com.multi.service.AdminService;
+import com.multi.service.SchedulesService;
 
 @RestController
 public class AJAXController {
 
 	@Autowired
 	AdminService adminservice;
-
+	
+	@Autowired
+	SchedulesService schedulesService; 
+	
+	// 시설 관리자 
 	@RequestMapping("/genderratio")
 	public Object genderratio(String id) {
 		JSONObject result = new JSONObject();
@@ -178,4 +185,18 @@ public class AJAXController {
 		result.put("result", ja);
 		return result;
 	}
+	 @RequestMapping("/schedulelist")
+	 public Object schedulelist(String id,String selectday,Model model) {
+		 List<SchedulesDTO> list = null;
+		 
+		 try {
+			list=schedulesService.selectdayadmin(selectday, id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("adminschedulelist", list);
+		 return list;
+	 }
+	
 }

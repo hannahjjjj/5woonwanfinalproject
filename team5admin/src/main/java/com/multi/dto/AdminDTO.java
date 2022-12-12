@@ -21,6 +21,8 @@ public class AdminDTO {
 	String acontact;
 	String aemail;
 	int grade;
+	int instructorid;
+	int facilityid;
 	
 	//월별 매출에 필요한 변수
 	String odate;

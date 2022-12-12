@@ -223,11 +223,17 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a th:href="@{/profile}"><img th:src="@{/assets/img/ui-sam.jpg}" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><img th:src="@{/assets/img/ui-sam.jpg}" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">Marcel Newman</h5>
               	  	
-                  <li class="mt">
+                  <li class="mt" th:if="${session.loginadmin == null}">
                       <a class="active" th:href="@{/index}">
+                          <i class="fa fa-dashboard"></i>
+                          <span>DashBoard</span>
+                      </a>
+                  </li>
+                  <li class="mt" th:if="${session.loginadmin != null}">
+                      <a class="active" th:href="@{/index(id=${session.loginadmin.aid})}">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
@@ -243,7 +249,8 @@
                           <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_register}">시설 등록</a></li>
                           <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_update}">시설 수정</a></li>
                           <li th:if="${session.loginadmin.grade==1}"><a th:href="@{/todo_list}">리뷰 관리</a></li>
-                          <li th:if="${session.loginadmin.grade!=1}"><a th:href="@{/schedules}">스케줄 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=1}and${session.loginadmin.grade==2}"><a th:href="@{/schedules(id=${session.loginadmin.aid})}">스케줄 관리</a></li>
+                          <li th:if="${session.loginadmin.grade!=1}and${session.loginadmin.grade==3}"><a th:href="@{/insschedules(id=${session.loginadmin.aid})}">스케줄 관리</a></li>
                       </ul>
                   </li>
               </ul>
