@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -22,5 +21,8 @@ public class FacilityDTO { //깃헙 오류
 	private String facilitytime2;
 	private double lat;
 	private double lng;
+
+	    
+	 
 
 }
