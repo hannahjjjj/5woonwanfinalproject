@@ -178,7 +178,7 @@ button {
 </style>
 <script>
 function moveorder(itemid) {
-	var custid = '[[${session.logincust.custid}]]';
+	var custid = $('input[name="custid"]').val();
 		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
 }
 </script>
