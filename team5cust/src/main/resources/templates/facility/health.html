@@ -27,42 +27,6 @@
     </style>
 
 <script>
-$(document).ready(function(){
-$('#search_btn2').click(function(){
-	$('#search_form2').attr({
-		method:'get',
-		action:'[[@{/search}]]'
-	});
-	$('#search_form2').submit();
-});
-paging();
-});
-
-function GetTarget(j){
-	var cateid="[[${cate.cateid}]]";
-}
-	$.ajax({
-		url:'facility/facilitypage',
-		data:{
-			'pageNo':j,
-			'cateid':cateid
-		},
-		method:'GET',
-		success: function(result){
-			$('#div_trainer_row').empty();
-			$('#div_trainer_row').append(result);
-			
-			currentPage = j;
-			totalData = $('#input_hiddencnt').val();
-			totalPages = Math.ceil(totalData / limitPerPage);
-			pageGroup = Math.ceil(currentPage / pageSize);
-			last = pageGroup * pageSize;
-			veryLast = totalPages;
-			
-			calcPage();
-		}
-	});
-
 var currentPage = 0;
 var totalData = 0;
 var limitPerPage = "[[${amount}]]";
@@ -74,59 +38,45 @@ var veryFirst = 1;
 var veryLst = 0;
 var first = 0;
 var next = 0;
-var prev = 0;
+var prev = 0; 
 
-	function calcPage(){
-		var pages = $('#pages');
-		pages.empty();
-		
-		if(currentPage <= 0){
-			currentPage = 1;
-		}
-		if(last > totalPages){
-			last = totalPages;
-		}
-		
-		first = last - (pageSize - 1);
-		next = last + 1;
-		prev = first - 1;
-		
-		if(totalPages < 1){
-			first = last;
-		}
-		
-		if(totalPages > 1){
-			pages.append('<li><a onclick="GetTarget('+ veryFirst +')"><<</a></li>');
-		}
-		
-		// prev 버튼
-		if(first > 1){
-			pages.append('<li><a onclick="GetTarget('+ first +')"><</a></li>');
-		}
-		
-		// 페이지 숫자
-		for (var j = first; j <= last; j++) {
-			
-			if(currentPage == j){
-				pages.append('<li class="active"><a onclick="GetTarget(' + j + ');"' + '>' + j + '</a></li>');
-			}else if(j > 0){
-				pages.append('<li><a onclick="GetTarget('+ j +')">' + j + '</a></li>');
-				};
-			}
-		
-		// next 버튼
-		if(next > pageSize && next <= totalPages){
-			pages.append('<li><a onclick="GetTarget(' + next + ')">></a></li>');
-		};
-		
-		if(totalPages > 1){
-			pages.append('<li><a onclick="GetTarget('+ veryLast +')">>></a></li>');
-		};
-	}
 
+
+function GetTarget(j){
+	var cateid="[[${cate.cateid}]]";
+
+	$.ajax({
+		url:'/facility/facilitypage',
+		data:{
+			'pageNo':j,
+			'cateid':cateid
+		},
+		method:'GET',
+		success: function(result){
+			$('#div_trainer_row').empty();
+			$('#div_trainer_row').append(result);
+			currentPage = j;
+			totalData = "[[${totalData}]]";
+			totalPages = Math.ceil(totalData / limitPerPage);
+			pageGroup = Math.ceil(currentPage / pageSize);
+			last = pageGroup * pageSize;
+			veryLast = totalPages;
+
+			calcPage();
+		}
+	});
+	history.pushState({
+		data:'/facility/facilitypage',
+		pageNo: j
+	}, // state
+	null, // title
+	'/health?pageNo=' + j + '&cateid=' + cateid); // url
+}
+
+	
 	function paging(totalData, currentPage){
 		
-		totalData = $('#input_hiddencnt').val();
+		totalData = "[[${totalData}]]";
 		currentPage = "[[${currentPage}]]";
 		totalPages = Math.ceil(totalData / limitPerPage);
 		pageGroup = Math.ceil(currentPage / pageSize); 
@@ -137,6 +87,20 @@ var prev = 0;
 	}
 
 
+	
+
+
+
+	$(document).ready(function(){
+	$('#search_btn2').click(function(){
+		$('#search_form2').attr({
+			method:'get',
+			action:'[[@{/search}]]'
+		});
+		$('#search_form2').submit();
+	});
+	paging(totalData, currentPage);
+	});
 
 </script>
  
@@ -177,21 +141,9 @@ var prev = 0;
 
           </div>
           </div>
-		
-    	<div class="container">
-        <div class="row">
-        	<div class="col-md-4" th:each="fl:${facilitylist}">
-        		<div class="property-wrap ftco-animate">
-         			<a th:href="@{/facilitydetail(facilityid=${fl.facilityid})}"class="img" th:style="'background-image: url('+@{fimages/}+${fl.facilityimg}+@{.jpg}+');'"></a> 
-
-        			<div class="facility_name" th:text="${fl.facilityname}"> </div>
-        			<div class="facility_number" th:text="${fl.facilitynumber}"> </div>
-        		</div>
-        	</div>
-     
-        </div>
-
-    	</div>
+		<div id="div_trainer_row">
+    		<div th:replace = "${facilitylist} ? ${facilitylist} : facilitylist"></div>
+		</div>
 		<div class="row mt-5">
 					<div class="col text-center">
 						<div class="block-27">

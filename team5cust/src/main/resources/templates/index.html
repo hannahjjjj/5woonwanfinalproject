@@ -166,7 +166,52 @@
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
   <script>
-
+  function calcPage(){
+		var pages = $('#pages');
+		pages.empty();
+		
+		if(currentPage <= 0){
+			currentPage = 1;
+		}
+		if(last > totalPages){
+			last = totalPages;
+		}
+		
+		first = last - (pageSize - 1);
+		next = last + 1;
+		prev = first - 1;
+		
+		if(totalPages < 1){
+			first = last;
+		}
+		if(totalPages > 1){
+			pages.append('<li><a  onclick="GetTarget('+ veryFirst +');"><<</a></li>');
+		}
+		
+		// prev 버튼
+		if(first > 1){
+			pages.append('<li><a  onclick="GetTarget('+ first +');"><</a></li>');
+		}
+		
+		// 페이지 숫자
+		for (var j = first; j <= last; j++) {
+			
+			if(currentPage == j){
+				pages.append('<li class="active"><a  onclick="GetTarget(' + j + ');"' + '>' + j + '</a></li>');
+			}else if(j > 0){
+				pages.append('<li><a  onclick="GetTarget('+ j +');">' + j + '</a></li>');
+				};
+			}
+		
+		// next 버튼
+		if(next > pageSize && next <= totalPages){
+			pages.append('<li><a  onclick="GetTarget(' + next + ');">></a></li>');
+		};
+		
+		if(totalPages > 1){
+			pages.append('<li><a  onclick="GetTarget('+ veryLast +');">>></a></li>');
+		};
+	}
   var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "ftBRzhRgpIJDkToc4CQX", //내 애플리케이션 정보에 cliendId를 입력해줍니다.

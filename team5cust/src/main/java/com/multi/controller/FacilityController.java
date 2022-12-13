@@ -44,7 +44,7 @@ public class FacilityController {
 	@Autowired
 	ItemMapper mapper;
 	
-	@Value("10")
+	@Value("9")
 	private int amount;
 	
 	@ModelAttribute("amount")
@@ -89,10 +89,9 @@ public class FacilityController {
 		try {
 			cate = cservice.get(cateid);
 			model.addAttribute("cate", cate);
-			model.addAttribute("center","facility/health");
 			fac = fservice.selectFacilityAll(cateid);
 			cnt=fac.size();
-			model.addAttribute("facilitylist", fac);
+			
 			if(cnt - startIndex < amount) {
 				endIndex = startIndex + (cnt % amount);
 			}else {
@@ -100,16 +99,19 @@ public class FacilityController {
 			}
 			
 			fac = fac.subList(startIndex, endIndex);
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		model.addAttribute("list", fac);
+		model.addAttribute("center","facility/health");
+		model.addAttribute("totalData", cnt);
 		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("facilitylist", "facility/facilitylist");
+		model.addAttribute("amount", amount);
 		return "index";
 	}
 	
-	@RequestMapping("/facilitypage")
+	@RequestMapping("facility/facilitypage")
 	public String findPage(Model model, int pageNo, int cateid) {
 		List<FacilityDTO> fac = null;
 		CateDTO cate = null;
@@ -121,23 +123,21 @@ public class FacilityController {
 			cate = cservice.get(cateid);
 			fac = fservice.selectFacilityAll(cateid);
 			cnt = fac.size();
-			model.addAttribute("cate", cate);
-			model.addAttribute("center","facility/health");
 			if(cnt - startIndex < amount) {
 				endIndex = startIndex + (cnt % amount);
 			}else {
 				endIndex =  startIndex + amount;
 			}
-			
 			fac = fac.subList(startIndex, endIndex);
-			model.addAttribute("facilitylist", fac);
+			model.addAttribute("list", fac);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalData", cnt);
-		return "index";
+		model.addAttribute("cate", cate);
+		
+		return "facility/facilitylist";
 	}
 	
 	@RequestMapping("/facilitydetail")
