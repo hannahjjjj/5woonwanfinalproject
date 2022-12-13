@@ -45,15 +45,20 @@
 </style>
 
 <script>  
+	var amount=document.getElementById('itemprice').value;
+
+
+
   function requestPay() {
 	  var IMP = window.IMP;
 	  IMP.init('imp86716450');
+		alert(amount);
 	  IMP.request_pay({
 		    pg : 'kakaopay',
 		    pay_method : 'card', //생략 가능
-		    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
+		    merchant_uid: "order_no_0003", // 상점에서 관리하는 주문 번호
 		    name : '주문명:결제테스트',
-		    amount : 14000,
+		    amount : 15000,
 		    buyer_email : 'iamport@siot.do',
 		    buyer_name : '구매자이름',
 		    buyer_tel : '010-1234-5678',
@@ -112,20 +117,20 @@
 						th:value="${session.logincust.custid}" readonly="readonly">
 				</div>
 				<div class="form-group">
-					<label>상품명 : </label><input type="text" name="itemname"
+					<label>상품명 : </label><input type="text" name="itemname" id="itemname"
 						th:value="${o.itemname}" readonly="readonly">
 				</div>
 				<div class="form-group">
-				<input type="hidden" name="itemid" th:value="${o.itemid}">
+				<input type="hidden" name="itemid" th:value="${o.itemid}" id="itemid"> 
 				</div>
 
 				<div class="form-group">
-					<label>횟수 : </label><input type="text" name="counting"
+					<label>횟수 : </label><input type="text" name="counting" id="counting"
 						th:value="${o.counting}" readonly="readonly">
 				</div>
 				
 				<div class="form-group">
-					<label>상품가격 : </label><input type="text" name="itemprice"
+					<label>상품가격 : </label><input type="text" name="itemprice" id="itemprice"
 						th:value="${o.itemprice + '원'}" readonly="readonly">
 				</div>
 				
@@ -139,18 +144,14 @@
 				<div class="form-group" th:if="${o.instructorid == 0}">
 					<label>강사선택 : </label><input type="" class="form-control" id="sel1" readonly="readonly">							
 				</div>
-				
-				<div>
-					<form method="post" action="/kakaoPay">
-						<button>카카오페이로 결제하기</button>
-					</form>
-				</div>
 				<br> <br>
 			<p id="check">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</p>
 			<br>
 		</form>
 		<div id="insertbt">
-					<button onclick="requestPay()">결제하기</button>
+			<button onclick="requestPay()">카카오페이로 결제하기</button>
+			<br>
+			<button onclick="requestPay()">결제하기</button>
 		</div>
 	</div>
 </div>

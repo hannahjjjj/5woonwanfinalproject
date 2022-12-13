@@ -1,5 +1,7 @@
 package com.multi.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,17 @@ public class FacilityDTO { //깃헙 오류
 	private String facilitytime2;
 	private double lat;
 	private double lng;
+	
+	
+	private MultipartFile img1;
+	
+	private String aid;
+	private String password;
+	private String name;
+	private String email;
+	private String weekdaystart;
+	private String weekdayend;
+	private String weekendstart;
+	private String weekendend;
 
 }

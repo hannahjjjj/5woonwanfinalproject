@@ -17,6 +17,7 @@ import com.multi.dto.InstructorDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.AdminService;
 import com.multi.service.FacilityService;
+import com.multi.service.InstructorService;
 import com.multi.service.SchedulesService;
 
 
@@ -31,6 +32,9 @@ public class MainController {
 	
 	@Autowired
 	FacilityService facilityservice;
+	
+	@Autowired
+	InstructorService instructorservice;
 	
 	@RequestMapping("/index")
 	public String index(Model model,String id) {
@@ -91,26 +95,58 @@ public class MainController {
 		try {
 			fac=facilityservice.selectaddr(ins.getAddr());
 			ins.setFacilityid(fac.getFacilityid());
+			instructorservice.register(ins);
+			
+			AdminDTO admin = new AdminDTO(ins.getAid(), ins.getPassword(), ins.getInstructorname(), ins.getInstructorphone(), ins.getInstructoremail(), 3, ins.getInstructorid(), 0, null, 0, 0, null, null);
+			adminService.register(admin);
+			model.addAttribute("status", "1");
+			model.addAttribute("center", "login");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			model.addAttribute("center", "register");
+			model.addAttribute("registatus", "0");
 			e.printStackTrace();
 		}
-		System.out.println(ins);
-		model.addAttribute("status", "1");
-		model.addAttribute("center", "register");
+		
 		return "index";
 	}
 	
 	@RequestMapping("/registerimpl")
-	public String registerimpl(Model model, AdminDTO admin) {
+	public String registerimpl(Model model, FacilityDTO fac) {
+		String str;
+		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
+		fac.setFacilityimg(imgname);
+		System.out.println(fac);
+		if(fac.getWeekdayend().isEmpty()) {
+			str="24시 운영";
+			fac.setFacilitytime(str);
+		}
+		else {
+			str=fac.getWeekdaystart()+" ~ "+fac.getWeekdayend(); 
+			fac.setFacilitytime(str);
+		}
+		
+		if(fac.getWeekendend().isEmpty()) {
+			str="24시 운영";
+			fac.setFacilitytime2(str);
+		}
+		else {
+			str=fac.getWeekendstart()+" ~ "+fac.getWeekendend(); 
+			fac.setFacilitytime2(str);
+		}
+		
 		try {
+			facilityservice.register(fac);
+			AdminDTO admin = new AdminDTO(fac.getAid(), fac.getPassword(), fac.getName(), fac.getFacilitynumber(), fac.getEmail(), 2, 0, fac.getFacilityid(), null, 0, 0, null, null);
 			adminService.register(admin);
 			model.addAttribute("center","login");
 			model.addAttribute("registatus", "1");
 			
 		} catch (Exception e) {
-			model.addAttribute("center", "register");
-			model.addAttribute("registatus", "0");
+			/*
+			 * model.addAttribute("center", "register"); model.addAttribute("registatus",
+			 * "0");
+			 */
 			e.printStackTrace();
 		}
 		
