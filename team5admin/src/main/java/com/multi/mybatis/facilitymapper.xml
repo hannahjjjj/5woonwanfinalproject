@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.FacilityMapper">
+	
+	<select id="select" parameterType="Integer" resultType="FacilityDTO">
+		SELECT * FROM facility WHERE facilityid=#{facilityid}
+	</select>
+
+	<select id="selectAll" resultType="FacilityDTO">
+		SELECT * FROM facility
+	</select>
+	
+	<select id="selectFacilityAll" parameterType="Integer" resultType="FacilityDTO">
+		SELECT * FROM facility WHERE cateid=#{cateid}
+	</select>
+	
+	<select id="searchFacility" resultType="FacilityDTO" parameterType="string">
+    	SELECT * FROM facility WHERE facilityname LIKE CONCAT('%',#{txt},'%') or facilityaddr LIKE CONCAT('%',#{txt},'%')
+    </select>
+	
+	<select id="viewFacilityName" parameterType="Integer" resultType="FacilityDTO">
+	SELECT * FROM facility
+	WHERE cateid = (SELECT f.facilityid FROM facility f
+	INNER JOIN instructor i ON f.facilityid = i.facilityid
+	WHERE instructorid = #{instructorid})
+	</select>
+
+	<update id="update" parameterType="FacilityDTO">
+		UPDATE facility SET cateid=#{cateid},facilityname=#{facilityname},facilityaddr=#{facilityaddr},facilitynumber=#{facilitynumber},facilityimg=#{facilityimg},facilitytime=#{facilitytime},facilitytime2=#{facilitytime2},lat=#{lat},lng=#{lng} 
+		WHERE facilityid=#{facilityid}
+	</update>
+ 
+	<insert id="insert" parameterType="FacilityDTO">
+		INSERT INTO facility VALUES (#{facilityid},#{cateid},#{facilityname},#{facilityaddr},#{facilitynumber},#{facilityimg},#{facilitytime},#{facilitytime2},#{lat},#{lng})
+	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM facility WHERE facilityid=#{facilityid}
+	</delete>
+</mapper>

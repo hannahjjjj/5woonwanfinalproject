@@ -44,7 +44,8 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a th:href="@{/index}" class="logo"><b>DASHGUM FREE</b></a>
+            
+            <a class="logo"><b>DASHGUM FREE</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -227,7 +228,7 @@
               	  <h5 class="centered">Marcel Newman</h5>
               	  	
                   <li class="mt" th:if="${session.loginadmin == null}">
-                      <a class="active" th:href="@{/index}">
+                      <a class="active">
                           <i class="fa fa-dashboard"></i>
                           <span>DashBoard</span>
                       </a>

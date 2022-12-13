@@ -14,7 +14,7 @@ $(document).ready(function(){
 function chart(){
 	var id="[[${session.loginadmin.aid}]]";
 	$.ajax({
-		url:'[[@{/genderratio}]]',
+		url:'[[@{/insgenderratio}]]',
 		data:{
 			'id':id
 			},
@@ -23,7 +23,7 @@ function chart(){
 		}
 	}); 
 	$.ajax({
-		url:'[[@{/newcust}]]',
+		url:'[[@{/insnewcust}]]',
 		data:{
 			'id':id
 			},

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AdminDTO;
+import com.multi.dto.InstructorDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.AdminService;
 import com.multi.service.SchedulesService;
@@ -58,6 +59,26 @@ public class MainController {
 	
 	@RequestMapping("/register")
 	public String register(Model model) {
+		model.addAttribute("center", "register");
+		return "index";
+	}
+	
+	
+	@RequestMapping("/role")
+	public String role(Model model, String role) {
+		model.addAttribute("status", "1");
+		if(role.equals("1")) {
+			model.addAttribute("center", "facilityregister");
+		}else {
+			model.addAttribute("center", "instructorregister");
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping("/insregisterimpl")
+	public String insregisterimpl(Model model,InstructorDTO ins) {
+		System.out.println(ins);
 		model.addAttribute("status", "1");
 		model.addAttribute("center", "register");
 		return "index";
