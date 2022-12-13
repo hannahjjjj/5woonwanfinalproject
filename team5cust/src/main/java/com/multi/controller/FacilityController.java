@@ -181,7 +181,6 @@ public class FacilityController {
 			item = itservice.get(instructorid);
 			inst = iservice.get(instructorid);
 			list1 = itservice.selectItemList(instructorid);
-			System.out.println(list1);
 			fac = fservice.viewFacilityName(instructorid);
 			ins = iservice.selectInstructorList(instructorid);
 			model.addAttribute("instructordetail",item);

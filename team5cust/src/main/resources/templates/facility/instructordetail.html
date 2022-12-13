@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
-  <body>
-  <style>
-  html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
+<style>
+html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
 	pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins,
 	kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl,
 	dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
@@ -17,8 +16,12 @@
 	font: inherit;
 	vertical-align: baseline;
 }
+#tab3 {
+	align-items: center;
+	justify-content: center;
+}
 
-h1, .h1, br {	
+h1, .h1, br {
 	font-size: 2.5rem;
 	color: black !important;
 }
@@ -68,93 +71,92 @@ button {
 .item-element {
 	font-size: 50px;
 	color: brown;
-}  
-  #tabs{
-  overflow: hidden;
-  width: 1500px; /* 01.탭부분 전체의 넓이 입니다. */
-  margin: 0 auto;
-  margin-bottom:40px;
-  padding-left:250px; /* 02.탭 메뉴를 중앙정렬할때 왼쪽 패딩값으로 조절해 맞춥니다*/
-  list-style: none;
 }
 
-#tabs li{
-  float: left;
-  margin: 0 80px 0 0; /* 03.탭메뉴 사이사이의 간격을 조정합니다 */
+#tabs {
+	overflow: hidden;
+	width: 1500px; /* 01.탭부분 전체의 넓이 입니다. */
+	margin: 0 auto;
+	margin-bottom: 40px;
+	padding-left: 250px; /* 02.탭 메뉴를 중앙정렬할때 왼쪽 패딩값으로 조절해 맞춥니다*/
+	list-style: none;
+
+
 }
 
+#tabs li {
+	float: left;
+	margin: 0 80px 0 0; /* 03.탭메뉴 사이사이의 간격을 조정합니다 */
+}
 
 /*비활성화 탭(기본 탭모양) 설정*/
-#tabs a{ 
-  position: relative;
-  width:250px; 
-  height:50px; /* 04.탭메뉴 하나의 넓이와 높이 */
-/*   background: #CCC; */
-  float: left;
-  text-decoration: none;
-  text-align:center;
-  font-size:14pt; /* 05.탭메뉴 폰트사이즈 */
-  line-height:50px; /* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
-  color: #444;
+#tabs a {
+	position: relative;
+	width: 250px;
+	height: 50px; /* 04.탭메뉴 하나의 넓이와 높이 */
+	/*   background: #CCC; */
+	float: left;
+	text-decoration: none;
+	text-align: center;
+	font-size: 14pt; /* 05.탭메뉴 폰트사이즈 */
+	line-height: 50px;
+	/* 06.텝메뉴 폰트를 세로중앙정렬 맞추기위해 -> 04.탭메뉴 높이와 같은 값을 입력해주세요 */
+	color: #444;
 }
 
-#tabs a:hover,
-#tabs a:hover::after,
-#tabs a:focus,
-#tabs a:focus::after{
-  /*background: #fff;*/
+#tabs a:hover, #tabs a:hover::after, #tabs a:focus, #tabs a:focus::after
+	{
+	/*background: #fff;*/
+	
 }
 
-#tabs a:focus{
-  /*outline: 0;*/
+#tabs a:focus {
+	/*outline: 0;*/
+	
 }
 
-#tabs a::after{
-  z-index: 1;
-  background: #fff; 
+#tabs a::after {
+	z-index: 1;
+	background: #fff;
 }
 
 /*활성화탭(탭 클릭했을때 모양) 설정*/
-#tabs #current a,
-#tabs #current a::after{ 
-  background:#fff; /* 07.탭메뉴 색상 설정 */
-  z-index: 3;
+#tabs #current a, #tabs #current a::after {
+	background: #fff; /* 07.탭메뉴 색상 설정 */
+	z-index: 3;
 }
 
 /* ------------------------------------------------- */
 
 /*컨텐츠 부분*/
-#content
-{
-    background: #fff;
-	width:1500px;
+#content {
+	background: #fff;
+	width: 1500px;
 	height: 850px; /* 08.컨텐츠 넓이와 높이 */
-	padding:100px; /* 09.컨텐츠 안쪽 여백 설정 */
+	padding: 100px; /* 09.컨텐츠 안쪽 여백 설정 */
 	position: relative;
-	z-index: 2;	
-    -moz-border-radius: 0 10px 10px 10px;
-    -webkit-border-radius: 0 10px 10px 10px;
+	z-index: 2;
+	-moz-border-radius: 0 10px 10px 10px;
+	-webkit-border-radius: 0 10px 10px 10px;
 }
 
-#content h2, #content h3, #content p
-{
-    margin: 0 0 50px 0;
+#content h2, #content h3, #content p {
+	margin: 0 0 50px 0;
 }
 
 /* ------------------------------------------------- */
-
-#about
-{
-    color: #999;
+#about {
+	color: #999;
 }
 
-#about a
-{
-    color: #eee;
+#about a {
+	color: #eee;
 }
-  
-  </style>
-  <script>
+</style>
+
+<body>
+
+<script>
 $(document).ready(function() {
 	$("#content div").hide(); // Initially hide all content
 	$("#tabs li:first").attr("id","current"); // Activate first tab
@@ -169,92 +171,100 @@ $(document).ready(function() {
     });
 })();
 </script>
-<script>
+	<script>
 function moveorder(itemid) {
 	var custid = '[[${session.logincust.custid}]]';
 		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
 }
 </script>
- 
-    
-    <section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate pb-5 text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-3 bread">InstructorDetail</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-    <br>
-    <br>
-    <div class="section" th:each="i:${ins}">
-      <div class="container">
-        <div class="row justify-content-between">
-          <div class="col-lg-7">
-            <div class="img-property-slide-wrap">
-              <div class="img-property-slide">
- 				<img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'" style="width:80%; height:700px; " alt="" >
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5">
-          <br><br>
-            <h2 class="heading text-primary" th:text="${i.instructorname}"></h2>
-            <h5 class="mb-3 bread" th:text="${i.instructorcon}" ></h5>
-<!--             <h5 class="mb-3 bread" th:text="${fd.facilityaddr}" ></h5> -->
-            <h5 class="mb-3 bread" th:text="${i.instructoremail}" ></h5>
-            <h5 class="mb-3 bread" th:text="${i.instructorphone}" ></h5>
-                <ul class="list-unstyled social dark-hover d-flex" style="font-size:30px;" >
-                  <li class="me-1">
-                    <a href="https://www.instagram.com/7lsehdwns/"><span class="icon-instagram" ></span></a>
-                  </li>
-                </ul>
-       <br>
-       <div>         
-           <h2 class="heading text-primary">&ensp;이용상품</h2>
-       </div>   
-           <tr >
-			<td th:each="it:${list1}">
-				<button th:onclick="moveorder([[${it.itemid}]]);" class="button"
-					id="btn">
-					<div id="itemname" th:text="${it.itemname}"></div>
-					<div style="display: none;" id="itemid" th:text="${it.itemid}"></div>
-					<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
-				</button>
-			</td>
 
-		</tr>
+
+	<section class="hero-wrap hero-wrap-2 ftco-degree-bg js-fullheight"
+		style="background-image: url('images/bg_1.jpg');"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div
+				class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+				<div class="col-md-9 ftco-animate pb-5 text-center">
+					<p class="breadcrumbs">
+						<span class="mr-2"><a th:href="@{/index}">Home <i
+								class="ion-ios-arrow-forward"></i></a></span> <span>About us <i
+							class="ion-ios-arrow-forward"></i></span>
+					</p>
+					<h1 class="mb-3 bread">InstructorDetail</h1>
+				</div>
+			</div>
 		</div>
+	</section>
+	<br>
+	<br>
+	<div class="section" th:each="i:${ins}">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-lg-7">
+					<div class="img-property-slide-wrap">
+						<div class="img-property-slide">
+							<img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"
+								style="width: 80%; height: 700px;" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<br>
+					<br>
+					<h2 class="heading text-primary" th:text="${i.instructorname}"></h2>
+					<h5 class="mb-3 bread" th:text="${i.instructorcon}"></h5>
+					<!--             <h5 class="mb-3 bread" th:text="${fd.facilityaddr}" ></h5> -->
+					<h5 class="mb-3 bread" th:text="${i.instructoremail}"></h5>
+					<h5 class="mb-3 bread" th:text="${i.instructorphone}"></h5>
+					<ul class="list-unstyled social dark-hover d-flex"
+						style="font-size: 30px;">
+						<li class="me-1"><a
+							href="https://www.instagram.com/7lsehdwns/"><span
+								class="icon-instagram"></span></a></li>
+					</ul>
+					<br>
 
-              </div>
-            </div>
-          </div>
-          <br> <br>
-          <ul id="tabs">
-    <li><a href="#" title="tab1">이력</a></li>
-    <li><a href="#" title="tab2">수상</a></li>
-    <li><a href="#" title="tab3">시간표</a></li>    
-</ul>
+				</div>
 
-<div id="content" th:each="i:${ins}" style="padding:0px 0px 0px 0px;"> 
-    <div id="tab1" style="padding:0px 0px 0px 400px;">
-        <img th:src="@{/fimages/}+${i.instructorimg2}+'.jpg'" style="width:50%; height:400px; " alt="" >
-    </div>
-    <div id="tab2" style="padding:50px 0px 0px 400px;">
-		<img th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'" style="width:40%; height:300px; " alt="" > 
-    </div>
-    <div id="tab3">
-      
-    </div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<ul id="tabs">
+		<li><a href="#" title="tab1">이력</a></li>
+		<li><a href="#" title="tab2">수상</a></li>
+		<li><a href="#" title="tab3">PT가격</a></li>
+	</ul>
 
-</div>
-          
- 
+	<div id="content" style="padding: 0px 0px 0px 0px;">
+		<div id="tab1" style="padding: 0px 0px 0px 400px;">
+			<img th:each="i:${ins}" th:src="@{/fimages/}+${i.instructorimg2}+'.jpg'"
+				style="width: 50%; height: 400px;" alt="">
+		</div>
+		<div id="tab2" style="padding: 50px 0px 0px 400px;" >
+			<img th:each="i:${ins}" th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'"
+				style="width: 40%; height: 300px;" alt="">
+		</div>
+		<div id="tab3" style="padding: 50px 0px 0px 400px;" class="section" >
+			<table>	
+				<tr>
+					<td th:each="it:${list1}" >
+						<button th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
+							<div id="itemname" th:text="${it.itemname}"></div>
+							<div style="display: none;" id="itemid" th:text="${it.itemid}"></div>
+							<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
+						</button>
+					</td>
+				</tr>
+		</table>
+		</div>
+	</div>
 
-  </body>
-  
+
+</body>
+
 
 </html>

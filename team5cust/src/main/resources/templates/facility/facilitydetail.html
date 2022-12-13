@@ -176,7 +176,12 @@ button {
   }
 
 </style>
-
+<script>
+function moveorder(itemid) {
+	var custid = '[[${session.logincust.custid}]]';
+		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
+}
+</script>
 <body>
 
 
@@ -196,6 +201,7 @@ $(document).ready(function(){
      getdata(fid);
       
 });
+
 function display(data){
    
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
