@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AdminDTO;
+import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.AdminService;
+import com.multi.service.FacilityService;
 import com.multi.service.SchedulesService;
 
 
@@ -28,6 +29,8 @@ public class MainController {
 	@Autowired
 	SchedulesService schedulesservice;
 	
+	@Autowired
+	FacilityService facilityservice;
 	
 	@RequestMapping("/index")
 	public String index(Model model,String id) {
@@ -78,6 +81,20 @@ public class MainController {
 	
 	@RequestMapping("/insregisterimpl")
 	public String insregisterimpl(Model model,InstructorDTO ins) {
+		FacilityDTO fac=null;
+		String imgname = ins.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
+		ins.setInstructorimg(imgname);
+		imgname=ins.getImg2().getOriginalFilename();
+		ins.setInstructorimg2(imgname);
+		imgname=ins.getImg3().getOriginalFilename();
+		ins.setInstructorimg3(imgname);
+		try {
+			fac=facilityservice.selectaddr(ins.getAddr());
+			ins.setFacilityid(fac.getFacilityid());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(ins);
 		model.addAttribute("status", "1");
 		model.addAttribute("center", "register");

@@ -14,4 +14,5 @@ public interface FacilityMapper extends MyMapper<Integer,FacilityDTO>{
 	public List<FacilityDTO> selectFacilityAll(int facilityid) throws Exception;
 	public List<FacilityDTO> viewFacilityName(int instructorid) throws Exception;
 	public List<FacilityDTO> searchFacility(String txt)throws Exception;
+	public FacilityDTO selectaddr(String addr)throws Exception;
 }

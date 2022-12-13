@@ -80,7 +80,6 @@ public class FacilityController {
 		if(pageNo == null) {
 			pageNo = 1;
 		}
-		
 		int startIndex = amount * (pageNo - 1);
 		int endIndex = 0;
 		int cnt = 0;

@@ -2,10 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 
-<style>			    			 	    	
-	                   
-    </style>
-
 <script>
 var currentPage = 0;
 var totalData = 0;
@@ -33,6 +29,7 @@ function GetTarget(j){
 		},
 		method:'GET',
 		success: function(result){
+			console.log(result);
 			$('#div_trainer_row').empty();
 			$('#div_trainer_row').append(result);
 			currentPage = j;
@@ -46,12 +43,6 @@ function GetTarget(j){
 			location.href='/facility?pageNo=' + j + '&cateid=' + cateid;
 		}
 	});
-	history.pushState({
-		data:'/facility/facilitypage',
-		pageNo: j
-	}, // state
-	null, // title
-	'/facility?pageNo=' + j + '&cateid=' + cateid); // url
 }
 
 	
@@ -66,11 +57,6 @@ function GetTarget(j){
 		
 		calcPage(currentPage);
 	}
-
-
-	
-
-
 
 	$(document).ready(function(){
 	$('#search_btn2').click(function(){
@@ -122,8 +108,12 @@ function GetTarget(j){
 
           </div>
           </div>
-		<div id="div_trainer_row">
-    		<div th:replace = "${facilitylist} ? ${facilitylist} : facilitylist"></div>
+          <div class="container">
+        	  <div class="row">
+				<div id="div_trainer_row" >
+    				<div th:replace = "${facilitylist} ? ${facilitylist} : facilitylist" ></div>
+       		   </div>
+			</div>
 		</div>
 		<div class="row mt-5">
 					<div class="col text-center">
