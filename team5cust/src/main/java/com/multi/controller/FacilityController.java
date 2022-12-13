@@ -5,13 +5,16 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
 import com.multi.dto.CustDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.FacilityPage;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.ItemDTO;
 import com.multi.dto.ReviewDTO;
@@ -40,25 +43,100 @@ public class FacilityController {
 	
 	@Autowired
 	ItemMapper mapper;
+	
+	@Value("10")
+	private int amount;
+	
+	@ModelAttribute("amount")
+	public int addAmount() {
+		return amount;
+	}
 
 	
-
+	/*
+	 * @RequestMapping("/facility") public String main(Model m, Integer pageNo, int
+	 * cateid) {
+	 * 
+	 * if(pageNo == null) { pageNo = 1; }
+	 * 
+	 * int startIndex = amount * (pageNo - 1); int endIndex = 0; int cnt = 0;
+	 * 
+	 * try { List<FacilityDTO> list = fservice.selectFacilityAll(cateid); cnt =
+	 * list.size();
+	 * 
+	 * if(cnt - startIndex < amount) { endIndex = startIndex + (cnt % amount); }else
+	 * { endIndex = startIndex + amount; }
+	 * 
+	 * list = list.subList(startIndex, endIndex); m.addAttribute("facilitylist",
+	 * list); } catch (Exception e) { e.printStackTrace(); };
+	 * m.addAttribute("currentPage", pageNo);
+	 * 
+	 * return "index"; }
+	 */
 	
 	@RequestMapping("/facility")
-	public String facility(Model model,int cateid) {
+	public String facility(Model model,int cateid,Integer pageNo) {
 		CateDTO cate = null;
 		List<FacilityDTO> fac = null;
+		if(pageNo == null) {
+			pageNo = 1;
+		}
+		
+		int startIndex = amount * (pageNo - 1);
+		int endIndex = 0;
+		int cnt = 0;
 		
 		try {
 			cate = cservice.get(cateid);
 			model.addAttribute("cate", cate);
 			model.addAttribute("center","facility/health");
 			fac = fservice.selectFacilityAll(cateid);
+			cnt=fac.size();
 			model.addAttribute("facilitylist", fac);
+			if(cnt - startIndex < amount) {
+				endIndex = startIndex + (cnt % amount);
+			}else {
+				endIndex =  startIndex + amount;
+			}
+			
+			fac = fac.subList(startIndex, endIndex);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		model.addAttribute("currentPage", pageNo);
+		return "index";
+	}
+	
+	@RequestMapping("/facilitypage")
+	public String findPage(Model model, int pageNo, int cateid) {
+		List<FacilityDTO> fac = null;
+		CateDTO cate = null;
+		int startIndex = amount * (pageNo - 1);
+		int endIndex = 0;
+		int cnt = 0;
+		
+		try {
+			cate = cservice.get(cateid);
+			fac = fservice.selectFacilityAll(cateid);
+			cnt = fac.size();
+			model.addAttribute("cate", cate);
+			model.addAttribute("center","facility/health");
+			if(cnt - startIndex < amount) {
+				endIndex = startIndex + (cnt % amount);
+			}else {
+				endIndex =  startIndex + amount;
+			}
+			
+			fac = fac.subList(startIndex, endIndex);
+			model.addAttribute("facilitylist", fac);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalData", cnt);
 		return "index";
 	}
 	
@@ -134,11 +212,7 @@ public class FacilityController {
 		return "index";
 	}
 	
-	/*
-	 * @RequestMapping("/reviewupdate") public String reviewupdate(Model
-	 * model,FacilityDTO facility, ReviewDTO review, HttpSession session) { try {
-	 * rservice.modify(review); session.setAttribute("review",review); } catch
-	 * (Exception e) { e.printStackTrace(); } return
-	 * "redirect:facilitydetail?id="+facility.getFacilityid(); }
-	 */
 }
+
+	
+
