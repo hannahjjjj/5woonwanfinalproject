@@ -38,6 +38,7 @@ var status = "[[${registatus}]]";
 	}
 	$('#register').click(function(){
 		$('#register_form').attr({
+			'enctype':'multipart/form-data',
 			'action':'[[@{/insregisterimpl}]]',
 			'method':'post'
 		});
@@ -189,12 +190,12 @@ function sample6_execDaumPostcode() {
                               </div>
                          </div>
                         <div class="form-group">
-						<label class="col-sm-2 col-sm-2 control-label">주소</label>
+						<label class="col-sm-2 col-sm-2 control-label">시설 주소</label>
 							<div class="col-sm-10">
 							<input type="text" id="sample6_postcode" placeholder="우편번호" name="postno">
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 							<input type="text" id="sample6_address" placeholder="주소" name="addr"><br>
-							<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addr">
+							<input type="text" id="sample6_detailAddress" placeholder="상세주소">
 							<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 							</div>
                       	</div>
@@ -220,21 +221,21 @@ function sample6_execDaumPostcode() {
 						</div>
                           
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">강사 사진 1</label>
+                              <label class="col-sm-2 col-sm-2 control-label">강사 프로필 사진 </label>
                               <div class="col-sm-10">
-                                  <input type="file" class="form-control round-form" id="instructorimg" name="instructorimg" >
+                                  <input type="file" class="form-control round-form" id="img1" name="img1" >
                               </div>
                          </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">강사 사진 2</label>
+                              <label class="col-sm-2 col-sm-2 control-label">강사 이력 사진 </label>
                               <div class="col-sm-10">
-                                  <input type="file" class="form-control round-form" id="instructorimg2" name="instructorimg2">
+                                  <input type="file" class="form-control round-form" id="img2" name="img2">
                               </div>
                          </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">강사 사진 3</label>
+                              <label class="col-sm-2 col-sm-2 control-label">강사 수상 사진 </label>
                               <div class="col-sm-10">
-                                  <input type="file" class="form-control round-form" id="instructorimg3" name="instructorimg3">
+                                  <input type="file" class="form-control round-form" id="img3" name="img3">
                               </div>
                          </div>
                       </form>

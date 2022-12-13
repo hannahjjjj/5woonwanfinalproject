@@ -2,30 +2,6 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 
-<style>			    			 	    	
-
-		/* [html, body 영역 스타일 지정] */
-		html, body{
-			width : 100%;
-			height : 100%;
-			margin : 0;
-			padding : 0;
-			border : none;	
-			overflow : auto;				
-		}		
-		
-		/* [body 스크롤바 메인 스타일 지정] */
-		body::-webkit-scrollbar {
-			width: 10px;
-			background-color: #c1c1c1;
-		}
-		/* body 스크롤바 thumb 스타일 지정 */
-		body::-webkit-scrollbar-thumb {		
-			background-color: #444444;
-		}
-		      				                          
-    </style>
-
 <script>
 var currentPage = 0;
 var totalData = 0;
@@ -53,6 +29,7 @@ function GetTarget(j){
 		},
 		method:'GET',
 		success: function(result){
+			console.log(result);
 			$('#div_trainer_row').empty();
 			$('#div_trainer_row').append(result);
 			currentPage = j;
@@ -62,15 +39,10 @@ function GetTarget(j){
 			last = pageGroup * pageSize;
 			veryLast = totalPages;
 
-			calcPage();
+			calcPage(j);
+			location.href='/facility?pageNo=' + j + '&cateid=' + cateid;
 		}
 	});
-	history.pushState({
-		data:'/facility/facilitypage',
-		pageNo: j
-	}, // state
-	null, // title
-	'/health?pageNo=' + j + '&cateid=' + cateid); // url
 }
 
 	
@@ -83,13 +55,8 @@ function GetTarget(j){
 		last = pageGroup * pageSize;
 		veryLast = totalPages;
 		
-		calcPage();
+		calcPage(currentPage);
 	}
-
-
-	
-
-
 
 	$(document).ready(function(){
 	$('#search_btn2').click(function(){
@@ -141,8 +108,12 @@ function GetTarget(j){
 
           </div>
           </div>
-		<div id="div_trainer_row">
-    		<div th:replace = "${facilitylist} ? ${facilitylist} : facilitylist"></div>
+          <div class="container">
+        	  <div class="row">
+				<div id="div_trainer_row" >
+    				<div th:replace = "${facilitylist} ? ${facilitylist} : facilitylist" ></div>
+       		   </div>
+			</div>
 		</div>
 		<div class="row mt-5">
 					<div class="col text-center">

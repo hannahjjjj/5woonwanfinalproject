@@ -1,5 +1,7 @@
 package com.multi.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,9 @@ public class InstructorDTO {
 	String instructorphone;
 	
 	// 가입을 위한 번호
-	
+	private MultipartFile img1;
+	private MultipartFile img2;
+	private MultipartFile img3;
 	String aid;
 	String password;
 	String addr;

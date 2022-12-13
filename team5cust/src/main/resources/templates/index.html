@@ -166,10 +166,9 @@
   <script th:src="@{/js/bootstrap.min.js}"></script>
   <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
   <script>
-  function calcPage(){
+  function calcPage(currentPage){
 		var pages = $('#pages');
 		pages.empty();
-		
 		if(currentPage <= 0){
 			currentPage = 1;
 		}
@@ -192,7 +191,7 @@
 		if(first > 1){
 			pages.append('<li><a  onclick="GetTarget('+ first +');"><</a></li>');
 		}
-		
+	
 		// 페이지 숫자
 		for (var j = first; j <= last; j++) {
 			
