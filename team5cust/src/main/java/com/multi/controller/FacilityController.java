@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CateDTO;
 import com.multi.dto.CustDTO;
 import com.multi.dto.FacilityDTO;
-import com.multi.dto.FacilityPage;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.ItemDTO;
 import com.multi.dto.ReviewDTO;
