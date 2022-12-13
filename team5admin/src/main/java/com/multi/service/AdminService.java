@@ -54,6 +54,12 @@ public class AdminService implements MyService<String,AdminDTO>{
 	public List<AdminDTO> genderratio(String id) throws Exception{ 
 		return mapper.genderratio(id);
 	}
+	public List<AdminDTO> insnewcust(String id) throws Exception{ 
+		return mapper.insnewcust(id); 
+	}
+	public List<AdminDTO> insgenderratio(String id) throws Exception{ 
+		return mapper.insgenderratio(id);
+	}
 
 }
 	
