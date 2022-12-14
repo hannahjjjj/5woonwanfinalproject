@@ -247,7 +247,7 @@
                       </a>
                       <ul class="sub" th:if="${session.loginadmin != null}">
                           <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/general}">회원 관리</a></li>
-                          <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_register}">시설 등록</a></li>
+                          <!-- <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_register}">시설 등록</a></li> -->
                           <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_update}">시설 수정</a></li>
                           <li th:if="${session.loginadmin.grade==1}"><a th:href="@{/todo_list}">리뷰 관리</a></li>
                           <li th:if="${session.loginadmin.grade!=1}and${session.loginadmin.grade==2}"><a th:href="@{/schedules(id=${session.loginadmin.aid})}">스케줄 관리</a></li>
@@ -260,13 +260,13 @@
       </aside>
       <!--sidebar end-->
       
-      <div th:insert = "${center} ? ${center} : maincenter"></div>
+      <div th:insert = "${center} ? ${center} : login"></div>
       <!--main content end-->
 
       <!--footer start-->
       <footer class="site-footer" >
           <div class="text-center">
-              2014 - Alvarez.is
+              2022 - Alvarez.is
               <a th:href="@{/index#}" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>

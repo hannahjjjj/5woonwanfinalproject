@@ -107,8 +107,9 @@ public class MainController {
 
 	@RequestMapping("/logout")
 	public String logout(Model model,HttpSession session) {
-			
+			System.out.println(session);
 			if(session != null) {
+				System.out.println("이거탐?");
 				session.invalidate();
 			}
 			return "index";
