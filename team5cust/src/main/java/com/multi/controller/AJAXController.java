@@ -226,22 +226,24 @@ public class AJAXController {
 		return result;
 	}
 	
+
 	@RequestMapping("/checkorder") //리뷰작성용
-		public String checkorder(String custid, int itemid , int instructorid) {
-		InstructorDTO ins =null;
-		ItemDTO item=null;
-		FacilityDTO fac=null;
-		try {
-			ins=insservice.get(instructorid);
-			item=itemservice.get(itemid);
-			/*
-			 * fac=fservice. OrdersDTO orders=new OrdersDTO(0, itemid, custid, instructorid,
-			 * ins.getFacilityid(), null, item.getItemname(),item.getItemprice() ,
-			 * item.getCounting(), item.getPeriod(), ins.getInstructorname(), facilityname);
-			 */			} catch (Exception e) {		
+		public String checkorder(String custid, int facilityid) {
+			int orderid=0;
+			String orderid1 = Integer.toString(orderid);
+			String result = null;
+			try {
+				orderid1 = oservice.checkorder(custid, facilityid);
+				if(orderid1 != null) {
+					result="1";
+				}else {
+					result="0";
+				}
+
+			} catch (Exception e) {		
 				e.printStackTrace();
 			}
-			return "";
+			return result;
 		}
 
 }

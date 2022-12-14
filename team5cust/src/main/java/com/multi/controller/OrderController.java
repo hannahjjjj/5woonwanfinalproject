@@ -102,7 +102,7 @@ public class OrderController {
 	//		OrdersDTO order = new OrdersDTO(0, itemid, id, day,item_name,price,count,instructor_name);
 	//		oservice.register(order);
 			list = iservice.get(itemid);
-			in = inservice.get();
+//			in = inservice.get;
 			int ordernum=oservice.getordernum();
 			cust=cservice.get(custid);
 			
