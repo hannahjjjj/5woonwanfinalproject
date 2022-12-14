@@ -182,7 +182,8 @@ button {
 <script>
   function moveorder(itemid) {
 	 var custid = $('input[name="custid"]').val();
-		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid+ '&[[@{instructorid=}]]'+0;
+	 var facilityid="[[${facilitydetail.facilityid}]]";
+	location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid+ '&[[@{instructorid=}]]'+0+"&[[@{facilityid=}]]"+facilityid;
 }
  
 </script>
@@ -444,7 +445,7 @@ marker.setMap(map);
       
              <div class="agent" >
                <div class="img">
-                <a th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"style="width:80%; height:400px;"alt="" ></a>
+                <a th:href="@{/instructordetail(instructorid=${ins.instructorid},facilityid=${facilitydetail.facilityid})}"><img th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"style="width:80%; height:400px;"alt="" ></a>
              </div>
              
              <div class="desc">

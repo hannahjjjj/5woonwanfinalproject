@@ -48,7 +48,6 @@ public class OrderController {
 		int itemprice = order.getItem_price();
 		int counting = order.getCounting();
 		String instructorname = order.getInstructor_name();
- 		System.out.println(order);
 		try {
 			int instructorid = inservice.selectname(instructorname);
 			OrdersDTO or = new OrdersDTO(1,itemid, custid,instructorid,0,odate,itemname,itemprice,counting,0,instructorname,null);
@@ -72,7 +71,6 @@ public class OrderController {
 //
 //			list = iservice.get();
 			list = oservice.orderall(id);
-			System.out.println(list);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "orderdetail");
 
@@ -84,7 +82,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insert(Model model, int itemid, String custid, int instructorid) {
+	public String insert(Model model, int itemid, String custid, int instructorid,int facilityid) {
 		ItemDTO list = null;
 		CustDTO cust =null;
 		InstructorDTO in = new InstructorDTO(0, 0, null, null, null, null, null, null, null);
@@ -110,7 +108,7 @@ public class OrderController {
 			model.addAttribute("in", in);
 			model.addAttribute("cust", cust);
 			model.addAttribute("ordernum", ordernum+1);
-			
+			model.addAttribute("facilityid", facilityid);
 			model.addAttribute("center", "insert");
 			
 		} catch (Exception e) {

@@ -19,7 +19,7 @@ import com.multi.service.FacilityService;
 	void contextLoads() {
 		FacilityDTO facility = null;
 		try {
-			facility = service.get(100);
+			facility = service.getfacilityid(100);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

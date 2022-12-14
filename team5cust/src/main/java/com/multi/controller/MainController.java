@@ -107,9 +107,7 @@ public class MainController {
 
 	@RequestMapping("/logout")
 	public String logout(Model model,HttpSession session) {
-			System.out.println(session);
 			if(session != null) {
-				System.out.println("이거탐?");
 				session.invalidate();
 			}
 			return "index";
@@ -151,7 +149,6 @@ public class MainController {
 			e.printStackTrace();
 		}
 			model.addAttribute("center","search");
-			System.out.println(txt);
 			return "index";
 	}
 	
@@ -165,7 +162,6 @@ public class MainController {
 	
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model model, CustDTO cust) {
-//		System.out.println(cust);
 		try {
 			custservice.register(cust);
 			model.addAttribute("center","login");
