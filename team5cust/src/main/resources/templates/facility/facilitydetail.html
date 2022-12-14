@@ -180,11 +180,11 @@ button {
 
 </style>
 <script>
-function moveorder(itemid) {
-	var custid = $('input[name="custid"]').val();
+  function moveorder(itemid) {
+	 var custid = $('input[name="custid"]').val();
 		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
 }
-
+ 
 </script>
 <body>
 
@@ -328,6 +328,7 @@ marker.setMap(map);
 	
 	 $(document).ready(function() {
 		$('#review_btn').click(function() {
+			
 			var custid = $('input[name="custid"]').val();
 			var facilityid = $('input[name="facilityid"]').val();	
 			var rate = $('input[name="rate"]:checked').val();
@@ -356,9 +357,11 @@ marker.setMap(map);
 				},
 				success : function(data) {
 					review(data);
+					
 				}
+				
 			})
-		});
+		 });
 	 });
 
 
@@ -464,6 +467,8 @@ marker.setMap(map);
           </div>
           <br>
           <div class="container4" id="container4">
+         
+         
           <h4><strong>이용요금</strong></h4>
           <br>
          <tr>
@@ -517,8 +522,8 @@ marker.setMap(map);
 		<ul class="review_list">
 		<li class="comment" th:each="r:${rlist}">
 		<div class="vcard bio mb-3">
-		<img src="/fimages/review.png" style="width:2%; height:2%; float:left;">
-		<h3 th:text="${r.custid}" style="font-weight:bolder;"></h3>
+		<img src="/fimages/review.png" style="width:1.5%; height:1.5%; float:left;">
+		<h6 th:text="${r.custid}" style="font-weight:bolder;"></h6>
 		</div>
 		
 		<div class="comment-body">
