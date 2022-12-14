@@ -243,21 +243,11 @@ public class AJAXController {
 			return result;
 		}
 	
-	@RequestMapping("/order") //리뷰작성용
-	public String order(String custid, int itemid,int instructorid) {
-			InstructorDTO ins =null;
-			ItemDTO item=null;
-			FacilityDTO fac=null;
-			System.out.println(custid);
-			System.out.println(itemid);
-			System.out.println(instructorid);
+	@RequestMapping("/order") 
+	public String order(String custid, int itemid,int instructorid,int facilityid) {
 			try {
-				fac=fservice.getfaclityid(instructorid);
-				ins=insservice.get(instructorid);
-				item=itemservice.get(itemid);
-				OrdersDTO orders =new OrdersDTO(0, itemid, custid, instructorid, fac.getFacilityid(), null, item.getItemname(), item.getItemprice(), item.getCounting(), item.getPeriod(), ins.getInstructorname(), fac.getFacilityname());
+				OrdersDTO orders =new OrdersDTO(0, itemid, custid, instructorid, facilityid, null, null, 0, 0, 0, null, null);
 				oservice.register(orders);
-				System.out.println(orders);
 				/*
 				 * fac=fservice. OrdersDTO orders=new OrdersDTO(0, itemid, custid, instructorid,
 				 * ins.getFacilityid(), null, item.getItemname(),item.getItemprice() ,

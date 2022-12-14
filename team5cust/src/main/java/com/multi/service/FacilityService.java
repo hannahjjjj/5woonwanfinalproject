@@ -52,8 +52,8 @@ public class FacilityService implements MyService<Integer, FacilityDTO>{
 	public List<FacilityDTO> viewFacilityName(int instructorid) throws Exception {
 		return mapper.viewFacilityName(instructorid);
 	}
-	public FacilityDTO getfaclityid(int instructorid) throws Exception {
-		return mapper.getfaclityid(instructorid);
+	public FacilityDTO getfacilityid(int instructorid) throws Exception {
+		return mapper.getfacilityid(instructorid);
 	}
 
 }

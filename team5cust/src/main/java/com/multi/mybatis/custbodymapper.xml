@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</update>
 
 	<insert id="insert" parameterType="CustbodyDTO">
-		INSERT INTO custbody VALUES (#{bodyinfoid},#{custid},NOW(),#{height},#{bodyfat},#{muscle},#{weight})
+		INSERT INTO custbody VALUES (#{bodyinfoid},#{custid},#{height},#{bodyfat},#{muscle},#{weight},NOW())
 	</insert>
 	
 	<delete id="delete" parameterType="Integer">

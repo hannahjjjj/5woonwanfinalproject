@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM facility WHERE facilityid=#{facilityid}
 	</delete>
-		<select id="getfaclityid" parameterType="Integer" resultType="Integer">
+		<select id="getfacilityid" parameterType="Integer" resultType="FacilityDTO">
 		SELECT facilityid FROM facility WHERE instructorid=#{instructorid}
 	</select>
 </mapper>

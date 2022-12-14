@@ -169,7 +169,7 @@ public class FacilityController {
 	}
 	
 	@RequestMapping("/instructordetail")
-	public String instructordetail(Model model,int instructorid,HttpSession session) {
+	public String instructordetail(Model model,int instructorid,HttpSession session,int facilityid) {
 		ItemDTO item = null;
 		InstructorDTO inst = null;
 		FacilityDTO facility = null;
@@ -184,6 +184,7 @@ public class FacilityController {
 			list1 = itservice.selectItemList(instructorid);
 			fac = fservice.viewFacilityName(instructorid);
 			ins = iservice.selectInstructorList(instructorid);
+			model.addAttribute("facilityid",facilityid);
 			model.addAttribute("instructordetail",item);
 			model.addAttribute("instructordetail",inst);
 			model.addAttribute("facilitydetail",facility);
@@ -191,7 +192,6 @@ public class FacilityController {
 			model.addAttribute("list1",list1);
 			model.addAttribute("facilitylist",fac);
 			model.addAttribute("ins",ins);
-			System.out.println(ins);
 			model.addAttribute("center","facility/instructordetail");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,7 +207,6 @@ public class FacilityController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(review);
 		
 		return "index";
 	}
