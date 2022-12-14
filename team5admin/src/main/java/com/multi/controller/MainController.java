@@ -40,8 +40,8 @@ public class MainController {
 	public String index(Model model,String id) {
 		AdminDTO admin = null;
 	    List<SchedulesDTO> list =null;
-		if(id==null) {
-			model.addAttribute("center", "index");
+		if(id.isEmpty()) {
+			model.addAttribute("center", "login");
 		}
 		else {
 			try {
@@ -152,27 +152,12 @@ public class MainController {
 		
 		return "index";
 	}
-	
-	@RequestMapping("/general")
-	public String general(Model model) {
-		model.addAttribute("center", "general");
-		return "index";
-	}
-	
-	@RequestMapping("/buttons")
-	public String buttons(Model model) {
-		model.addAttribute("center", "buttons");
-		return "index";
-	}
-	
-	@RequestMapping("/panels")
-	public String panels(Model model) {
-		model.addAttribute("center", "panels");
-		return "index";
-	}
-	@RequestMapping("/facility_register")
-	public String facility_register(Model model) {
-		model.addAttribute("center", "facility_register");
+	@RequestMapping("/todo_update")
+	public String facility_update(Model model) {
+		
+		
+		
+		model.addAttribute("center", "facility_update");
 		return "index";
 	}
 	

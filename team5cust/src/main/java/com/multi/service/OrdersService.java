@@ -53,6 +53,9 @@ public class OrdersService implements MyService<Integer, OrdersDTO> {
 	public String checkorder(String custid, int facilityid) throws Exception{
 		return mapper.checkorder(custid, facilityid);
 	}
+	public int getordernum() throws Exception{
+		return mapper.getordernum();
+	}
 	
 	// 주문상세 인서트할때
 //	fun insertUserData (user: User, hobby: Hobby) {

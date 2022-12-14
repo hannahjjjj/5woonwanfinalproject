@@ -19,6 +19,7 @@ public class OrdersDTO {
 	private int itemid;
 	private String custid;
 	private int instructorid;
+	private int facilityid;
 	private Date odate;
 
 	

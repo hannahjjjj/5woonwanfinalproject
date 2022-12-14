@@ -18,11 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.multi.dto.CustDTO;
 import com.multi.dto.CustbodyDTO;
 import com.multi.dto.FacilityDTO;
+import com.multi.dto.InstructorDTO;
+import com.multi.dto.ItemDTO;
+import com.multi.dto.OrdersDTO;
 import com.multi.dto.ReviewDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.CustService;
 import com.multi.service.CustbodyService;
 import com.multi.service.FacilityService;
+import com.multi.service.InstructorService;
+import com.multi.service.ItemService;
 import com.multi.service.OrdersService;
 import com.multi.service.ReviewService;
 import com.multi.service.SchedulesService;
@@ -48,6 +53,11 @@ public class AJAXController {
 	@Autowired
 	OrdersService oservice;
 	
+	@Autowired
+	InstructorService insservice;
+	
+	@Autowired
+	ItemService itemservice;
 	
 	@RequestMapping("/kakkologin")
 	public String kakkologin(String id,String name,String birthday,String email,String gender,HttpSession session) {
@@ -198,24 +208,21 @@ public class AJAXController {
 	}
 	
 	@RequestMapping("/checkorder") //리뷰작성용
-		public String checkorder(String custid, int facilityid) {
-			int orderid=0;
-			String orderid1 = Integer.toString(orderid);
-			String result = null;
-			try {
-				orderid1 = oservice.checkorder(custid, facilityid);
-				if(orderid1 != null) {
-					result="1";
-				}else {
-					result="0";
-				}
-				
-			} catch (Exception e) {		
+		public String checkorder(String custid, int itemid , int instructorid) {
+		InstructorDTO ins =null;
+		ItemDTO item=null;
+		FacilityDTO fac=null;
+		try {
+			ins=insservice.get(instructorid);
+			item=itemservice.get(itemid);
+			/*
+			 * fac=fservice. OrdersDTO orders=new OrdersDTO(0, itemid, custid, instructorid,
+			 * ins.getFacilityid(), null, item.getItemname(),item.getItemprice() ,
+			 * item.getCounting(), item.getPeriod(), ins.getInstructorname(), facilityname);
+			 */			} catch (Exception e) {		
 				e.printStackTrace();
 			}
-			System.out.println(result);
-			return result;
+			return "";
 		}
 
-	
 }

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.multi.mapper.OrdersMapper">
 	
 	<insert id="insert" parameterType="OrdersDTO">
-		INSERT INTO orders VALUES (NULL, #{itemid}, #{custid}, #{instructorid}, NOW())
+		INSERT INTO orders VALUES (NULL, #{itemid}, #{custid}, #{instructorid}, NOW(),#{facilityid})
 	</insert>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM orders WHERE orderid=#{orderid}
@@ -17,6 +17,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="selectAll" resultType="OrdersDTO">
 		SELECT * FROM orders
 	</select>
+	
+	<select id="getordernum" resultType="Integer">
+		SELECT * FROM orders
+		ORDER BY orderid DESC
+		LIMIT 1;
+	</select>
+	
 	<select id="select" parameterType="Integer" resultType="OrdersDTO">
 		SELECT * FROM orders WHERE orderid = #{orderid}
 	</select>

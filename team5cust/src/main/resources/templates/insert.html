@@ -45,41 +45,47 @@
 </style>
 
 <script>  
-	var amount=document.getElementById('itemprice').value;
-
 
 
   function requestPay() {
 	  var IMP = window.IMP;
 	  IMP.init('imp86716450');
-		alert(amount);
 	  IMP.request_pay({
 		    pg : 'kakaopay',
 		    pay_method : 'card', //생략 가능
-		    merchant_uid: "order_no_0003", // 상점에서 관리하는 주문 번호
-		    name : '주문명:결제테스트',
-		    amount : 15000,
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456'
+		    merchant_uid: "[[${ordernum}]]", // 상점에서 관리하는 주문 번호
+		    name : "[[${list.itemname}]]",
+		    amount : "[[${list.itemprice}]]",
+		    buyer_email : "[[${cust.email}]]",
+		    buyer_name : '[[${cust.custname}]]',
+		    buyer_tel : "[[${cust.contact}]]",
+		    buyer_addr : "[[${cust.addr}]]",
 		}, function(rsp) { // callback 로직
 			//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
-			console.log(rsp);
             if (rsp.success) {
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
+			$.ajax({
+				url:'[[@{/checkorder}]]', //아작스로 아이디를 사용가능한지 보는 기능
+				data:{
+					'cusid':custid,
+					'itemid':"[[${list.itemid}]]",
+					'instructorid':"[[${in.instructorid}]]"
+					}, //cid이름으로id데이터전달한다
+				success:function(result){
+					console.log(rsp);
+	                var msg = '결제가 완료되었습니다.';
+	                msg += '고유ID : ' + rsp.imp_uid;
+	                msg += '상점 거래ID : ' + rsp.merchant_uid;
+	                msg += '결제 금액 : ' + rsp.paid_amount;
+	                msg += '카드 승인번호 : ' + rsp.apply_num;
+				}
+			});
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
             }
             alert(msg);
 		});
-  }
+  	}
 </script>
 	
 <head>

@@ -15,4 +15,5 @@ public interface OrdersMapper extends MyMapper<Integer, OrdersDTO> {
 	public List<OrdersDTO> orderall(String custid) throws Exception;
 	public List<OrdersDTO> mymembership(String custid) throws Exception;
 	public String checkorder(String custid, int facilityid) throws Exception;
+	public int getordernum() throws Exception;
 }

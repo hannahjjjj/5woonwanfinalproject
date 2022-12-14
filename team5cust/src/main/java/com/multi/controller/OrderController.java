@@ -8,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.dto.CustDTO;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.ItemDTO;
 import com.multi.dto.OrdersDTO;
 import com.multi.dto.ReviewDTO;
+import com.multi.service.CustService;
+import com.multi.service.CustbodyService;
 import com.multi.service.InstructorService;
 import com.multi.service.ItemService;
 import com.multi.service.OrdersService;
@@ -33,6 +36,9 @@ public class OrderController {
 	@Autowired
 	InstructorService inservice;
 	
+	@Autowired
+	CustService cservice;
+	
 	@RequestMapping("/insertimpl")
 	public String insertimpl(Model model,OrdersDTO order,String custid) {
 		
@@ -45,7 +51,7 @@ public class OrderController {
  		System.out.println(order);
 		try {
 			int instructorid = inservice.selectname(instructorname);
-			OrdersDTO or = new OrdersDTO(1,itemid, custid,instructorid,odate,itemname,itemprice,counting,0,instructorname,null);
+			OrdersDTO or = new OrdersDTO(1,itemid, custid,instructorid,0,odate,itemname,itemprice,counting,0,instructorname,null);
 			oservice.register(or);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,14 +84,14 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insert(Model model, int itemid, String id) {
+	public String insert(Model model, int itemid, String custid) {
 		ItemDTO list = null;
 		String item_name = null;
 		String instructor_name = null;
 		int total_cnt, price, count = 0;
 		Date day=new Date();
+		CustDTO cust =null;
 		List<InstructorDTO> in = null;
-		
 		try {	
 //			ItemDTO item = iservice.get(itemid);
 //				itemid = item.getItemid();
@@ -97,8 +103,15 @@ public class OrderController {
 	//		oservice.register(order);
 			list = iservice.get(itemid);
 			in = inservice.get();
+			int ordernum=oservice.getordernum();
+			cust=cservice.get(custid);
+			
+			
 			model.addAttribute("list", list);
 			model.addAttribute("in", in);
+			model.addAttribute("cust", cust);
+			model.addAttribute("ordernum", ordernum+1);
+			
 			model.addAttribute("center", "insert");
 			
 		} catch (Exception e) {
