@@ -169,7 +169,7 @@ public class FacilityController {
 	}
 	
 	@RequestMapping("/instructordetail")
-	public String instructordetail(Model model,int instructorid) {
+	public String instructordetail(Model model,int instructorid,HttpSession session) {
 		ItemDTO item = null;
 		InstructorDTO inst = null;
 		FacilityDTO facility = null;
@@ -177,6 +177,7 @@ public class FacilityController {
 		List<FacilityDTO> fac = null;	
 		List<InstructorDTO> ins = null;
 		List<ReviewDTO> review = null;
+		CustDTO cust = (CustDTO) session.getAttribute("cust");
 		try {
 			item = itservice.get(instructorid);
 			inst = iservice.get(instructorid);

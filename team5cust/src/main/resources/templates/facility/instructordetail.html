@@ -239,21 +239,24 @@ function moveorder(itemid) {
 			<img th:each="i:${ins}" th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'"
 				style="width: 40%; height: 300px;" alt="">
 		</div>
-		<div id="tab3" style="padding: 50px 0px 0px 400px;" >
+		<div id="tab3" style="padding: 50px 0px 0px 400px;" >			
 			<table>	
-
+			<tr>
 					<td th:each="it:${list1}">
 						<button  th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
 							<b id="itemname" th:text="${it.itemname}"></b><br>
 							<b style="display: none;" id="itemid" th:text="${it.itemid}"></b>
 							<b id="itemprice" th:text="${it.itemprice} + '₩' "></b>
-
 						</button>
 					</td>
 				</tr>
-
-
 		</table>
+		
+		<div>
+		<form th:if="${session.logincust!=null}">
+		<input id="custid" name="custid" th:value=${session.logincust.custid} type="hidden">
+		</form>
+		</div>	
 
 		</div>
 	</div>
