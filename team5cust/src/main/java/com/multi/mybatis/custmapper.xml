@@ -17,12 +17,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</select>
 
 	<update id="update" parameterType="CustDTO">
-		UPDATE cust SET custpwd=#{custpwd},custname=#{custname},contact=#{contact},gender=#{gender},birth=#{birth},email=#{email},withdrawal=#{withdrawal},addr=${addr},membership=#{membership},expiration=#{expiration},custrdate=#{custrdate},kakkoid=#{kakkoid} 
+		UPDATE cust SET custpwd=#{custpwd},custname=#{custname},contact=#{contact},email=#{email} 
 		WHERE custid=#{custid}
 	</update>
  
 	<insert id="insert" parameterType="CustDTO">
-		INSERT INTO cust VALUES (#{custid},#{custpwd},#{custname},#{contact},#{gender},#{birth},#{email},NULL,NULL,NULL,NOW(),#{addr},#{postno},#{kakkoid})
+		INSERT INTO cust VALUES (#{custid},#{custpwd},#{custname},#{contact},#{gender},#{birth},#{email},#{withdrawal},#{membership},NULL,NOW(),#{addr},#{postno},#{kakkoid})
 	</insert>
 	
 	<delete id="delete" parameterType="CustDTO">

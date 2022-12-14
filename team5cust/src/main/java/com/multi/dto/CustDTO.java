@@ -15,18 +15,18 @@ import lombok.ToString;
 @ToString
 public class CustDTO {
 	//고객테이블 기본 컬럼
-	String custid;
-	String custpwd;
-	String custname;
-	String contact;
-	String gender;
-	String birth;
-	String email;
-	String withdrawal;
-	String membership;
-	String addr;
-	String postno;
-	Date expiration;
-	Date custrdate;
-	String kakkoid;
+	private String custid;
+	private String custpwd;
+	private String custname;
+	private String contact;
+	private String gender;
+	private String birth;
+	private String email;
+	private String withdrawal;
+	private String membership;
+	private String addr;
+	private String postno;
+	private Date expiration;
+	private Date custrdate;
+	private String kakkoid;
 }
