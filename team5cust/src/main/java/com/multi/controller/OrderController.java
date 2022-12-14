@@ -84,28 +84,27 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insert(Model model, int itemid, String custid) {
+	public String insert(Model model, int itemid, String custid, int instructorid) {
 		ItemDTO list = null;
-		String item_name = null;
-		String instructor_name = null;
-		int total_cnt, price, count = 0;
-		Date day=new Date();
 		CustDTO cust =null;
-		List<InstructorDTO> in = null;
+		InstructorDTO in = new InstructorDTO(0, 0, null, null, null, null, null, null, null);
 		try {	
 //			ItemDTO item = iservice.get(itemid);
 //				itemid = item.getItemid();
 //				item_name = item.getItemname();
 //				price = item.getItemprice();
 //				count = item.getCount();
-//				instructor_name = item.getInstructorname();
+//				instructor_name = item.getㅋ	Instructorname();
 	//		OrdersDTO order = new OrdersDTO(0, itemid, id, day,item_name,price,count,instructor_name);
 	//		oservice.register(order);
 			list = iservice.get(itemid);
-//			in = inservice.get;
+			if(instructorid==0) {
+				in.setInstructorid(0);
+			}else {
+				in = inservice.get(instructorid);
+			}
 			int ordernum=oservice.getordernum();
 			cust=cservice.get(custid);
-			
 			
 			model.addAttribute("list", list);
 			model.addAttribute("in", in);

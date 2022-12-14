@@ -162,8 +162,9 @@ $(document).ready(function() {
 <script>
  function moveorder(itemid) {
 	var custid = $('input[name="custid"]').val();
-	alert(custid);
-		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
+	var insid = "[[${ins[0].instructorid}]]";
+	alert(insid);
+		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid+'&[[@{instructorid=}]]' + insid;
 } 
 
 </script>

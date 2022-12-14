@@ -11,10 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import com.multi.dto.CustDTO;
 import com.multi.dto.CustbodyDTO;
@@ -22,7 +20,6 @@ import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.ItemDTO;
 import com.multi.dto.OrdersDTO;
-import com.multi.dto.ReviewDTO;
 import com.multi.dto.SchedulesDTO;
 import com.multi.service.CustService;
 import com.multi.service.CustbodyService;
@@ -245,5 +242,30 @@ public class AJAXController {
 			}
 			return result;
 		}
+	
+	@RequestMapping("/order") //리뷰작성용
+	public String order(String custid, int itemid,int instructorid) {
+			InstructorDTO ins =null;
+			ItemDTO item=null;
+			FacilityDTO fac=null;
+			System.out.println(custid);
+			System.out.println(itemid);
+			System.out.println(instructorid);
+			try {
+				fac=fservice.getfaclityid(instructorid);
+				ins=insservice.get(instructorid);
+				item=itemservice.get(itemid);
+				OrdersDTO orders =new OrdersDTO(0, itemid, custid, instructorid, fac.getFacilityid(), null, item.getItemname(), item.getItemprice(), item.getCounting(), item.getPeriod(), ins.getInstructorname(), fac.getFacilityname());
+				oservice.register(orders);
+				System.out.println(orders);
+				/*
+				 * fac=fservice. OrdersDTO orders=new OrdersDTO(0, itemid, custid, instructorid,
+				 * ins.getFacilityid(), null, item.getItemname(),item.getItemprice() ,
+				 * item.getCounting(), item.getPeriod(), ins.getInstructorname(), facilityname);
+				 */			
+				} catch (Exception e) {		
+				}
+				return "";
+	}
 
 }

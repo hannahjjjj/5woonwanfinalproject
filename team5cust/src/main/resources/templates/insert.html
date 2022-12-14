@@ -46,6 +46,9 @@
 
 <script>  
 
+      	var itemid="[[${list.itemid}]]";
+       	var instructorid="[[${in.instructorid}]]";
+      	var custid="[[${session.logincust.custid}]]"
 
   function requestPay() {
 	  var IMP = window.IMP;
@@ -63,27 +66,30 @@
 		}, function(rsp) { // callback 로직
 			//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
             if (rsp.success) {
-			$.ajax({
-				url:'[[@{/checkorder}]]', //아작스로 아이디를 사용가능한지 보는 기능
-				data:{
-					'cusid':custid,
-					'itemid':"[[${list.itemid}]]",
-					'instructorid':"[[${in.instructorid}]]"
-					}, //cid이름으로id데이터전달한다
-				success:function(result){
-					console.log(rsp);
-	                var msg = '결제가 완료되었습니다.';
-	                msg += '고유ID : ' + rsp.imp_uid;
-	                msg += '상점 거래ID : ' + rsp.merchant_uid;
-	                msg += '결제 금액 : ' + rsp.paid_amount;
-	                msg += '카드 승인번호 : ' + rsp.apply_num;
-				}
-			});
+            	alert( itemid+" ,"+instructorid);
+						console.log(rsp);
+		                var msg = '결제가 완료되었습니다.';
+		                msg += '고유ID : ' + rsp.imp_uid;
+		                msg += '상점 거래ID : ' + rsp.merchant_uid;
+		                msg += '결제 금액 : ' + rsp.paid_amount;
+		                msg += '카드 승인번호 : ' + rsp.apply_num;
+            alert(msg);
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
-            }
             alert(msg);
+                return;
+            }
+		});
+	  $.ajax({
+			url:'[[@{/order}]]', //아작스로 아이디를 사용가능한지 보는 기능
+			data:{
+				'cusid':custid,
+				'itemid':itemid,
+				'instructorid':instructorid
+				}, //cid이름으로id데이터전달한다
+			success:function(){
+			}
 		});
   	}
 </script>
