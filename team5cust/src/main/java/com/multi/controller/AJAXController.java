@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.multi.dto.CustDTO;
 import com.multi.dto.CustbodyDTO;
 import com.multi.dto.FacilityDTO;
@@ -58,6 +59,24 @@ public class AJAXController {
 	
 	@Autowired
 	ItemService itemservice;
+
+	@RequestMapping("/checkid")
+	public Object checkid(String cid) {
+		String result = "";
+		CustDTO cust = null;
+		try {
+			cust = custservice.get(cid);
+			if(cust!=null) {
+				result="f";
+			}else {
+				result="t";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+		}
 	
 	@RequestMapping("/kakkologin")
 	public String kakkologin(String id,String name,String birthday,String email,String gender,HttpSession session) {

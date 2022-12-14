@@ -363,10 +363,12 @@ public class MainController {
 		try {
 			custservice.modify(cust);
 			session.setAttribute("logincust", cust);
+			model.addAttribute("center","/cust/mypage");
+			model.addAttribute("custcenter","/cust/custdetail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:custdetail?id="+cust.getCustid();
+		return "redirect:mypage?id="+cust.getCustid();
 	}
 	
 	@RequestMapping("/custdeleteimpl")

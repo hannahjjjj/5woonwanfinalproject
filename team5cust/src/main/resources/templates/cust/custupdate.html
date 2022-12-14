@@ -1,5 +1,5 @@
 <meta charset="utf-8"> 
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <script>
 $(document).ready(function () {
 
@@ -12,6 +12,10 @@ $(document).ready(function () {
 			});
 
 			$('#cust_form').submit();
+			if (true){
+				var d = confirm('수정이 완료되었습니다.');	
+			}
+			else var d = confirm('다시 수정해주세요');
 	   	}else{
 		   return;
 	   	}
@@ -49,8 +53,9 @@ $(document).ready(function () {
 		    <div class="form-group">
 		      <label for="addr">이메일 주소:</label>
 		      <input type="text"  class="form-control" id="email" th:value="${custdetail.email}" name="email">
-		    </div>		    
-		  </form>
+		    </div>
+								
+		</form>
 		  <button id="update_btn" class="btn btn-default">UPDATE</button>
     </div>
 </div>

@@ -2,24 +2,12 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <style>
-html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
-	pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins,
-	kbd, q, s, samp, small, strike, sub, sup, tt, var, b, u, i, center, dl,
-	dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
-	tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
-	figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
-	section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
+
+
 #tab3 {
-	align-items: center;
-	justify-content: center;
+
 }
+
 
 h1, .h1, br {
 	font-size: 2.5rem;
@@ -53,8 +41,8 @@ button {
     overflow: hidden;  */
 	width: 250px;
 	height: 115px;
-	background: black;
-	color: white;
+	background: white;
+	color: black !important;
 	padding: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -64,9 +52,9 @@ button {
 }
 
 .button:hover {
-	background-color: rgba(0, 0, 0, .85);
+	background-color: white(0, 0, 0, .85);
 	cursor: pointer;
-}
+} 
 
 .item-element {
 	font-size: 50px;
@@ -93,7 +81,7 @@ button {
 #tabs a {
 	position: relative;
 	width: 250px;
-	height: 50px; /* 04.탭메뉴 하나의 넓이와 높이 */
+	height:rgb(255, 255, 128); /* 04.탭메뉴 하나의 넓이와 높이 */
 	/*   background: #CCC; */
 	float: left;
 	text-decoration: none;
@@ -116,7 +104,7 @@ button {
 }
 
 #tabs a::after {
-	z-index: 1;
+	z-index: 0;
 	background: #fff;
 }
 
@@ -171,11 +159,12 @@ $(document).ready(function() {
     });
 })();
 </script>
-	<script>
+<script>
 function moveorder(itemid) {
-	var custid = '[[${session.logincust.custid}]]';
+	var custid = $('input[name="custid"]').val();
 		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
 }
+
 </script>
 
 
@@ -196,6 +185,7 @@ function moveorder(itemid) {
 				</div>
 			</div>
 		</div>
+
 	</section>
 	<br>
 	<br>
@@ -206,18 +196,19 @@ function moveorder(itemid) {
 					<div class="img-property-slide-wrap">
 						<div class="img-property-slide">
 							<img th:src="@{/fimages/}+${i.instructorimg}+'.jpg'"
-								style="width: 80%; height: 700px;" alt="">
+								style="width: 70%; height: 700px;" alt="">
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-5">
 					<br>
 					<br>
-					<h2 class="heading text-primary" th:text="${i.instructorname}"></h2>
-					<h5 class="mb-3 bread" th:text="${i.instructorcon}"></h5>
+					<h1 class="heading text-primary" th:text="${i.instructorname}"></h1>
+					<br>
+					<h4 class="mb-3 bread" th:text="${i.instructorcon}"></h4>
 					<!--             <h5 class="mb-3 bread" th:text="${fd.facilityaddr}" ></h5> -->
-					<h5 class="mb-3 bread" th:text="${i.instructoremail}"></h5>
-					<h5 class="mb-3 bread" th:text="${i.instructorphone}"></h5>
+					<h4 class="mb-3 bread" th:text="${i.instructoremail}"></h4>
+					<h4 class="mb-3 bread" th:text="${i.instructorphone}"></h4>
 					<ul class="list-unstyled social dark-hover d-flex"
 						style="font-size: 30px;">
 						<li class="me-1"><a
@@ -248,20 +239,25 @@ function moveorder(itemid) {
 			<img th:each="i:${ins}" th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'"
 				style="width: 40%; height: 300px;" alt="">
 		</div>
-		<div id="tab3" style="padding: 50px 0px 0px 400px;" class="section" >
+		<div id="tab3" style="padding: 50px 0px 0px 400px;" >
 			<table>	
-				<tr>
-					<td th:each="it:${list1}" >
-						<button th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
-							<div id="itemname" th:text="${it.itemname}"></div>
-							<div style="display: none;" id="itemid" th:text="${it.itemid}"></div>
-							<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
+
+					<td th:each="it:${list1}">
+						<button  th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
+							<b id="itemname" th:text="${it.itemname}"></b><br>
+							<b style="display: none;" id="itemid" th:text="${it.itemid}"></b>
+							<b id="itemprice" th:text="${it.itemprice} + '₩' "></b>
+
 						</button>
 					</td>
 				</tr>
+
+
 		</table>
+
 		</div>
 	</div>
+
 
 
 </body>
