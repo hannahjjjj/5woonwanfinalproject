@@ -206,6 +206,7 @@ public class FacilityController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println(review);
 		
 		return "index";
 	}
