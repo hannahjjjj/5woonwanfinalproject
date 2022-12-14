@@ -22,6 +22,8 @@
 ### 시스템구성도
 ![파이널플젝 웹서버](https://user-images.githubusercontent.com/111735494/207484998-4676eaf6-e070-4874-8346-795ef076c13b.jpg)
 ### 수행도구
++ Back-end <br> 
++ Front-end <br><img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/>
 ### 프로젝트 UI
 ![슬라이드1](https://user-images.githubusercontent.com/111735494/207485168-cfda4dc5-8be5-404d-99a3-316bb2f6eb88.JPG)
 ### 데이터베이스 설계
@@ -62,10 +64,13 @@
 + 카카오맵 연동하여 시설 상세위치 표시
 ### 6-3. 이용권 구매
 + 결제 API를 통해 구매 가능
-### 7.강사 상세 페이지
+### 7. 강사 상세 페이지
 + 강사기본정보
 + 드롭다운형식으로 이력/수상/PT가격을 볼 수 있음
 ### 7-1.PT 신청 기능
 + PT가격에서 자신이 원하는 회원권 구매
 + 결제 API를 통해 결제
+### 8. 검색기능
++ 메인페이지에서 자신이 사는 동네를 검색
++ 시설페이지에서 좌측에 있는 검색창 이용 가능
 ## 관리자전용 PAGE
