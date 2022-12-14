@@ -8,7 +8,7 @@ html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
 	dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption,
 	tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
 	figure, figcaption, footer, header, hgroup, menu, nav, output, ruby,
-	section, summary, time, mark, audio, video {
+	section, summary, time, mark, audio, video{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -16,7 +16,7 @@ html, body, span, applet, object, iframe, h2, h3, h4, h5, h6, blockquote,
 	font: inherit;
 	vertical-align: baseline;
 }
-#tab3 {
+#tab3{
 	align-items: center;
 	justify-content: center;
 }
@@ -54,7 +54,7 @@ button {
 	width: 250px;
 	height: 115px;
 	background: black;
-	color: white;
+	color: white !important;
 	padding: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -171,7 +171,7 @@ $(document).ready(function() {
     });
 })();
 </script>
-	<script>
+<script>
 function moveorder(itemid) {
 	var custid = '[[${session.logincust.custid}]]';
 		location.href = '[[@{/insert?custid=}]]' + custid + '&[[@{itemid=}]]' + itemid;
@@ -248,18 +248,18 @@ function moveorder(itemid) {
 			<img th:each="i:${ins}" th:src="@{/fimages/}+${i.instructorimg3}+'.jpg'"
 				style="width: 40%; height: 300px;" alt="">
 		</div>
-		<div id="tab3" style="padding: 50px 0px 0px 400px;" class="section" >
+		<div id="tab3" style="padding: 50px 0px 0px 400px;" >
 			<table>	
-				<tr>
-					<td th:each="it:${list1}" >
-						<button th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
-							<div id="itemname" th:text="${it.itemname}"></div>
-							<div style="display: none;" id="itemid" th:text="${it.itemid}"></div>
-							<div id="itemprice" th:text="${it.itemprice} + '₩' "></div>
+				<tr >
+					<td th:each="it:${list1}">
+						<button  th:onclick="moveorder([[${it.itemid}]]);" class="button" id="btn">
+							<b id="itemname" th:text="${it.itemname}"></b><br>
+							<b style="display: none;" id="itemid" th:text="${it.itemid}"></b>
+							<b id="itemprice" th:text="${it.itemprice} + '₩' "></b>
 						</button>
 					</td>
 				</tr>
-		</table>
+			</table>
 		</div>
 	</div>
 
