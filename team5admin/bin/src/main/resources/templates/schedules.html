@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<link th:href="@{/assets/js/fullcalendar/bootstrap-fullcalendar.css}" rel="stylesheet" />
+	<link th:href="@{/assets/js/fullcalendar/main.css}" rel='stylesheet' />
+<script>
+function del(id){
+	    var c = confirm('예약을 취소 하시겠습니까?');
+	    if(c == true){
+	       location.href='[[@{/schedulues/delete?id=}]]'+id;
+	    }
+}
+function fix(id){
+	    var c = confirm('예약을 확정 하시겠습니까?');
+	    if(c == true){
+	       location.href='[[@{/schedulues/fix?id=}]]'+id;
+	    }
+}
+    var selectday;
+    function select_time(time){
+    	var id="[[${session.loginadmin.aid}]]";
+    	var insid="[[${insid}]]";
+    	var c =confirm('예약 하시겠습니까?');
+    	if(c==true){
+	    	$.ajax({
+	            url:"/scheduletime",
+	            data:{"id":id,
+	            	"time":time.value,
+	            	"selectday":selectday,
+	            	"insid":insid
+	          	  },
+	            Type:"post",
+	            success:function(){
+	            	alert("예약이 완료 되었습니다.")
+	            }
+	         });
+    	}
+    }
+    	
+    
+  	document.addEventListener('DOMContentLoaded', function() {
+      	
+  		var calendarEl = document.getElementById('schedules');
+
+      	var calendar = new FullCalendar.Calendar(calendarEl, {
+          	dateClick: function(info) {
+          		selectday=new Date(info.dateStr);
+          		selectday=selectday.getFullYear() +
+          		'-' + ( (selectday.getMonth()+1) <= 9 ? "0" + (selectday.getMonth()+1) : (selectday.getMonth()+1) )+
+          		'-' + ( (selectday.getDate()) <= 9 ? "0" + (selectday.getDate()) : (selectday.getDate()) );
+          		
+          		
+          		var today=new Date();
+          		today= today.getFullYear() +
+          		'-' + ( (today.getMonth()+1) <= 9 ? "0" + (today.getMonth()+1) : (today.getMonth()+1) )+
+          		'-' + ( (today.getDate()) <= 9 ? "0" + (today.getDate()) : (today.getDate()) );
+          		
+          		
+          		if(selectday<today){
+           		alert("오늘 날짜 이 후로 선택해주세요.");
+           		return;
+          		}
+          	    var id="[[${session.loginadmin.aid}]]";
+            	location.href="/schedules?id="+id+"&&"+"selectday="+selectday;
+          	},
+              headerToolbar: {
+                  right: 'prev,next',
+                  center: 'title',
+                  left:'today'
+                  
+              },
+              selectable: true, // 날짜 선택 가능하게 하는 속성
+              selectMirror: false,
+              navLinks: false, // can click day/week names to navigate views
+              editable: false, //날짜 여러개 선택 할 수 있는 속성
+              dayMaxEvents: false, // allow "more" link when too many events
+          });
+          calendar.render();
+      });
+</script>
+</head>
+<body>
+	<section id="main-content">
+		<section class="wrapper">
+			<h3>
+				<i class="fa fa-angle-right"></i> Calendar
+			</h3>
+			<!-- page start-->
+			<div class="row mt">
+				<aside class="col-lg-3 mt">
+					<h4>
+						<i class="fa fa-angle-right"></i> 스케줄
+					</h4>
+					<div class="desc" id="list" th:each="adminschedulelist:${adminschedulelist}">
+                      	<div class="thumb">
+                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                      	</div>
+                      	<div class="details">
+                      		<p><muted th:text="${adminschedulelist.time}"></muted><br/>
+                      		   <a>강사 : </a><a th:text="${adminschedulelist.instructorname}"></a><br/>
+                      		   <a>회원 : </a><a th:text="${adminschedulelist.custname}"></a><br/>
+                      		   <a>상태 : </a><a th:text="${adminschedulelist.status}"></a><br/>
+                      		</p>
+                      		<button type="button" class="btn btn-theme" id="delete" th:onclick="del([[${adminschedulelist.schedulesid}]]);">예약 취소</button>
+							<button type="button" class="btn btn-theme02" id="fix" th:onclick="fix([[${adminschedulelist.schedulesid}]]);">예약 확정</button>
+                      	</div>
+                      </div>
+                        <!-- CALENDAR-->
+                        <br>
+                        <div id="calendar" class="mb">
+                            <div class="panel green-panel no-margin">
+                                <div class="panel-body">
+                                    <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
+                                        <div class="arrow"></div>
+                                        <h3 class="popover-title" style="disadding: none;"></h3>
+                                        <div id="date-popover-content" class="popover-content"></div>
+                                    </div>
+                                    <div id="my-calendar"></div>
+                                </div>
+                            </div>
+                        </div><!-- / calendar -->
+				</aside>
+				<aside class="col-lg-9 mt">
+					<section class="panel">
+						<div class="panel-body">
+							<div id="schedules" class="has-toolbar"></div>
+						</div>
+					</section>
+				</aside>
+			</div>
+			<!-- page end-->
+		</section>
+		<!--/wrapper -->
+	</section>
+	<!-- /MAIN CONTENT -->
+
+	<!--main content end-->
+
+	<script th:src="@{/assets/js/jquery.js}"></script>
+	<script th:src="@{/assets/js/jquery-ui-1.9.2.custom.min.js}"></script>
+	<script th:src="@{/assets/js/fullcalendar/fullcalendar.min.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script class="include" type="text/javascript" th:src="@{/assets/js/jquery.dcjqaccordion.2.7.js}"></script>
+	<script th:src="@{/assets/js/jquery.scrollTo.min.js}"></script>
+	<script th:src="@{assets/js/jquery.sparkline.js}"></script>
+	<script th:src="@{/assets/js/common-scripts.js}"></script>
+	 <script th:src="@{/assets/js/fullcalendar/main.js}"></script>
+
+</body>
+</html>

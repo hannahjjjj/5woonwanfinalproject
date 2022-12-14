@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.InstructorMapper">
+ 	<insert id="insert" parameterType="InstructorDTO">
+		INSERT INTO instructor VALUES (NULL, #{facilityid}, #{instructorname},#{instructorcon},#{instructorimg},#{instructorimg2},#{instructorimg3},#{instructoremail},#{instructorphone})
+		<selectKey keyProperty="instructorid" resultType="Integer" order="AFTER"> 
+	                SELECT LAST_INSERT_ID()
+	      </selectKey> 
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM instructor WHERE instructorid=#{instructorid}
+	</delete>
+	<update id="update" parameterType="InstructorDTO">
+		UPDATE instructor SET facilityid=#{facilityid}, instructorname=#{instructorname}, instructorcon=#{instructorcon},instructorimg=#{instructorimg},instructorimg2=#{instructorimg2},instructoremail=#{instructoremail},instructorphone=#{instructorphone}
+		WHERE instructorid=#{instructorid}
+	</update> 
+	<select id="selectAll" resultType="InstructorDTO">
+		SELECT * FROM instructor
+	</select>
+	<select id="select" parameterType="Integer" resultType="InstructorDTO">
+		SELECT * FROM instructor WHERE instructorid = #{instructorid}
+	</select>
+	
+	<select id="selectFacilityList" parameterType="Integer" resultType="InstructorDTO">
+		SELECT * FROM instructor WHERE facilityid = #{facilityid}
+	</select>
+	
+	<select id="selectInstructorList" parameterType="Integer" resultType="InstructorDTO">
+		SELECT * FROM instructor WHERE instructorid = #{instructorid}
+	</select>
+	<select id="selectname" parameterType="String" resultType="InstructorDTO">
+		SELECT instructorid FROM instructor WHERE instructorname = #{instructorname}
+	</select>
+</mapper>
