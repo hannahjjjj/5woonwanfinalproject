@@ -16,4 +16,5 @@ public interface AdminMapper extends MyMapper<String,AdminDTO>{
 	public List<AdminDTO> genderratio(String id) throws Exception;
 	public List<AdminDTO> insnewcust(String id) throws Exception;
 	public List<AdminDTO> insgenderratio(String id) throws Exception;
+	public AdminDTO deleteins(int instructorid) throws Exception;
 }

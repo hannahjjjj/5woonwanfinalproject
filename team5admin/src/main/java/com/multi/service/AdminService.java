@@ -61,5 +61,8 @@ public class AdminService implements MyService<String,AdminDTO>{
 		return mapper.insgenderratio(id);
 	}
 
+	public AdminDTO deleteins(int instructorid) throws Exception{
+		return mapper.deleteins (instructorid);
+	}
 }
 	

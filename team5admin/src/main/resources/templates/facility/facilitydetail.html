@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	th:href="@{styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{plugins/font-awesome-4.7.0/css/font-awesome.min.css}"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{styles/contact.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{styles/contact_responsive.css}">
+<script
+	th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+
+
+<style>
+#body div#kakaoPlusFriend-chat-button {
+	right: 5px;
+	bottom: 5px;
+}
+
+@media screen and (max-width: 640px) {
+	#body div#kakaoPlusFriend-chat-button {
+		right: 5px;
+		bottom: 5px;
+	}
+}
+</style>
+<script>
+$(document).ready(function(){
+	  var fid=$('#fid').text();  
+	     getdata(fid);
+	     
+});
+function del(instructorid){
+	var c = confirm('삭제하시겠습니까?');
+	if(c == true){
+		location.href='[[@{/instructordelete?instructorid=}]]'+instructorid;
+		if(location.href== true){
+			var d = confirm('삭제되었습니다.');
+		}
+	}
+}
+
+
+
+</script>
+<body>
+
+
+	<script>
+  
+
+
+   $('.categories>li>a').click(function(e){
+      var href=$(this).attr('href');
+      var targetTop = $(href).offset().top;
+       $('html').stop().animate({scrollTop:targetTop}, 300);
+       
+       e.preventDefault();
+      });
+
+
+   function Page__updateIndicatorActive() {
+       var scrollTop = $(window).scrollTop();
+       
+       // 역순으로 검색해야 편하다
+       $($('.page').get().reverse()).each(function(index, node) {
+           var $node = $(this);
+           var offsetTop = parseInt($node.attr('data-offset-top'));
+           
+           if ( scrollTop >= offsetTop ) {
+               // 기존 녀석에게 활성화 풀고
+               $('.page-indicator > ul > li.active').removeClass('active');
+               // 해당하는 녀석에게 활성화 넣고
+               
+               var currentPageIndex = $node.index();
+               $('.page-indicator > ul > li').eq(currentPageIndex).addClass('active');
+               
+               $('html').attr('data-current-page-index', currentPageIndex);
+               
+               return false; // 더 이상 다른 페이지를 검사하지 않는다.
+           }
+       });
+   }
+   
+   // 각 페이지의 offsetTop 속성을 업데이트
+   function Page__updateOffsetTop() {
+       
+       $('.page').each(function(index, node) {
+           var $page = $(node);
+           var offsetTop = $page.offset().top;
+           
+           $page.attr('data-offset-top', offsetTop);
+       });
+       
+       // 계산이 바뀌었으니까, 다시 상태 업데이트
+       Page__updateIndicatorActive();
+   }
+   
+   function Page__init() {
+       Page__updateOffsetTop();
+   }
+
+
+
+
+</script>
+
+
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="container" id="container">
+				<h4>
+					<strong>강사리스트</strong>
+				</h4>
+				<br>
+				<div class="row">
+					<div class="col-md-3" th:each="ins:${ins}">
+
+						<div class="agent">
+						<input type="hidden" th:value="${ins.instructorid}" id="instructorid" name="instructorid">
+							<div class="img">
+								<a
+									th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img
+									th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"
+									style="width: 40%; height: 200px;" alt=""></a>
+							</div>
+
+							<div class="desc">
+								<h4>
+									이름:<strong><a th:text="${ins.instructorname}"></a></strong>
+								</h4>
+								<h4>
+									종목:<a th:text="${ins.instructorcon}"></a>
+								</h4>
+								<h4>
+									연락처:<a th:text="${ins.instructorphone}"></a>
+								</h4>
+								<button th:onclick="del([[${ins.instructorid}]]);" id="delete_btn" class="btn btn-default">DELETE</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			
+			
+		</section>
+	</section>
+
+
+</body>
+</html>

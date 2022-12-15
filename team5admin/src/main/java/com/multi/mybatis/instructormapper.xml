@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM instructor WHERE instructorid=#{instructorid}
 	</delete>
 	<update id="update" parameterType="InstructorDTO">
-		UPDATE instructor SET facilityid=#{facilityid}, instructorname=#{instructorname}, instructorcon=#{instructorcon},instructorimg=#{instructorimg},instructorimg2=#{instructorimg2},instructoremail=#{instructoremail},instructorphone=#{instructorphone}
+		UPDATE instructor SET facilityid=#{facilityid}, instructorname=#{instructorname}, instructorcon=#{instructorcon},instructoremail=#{instructoremail},instructorphone=#{instructorphone},instructorimg=#{instructorimg}
 		WHERE instructorid=#{instructorid}
 	</update> 
 	<select id="selectAll" resultType="InstructorDTO">
