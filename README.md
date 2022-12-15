@@ -20,7 +20,7 @@
 + 유승리
 <br>회원가입
 ### 시스템구성도
-![파이널플젝 웹서버](https://user-images.githubusercontent.com/111735494/207484998-4676eaf6-e070-4874-8346-795ef076c13b.jpg)
+![시스템구성도](https://user-images.githubusercontent.com/111735494/207923738-b459a007-6587-4cef-ab3a-43f0e20c11ee.jpg)
 ### 수행도구
 + Back-end <br> 
 + Front-end <br><img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/>
