@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.AdminDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
+import com.multi.frame.Util;
 import com.multi.mapper.FacilityMapper;
 import com.multi.service.AdminService;
 import com.multi.service.FacilityService;
@@ -30,6 +32,15 @@ public class FacilityController {
 
 	@Autowired
 	AdminService aservice;
+	
+	
+	@Value("${admindir}")
+	String admindir;
+
+	@Value("${custdir}")
+	String custdir;
+	
+	
 	@RequestMapping("/facilit_update")
 	public String facility_update(Model model,int facilityid,HttpSession session) {
 
@@ -46,18 +57,30 @@ public class FacilityController {
 	
 	@RequestMapping("/instructorupdate")
 	public String instructorupdate(Model model, InstructorDTO ins, int instructorid) {
-
+		InstructorDTO inst = null;
+		FacilityDTO facility = null;
+		List<FacilityDTO> fac = null;	
 		try {
-
+			Util.saveFile(ins.getImg1(), admindir, custdir);
+			String imgname = ins.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
+			String[] tempstr1=imgname.split("\\.");
+			ins.setInstructorimg(tempstr1[0]);
+			
 			iservice.modify(ins);
 			ins = iservice.get(instructorid);
-			System.out.println(ins);
-			model.addAttribute("i",ins);
-			model.addAttribute("center", "facility/facilitydetail");
+			
+			inst = iservice.get(instructorid);
+			fac = fservice.viewFacilityName(instructorid);
+			
+			model.addAttribute("instructordetail",inst);
+			model.addAttribute("facilitydetail",facility);
+			model.addAttribute("facilitylist",fac);
+			model.addAttribute("ins",inst);
+			model.addAttribute("center","facility/instructordetail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:facilitydetail?facilityid=" + ins.getFacilityid();
+		return "index";
 	}
 	
 	@RequestMapping("/instructordelete")
@@ -71,6 +94,8 @@ public class FacilityController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 		return "redirect:facilitydetail?facilityid=" + ins.getFacilityid();
 	}
 	
