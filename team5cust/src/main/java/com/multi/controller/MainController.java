@@ -298,7 +298,7 @@ public class MainController {
 	public String ocrimpl(Model model, CustbodyDTO obj) {
 		CustDTO cust = null;
 		String imgname = obj.getImg().getOriginalFilename(); // 파일덩어리 안에있는 파일이름을 꺼낸다.
-		CustbodyDTO custbody=null;
+		CustbodyDTO custbody = null;
 		
 		obj.setImgname(imgname);
 		try {

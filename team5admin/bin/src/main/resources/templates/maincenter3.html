@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+$(document).ready(function(){
+	chart();
+});
+
+function chart(){
+	var id="[[${session.loginadmin.aid}]]";
+	$.ajax({
+		url:'[[@{/insgenderratio}]]',
+		data:{
+			'id':id
+			},
+		success:function(data){
+			gender_ratio(data);
+		}
+	}); 
+	$.ajax({
+		url:'[[@{/insnewcust}]]',
+		data:{
+			'id':id
+			},
+		success:function(data){
+			new_cust(data);
+		}
+	}); 
+	$.ajax({
+		url:'[[@{/myprofit}]]',
+		data:{
+			'id':id
+			},
+		success:function(data){
+			my_profit(data);
+		}
+	}); 
+}
+
+function my_profit(data){
+	Highcharts.chart('my_profit', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: '월별 매출'
+	    },
+	    xAxis: {
+	        categories: data['date']
+	    },
+	    yAxis: {
+	        title: {
+	            text: '매출액'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: data['result']
+	});
+
+}
+function new_cust(data){
+	Highcharts.chart('new_cust_table', {
+	    chart: {
+	        type: 'line'
+	    },
+	    title: {
+	        text: '신규 고객'
+	    },
+	    xAxis: {
+	        categories: data["date"]
+	    },
+	    yAxis: {
+	        title: {
+	            text: 'New Customer'
+	        }
+	    },
+	    plotOptions: {
+	        line: {
+	            dataLabels: {
+	                enabled: true
+	            },
+	            enableMouseTracking: false
+	        }
+	    },
+	    series: data["result"]
+	});
+
+}
+function gender_ratio(data){
+	Highcharts.chart('gender_ratio_table', {
+	    chart: {
+	        type: 'column'
+	    },
+	    title: {
+	        text: '연령대 별 성비 '
+	    },
+	    subtitle: {
+	    },
+	    xAxis: {
+	        categories: data['age'],
+	        crosshair: true
+	    },
+	    yAxis: {
+	        min: 0,
+	        title: {
+	            text: 'count'
+	        }
+	    },
+	    tooltip: {
+	    },
+	    plotOptions: {
+	        column: {
+	            pointPadding: 0.2,
+	            borderWidth: 0
+	        }
+	    },
+	    series: data['result']
+	});
+}
+</script>
+</head>
+<body>
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+              <div class="row">
+                  <div class="col-lg-9 main-chart">
+                  
+                  	<div class="row mtbox">
+                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+                  			<div class="box1">
+					  			<span class="li_heart"></span>
+					  			<h3>933</h3>
+                  			</div>
+					  			<p>933 People liked your page the last 24hs. Whoohoo!</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_cloud"></span>
+					  			<h3>+48</h3>
+                  			</div>
+					  			<p>48 New files were added in your cloud storage.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_stack"></span>
+					  			<h3>23</h3>
+                  			</div>
+					  			<p>You have 23 unread messages in your inbox.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_news"></span>
+					  			<h3>+10</h3>
+                  			</div>
+					  			<p>More than 10 news were added in your reader.</p>
+                  		</div>
+                  		<div class="col-md-2 col-sm-2 box0">
+                  			<div class="box1">
+					  			<span class="li_data"></span>
+					  			<h3>OK!</h3>
+                  			</div>
+					  			<p>Your server is working perfectly. Relax & enjoy.</p>
+                  		</div>
+                  	
+                  	</div><!-- /row mt -->	
+                  
+                      
+                      <div class="row mt">
+						
+						<div class="col-md-6 col-sm-6 mb">
+							<!-- REVENUE PANEL -->
+							<div class="darkblue-panel pn">
+								<div id="new_cust_table"></div>
+							</div>
+						</div><!-- /col-md-4 -->
+						<div class="col-md-6 col-sm-6 mb">
+							<!-- REVENUE PANEL -->
+							<div class="darkblue-panel pn">
+								<div id="my_profit"></div>
+							</div>
+						</div><!-- /col-md-4 -->
+                      <!-- SERVER STATUS PANELS -->
+                    </div><!-- /row -->
+					<br><br><br>
+					<div class="row mt">
+                      <!--CUSTOM CHART START -->
+                      <div class="border-head">
+                          <h3>Gender Ratio</h3>
+                      </div>
+                      <div>
+                      	<div id="gender_ratio_table"></div>
+                      </div>
+                      <!--custom chart end-->
+					</div>
+                  </div><!-- /col-lg-9 END SECTION MIDDLE -->
+                  
+                  
+      <!-- **********************************************************************************************************************************************************
+      RIGHT SIDEBAR CONTENT
+      *********************************************************************************************************************************************************** -->                  
+                  <!-- 15개  -->
+                  <div class="col-lg-3 ds">
+						<h3>스케줄</h3>
+                      <div class="desc" th:each="scheduleslist:${scheduleslist}">
+                      	<div class="thumb">
+                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+                      	</div>
+                      	<div class="details">
+                      		<p><muted th:text="${scheduleslist.time}"></muted><br/>
+                      		   <a>강사 : </a><a th:text="${scheduleslist.instructorname}"></a><br/>
+                      		   <a>회원 : </a><a th:text="${scheduleslist.custname}"></a><br/>
+                      		</p>
+                      	</div>
+                      </div>
+                        <!-- CALENDAR-->
+                        <div id="calendar" class="mb">
+                            <div class="panel green-panel no-margin">
+                                <div class="panel-body">
+                                    <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
+                                        <div class="arrow"></div>
+                                        <h3 class="popover-title" style="disadding: none;"></h3>
+                                        <div id="date-popover-content" class="popover-content"></div>
+                                    </div>
+                                    <div id="my-calendar"></div>
+                                </div>
+                            </div>
+                        </div><!-- / calendar -->
+                      
+                  </div><!-- /col-lg-3 -->
+              </div><! --/row -->
+          </section>
+      </section>
+</body>
+</html>
