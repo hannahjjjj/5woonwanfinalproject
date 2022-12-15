@@ -10,12 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AdminDTO;
-import com.multi.dto.CateDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
 import com.multi.mapper.FacilityMapper;
 import com.multi.service.AdminService;
-import com.multi.service.CateService;
 import com.multi.service.FacilityService;
 import com.multi.service.InstructorService;
 
@@ -23,8 +21,6 @@ import com.multi.service.InstructorService;
 @Controller
 public class FacilityController {
 
-	@Autowired
-	CateService cservice;
 	@Autowired
 	FacilityService fservice;
 	@Autowired

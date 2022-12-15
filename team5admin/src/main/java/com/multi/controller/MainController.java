@@ -113,14 +113,14 @@ public class MainController {
 		Util.saveFile(ins.getImg3(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
 		
 		String imgname = ins.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
-		String[] tempstr1=imgname.split(".");
+		String[] tempstr1=imgname.split("\\.");
 		ins.setInstructorimg(tempstr1[0]);
 		
 		imgname=ins.getImg2().getOriginalFilename();
-		String[] tempstr2=imgname.split(".");
+		String[] tempstr2=imgname.split("\\.");
 		ins.setInstructorimg2(tempstr2[0]);
 		imgname=ins.getImg3().getOriginalFilename();
-		String[] tempstr3=imgname.split(".");
+		String[] tempstr3=imgname.split("\\.");
 		ins.setInstructorimg3(tempstr3[0]);
 		System.out.println(ins);
 		try {
@@ -149,7 +149,7 @@ public class MainController {
 		String str;
 		Util.saveFile(fac.getImg1(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
 		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다.
-		String[] tempstr=imgname.split(".");
+		String[] tempstr=imgname.split("\\.");
 		fac.setFacilityimg(tempstr[0]);
 		System.out.println(fac);
 		if(fac.getWeekdayend().isEmpty()) {
@@ -210,7 +210,7 @@ public class MainController {
 		AdminDTO admin=null;
 		Util.saveFile(fac.getImg1(), admindir, custdir);
 		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다.
-		String[] tempstr=imgname.split(".");
+		String[] tempstr=imgname.split("\\.");
 		fac.setFacilityimg(tempstr[0]);
 		
 		if(fac.getWeekdayend().isEmpty()) {
@@ -234,17 +234,18 @@ public class MainController {
 			admin=adminService.get(id);
 			fac.setFacilityid(admin.getFacilityid());
 			facilityservice.modify(fac);
-			model.addAttribute("center","login");
-			model.addAttribute("registatus", "1");
+			
 			
 		} catch (Exception e) {
 			/*
 			 * model.addAttribute("center", "register"); model.addAttribute("registatus",
 			 * "0");
 			 */
+			
 			e.printStackTrace();
 		}
-		
+		model.addAttribute("fac", fac);
+		model.addAttribute("center", "facility_update");
 		return "index";
 	}
 	
