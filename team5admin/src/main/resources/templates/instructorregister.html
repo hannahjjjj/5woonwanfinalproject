@@ -189,16 +189,15 @@ function sample6_execDaumPostcode() {
                                   <input type="text" class="form-control round-form" id="instructorphone" name="instructorphone" placeholder="-생략 없이 작성">
                               </div>
                          </div>
-                        <div class="form-group">
-						<label class="col-sm-2 col-sm-2 control-label">시설 주소</label>
-							<div class="col-sm-10">
-							<input type="text" id="sample6_postcode" placeholder="우편번호" name="postno">
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample6_address" placeholder="주소" name="addr"><br>
-							<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-							<input type="text" id="sample6_extraAddress" placeholder="참고항목">
-							</div>
-                      	</div>
+                         <div class="form-group">
+							<label class="col-sm-2 col-sm-2 control-label" >시설 주소 : </label>
+								<div class="col-sm-10">
+									<select class="form-control round-form" id="addr" name ="addr">
+										<option value="">시설 선택</option>
+										<option th:each="fac:${fac}" th:value="${fac.facilityname}+':'+${fac.facilityaddr}" th:text="${fac.facilityname}+':'+${fac.facilityaddr}" >
+									</select>
+								</div>
+						</div>
                           <!-- 강사 -->                          
                           <div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">종류</label>

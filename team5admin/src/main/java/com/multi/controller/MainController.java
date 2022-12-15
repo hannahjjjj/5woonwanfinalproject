@@ -77,9 +77,23 @@ public class MainController {
 		if(role.equals("1")) {
 			model.addAttribute("center", "facilityregister");
 		}else {
-			model.addAttribute("center", "instructorregister");
+			model.addAttribute("center", "searchfacility");
 		}
 		
+		return "index";
+	}
+	@RequestMapping("/searchfac")
+	public String searchfac(Model model, String facilityaddr) {
+		List<FacilityDTO> fac= null;
+		try {
+			fac=facilityservice.searchFacility(facilityaddr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("fac", fac);
+		model.addAttribute("status", "1");
+		model.addAttribute("center", "instructorregister");
 		return "index";
 	}
 	
@@ -92,8 +106,11 @@ public class MainController {
 		ins.setInstructorimg2(imgname);
 		imgname=ins.getImg3().getOriginalFilename();
 		ins.setInstructorimg3(imgname);
+		System.out.println(ins);
 		try {
-			fac=facilityservice.selectaddr(ins.getAddr());
+			String[] tempstr=ins.getAddr().split(":");
+			fac=facilityservice.selectaddr(tempstr[1]);
+			
 			ins.setFacilityid(fac.getFacilityid());
 			instructorservice.register(ins);
 			
