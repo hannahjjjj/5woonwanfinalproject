@@ -2,7 +2,7 @@
 ## SpringBoot Project 5WoonWan
 스프링부트과 html을 이용한 운동시설 검색 및 회원권 구매 <br> 트레이너와 1:1 스케줄링이 가능한 사이트
 ### 👨🏻‍🏫프로젝트 내용👩🏻‍🏫
-웹 사이트 시연영상 <br> ✔[click](www.youtube.com)
+웹 사이트 시연영상 <br> ✔[click]([www.youtube.com](https://www.youtube.com/watch?v=371BYG-tJDY))
 ### 프로젝트기능구현
 1. 자신의 동네주변 헬스장검색
 2. 자신이 선택한 강사와 스케줄링 기능
@@ -31,6 +31,10 @@
 ### ⚡TROUBLE SHOOTING⚡
 ## 프로젝트 결과
 ## 회원전용 웹페이지
+### custwebpage
+![image](https://user-images.githubusercontent.com/111735494/207851195-3e288c1f-37df-4c46-b8b0-c6cb0060a93e.png)
+### adminwebpage
+![image](https://user-images.githubusercontent.com/111735494/207851298-83278f44-5e78-4713-a6a5-1bbdb32f573f.png)
 ### 1.회원가입
 + Ajax 이용하여 아이디 중복 및 비밀번호2차확인
 + 모든 칸을 채우지 않으면 "입력사항을 모두 입력해주세요."모달창 띄우기
