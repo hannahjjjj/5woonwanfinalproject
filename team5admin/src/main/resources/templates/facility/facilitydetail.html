@@ -123,8 +123,7 @@ function del(instructorid){
 						<div class="agent">
 						<input type="hidden" th:value="${ins.instructorid}" id="instructorid" name="instructorid">
 							<div class="img">
-								<a
-									th:href="@{/instructordetail(instructorid=${ins.instructorid})}"><img
+								<a><img
 									th:src="@{/fimages/}+${ins.instructorimg}+'.jpg'"
 									style="width: 40%; height: 200px;" alt=""></a>
 							</div>
