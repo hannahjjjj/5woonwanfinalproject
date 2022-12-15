@@ -248,6 +248,7 @@ public class AJAXController {
 			try {
 				OrdersDTO orders =new OrdersDTO(0, itemid, custid, instructorid, facilityid, null, null, 0, 0, 0, null, null);
 				oservice.register(orders);
+				
 				/*
 				 * fac=fservice. OrdersDTO orders=new OrdersDTO(0, itemid, custid, instructorid,
 				 * ins.getFacilityid(), null, item.getItemname(),item.getItemprice() ,

@@ -30,36 +30,33 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="myprofit" resultType="AdminDTO">
-		SELECT b.odate , b.profit FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate, SUM(i.itemprice) profit FROM admin a
+		SELECT b.odate , SUM(b.itemprice) profit FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate , i.itemprice FROM admin a
 		INNER JOIN facility f ON a.facilityid=f.facilityid
 		INNER JOIN orders o ON f.facilityid=o.facilityid
 		INNER JOIN item i ON i.itemid=o.itemid
-		WHERE aid=#{aid}
+		WHERE aid=#{aid}) b
 		GROUP BY odate
-		ORDER BY odate DESC
-		LIMIT 10) b
-		ORDER BY b.odate;
+		ORDER BY odate 
+		LIMIT 10;
 	</select>
 	
 	<select id="newcust" resultType="AdminDTO">
-		SELECT b.odate , b.cust_count FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate, COUNT(*) cust_count FROM admin a
+		SELECT plz.odate , COUNT(*) cust_count FROM (SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate FROM admin a
 		INNER JOIN facility f ON a.facilityid=f.facilityid
 		INNER JOIN orders o ON f.facilityid=o.facilityid
-		WHERE aid=#{aid}
-		GROUP BY odate
-		ORDER BY odate DESC
-		LIMIT 10) b
-		ORDER BY b.odate;
+		WHERE aid=#{aid}) plz
+        GROUP BY plz.odate
+        ORDER BY plz.odate
+        LIMIT 10;
 	</select>
 	
 	<select id="insnewcust" resultType="AdminDTO">
-		SELECT b.odate , b.cust_count FROM(SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate, COUNT(*) cust_count FROM admin a
+		SELECT b.odate , COUNT(*) cust_count FROM(SELECT DATE_FORMAT(o.odate,'%Y-%m') as odate FROM admin a
 		INNER JOIN orders o ON o.instructorid=a.instructorid
-		WHERE o.instructorid=#{instructorid}
-		GROUP BY o.odate
-		ORDER BY o.odate DESC
-		LIMIT 10) b
-		ORDER BY b.odate;
+		WHERE o.instructorid=#{instructorid}) b
+		GROUP BY b.odate
+		ORDER BY b.odate 
+		LIMIT 10;
 	</select>
 	
 	<select id="genderratio" resultType="AdminDTO">

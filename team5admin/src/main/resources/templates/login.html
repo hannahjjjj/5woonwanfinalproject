@@ -115,14 +115,9 @@ function naverLogin() {
 		            <button id="login_btn" class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            <hr>
 		            
-		            <div class="login-social-link centered">
-		            <p>or you can sign in via your social network</p>
-		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
-		            </div>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
-		                <a class="" href="#">
+		                <a class="" th:href="@{/register}">
 		                    Create an account
 		                </a>
 		            </div>
@@ -160,7 +155,7 @@ function naverLogin() {
 					</button>
 
 				</div>
-				<div class="modal-body">ID�삉�뒗鍮꾨�踰덊샇媛� �씪移섑븯吏��븡�뒿�땲�떎. �떎�떆 �떆�룄�빐二쇱꽭�슂.</div>
+				<div class="modal-body">아이디 비밀번호를 입력하세요</div>
 				<div class="modal-footer">
 					<button class="btn" type="button" data-dismiss="modal">�솗�씤</button>
 				</div>
