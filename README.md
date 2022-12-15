@@ -64,8 +64,7 @@
 ### 5.시설 리스트
 + 운동 카테고리별로 정리
 + 페이징처리 구현
-![스케줄](https://user-images.githubusercontent.com/48542532/207913544-99696e64-1199-4f63-a1ec-eef082ab5f21.gif)
-
+![시설리스트](https://user-images.githubusercontent.com/48542532/207914045-78241cc6-21cb-4b7a-a04e-908ee2b3dd47.gif)
 ### 6.시설 상세 페이지
 + 시설의 기본정보
 + 좌측 카테고리별로 클릭하면 이동
