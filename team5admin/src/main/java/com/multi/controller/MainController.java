@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.multi.dto.AdminDTO;
 import com.multi.dto.FacilityDTO;
 import com.multi.dto.InstructorDTO;
 import com.multi.dto.SchedulesDTO;
+import com.multi.frame.Util;
 import com.multi.service.AdminService;
 import com.multi.service.FacilityService;
 import com.multi.service.InstructorService;
@@ -35,6 +37,12 @@ public class MainController {
 	
 	@Autowired
 	InstructorService instructorservice;
+	
+	@Value("${admindir}")
+	String admindir;
+
+	@Value("${custdir}")
+	String custdir;
 	
 	@RequestMapping("/index")
 	public String index(Model model,String id) {
@@ -100,12 +108,20 @@ public class MainController {
 	@RequestMapping("/insregisterimpl")
 	public String insregisterimpl(Model model,InstructorDTO ins) {
 		FacilityDTO fac=null;
+		Util.saveFile(ins.getImg1(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
+		Util.saveFile(ins.getImg2(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
+		Util.saveFile(ins.getImg3(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
+		
 		String imgname = ins.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
-		ins.setInstructorimg(imgname);
+		String[] tempstr1=imgname.split(".");
+		ins.setInstructorimg(tempstr1[0]);
+		
 		imgname=ins.getImg2().getOriginalFilename();
-		ins.setInstructorimg2(imgname);
+		String[] tempstr2=imgname.split(".");
+		ins.setInstructorimg2(tempstr2[0]);
 		imgname=ins.getImg3().getOriginalFilename();
-		ins.setInstructorimg3(imgname);
+		String[] tempstr3=imgname.split(".");
+		ins.setInstructorimg3(tempstr3[0]);
 		System.out.println(ins);
 		try {
 			String[] tempstr=ins.getAddr().split(":");
@@ -131,15 +147,17 @@ public class MainController {
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model model, FacilityDTO fac) {
 		String str;
-		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다. 
-		fac.setFacilityimg(imgname);
+		Util.saveFile(fac.getImg1(), admindir, custdir); // 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장
+		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다.
+		String[] tempstr=imgname.split(".");
+		fac.setFacilityimg(tempstr[0]);
 		System.out.println(fac);
 		if(fac.getWeekdayend().isEmpty()) {
 			str="24시 운영";
 			fac.setFacilitytime(str);
 		}
 		else {
-			str=fac.getWeekdaystart()+" ~ "+fac.getWeekdayend(); 
+			str="am "+fac.getWeekdaystart()+" ~ "+" pm "+fac.getWeekdayend(); 
 			fac.setFacilitytime(str);
 		}
 		
@@ -148,7 +166,7 @@ public class MainController {
 			fac.setFacilitytime2(str);
 		}
 		else {
-			str=fac.getWeekendstart()+" ~ "+fac.getWeekendend(); 
+			str="am "+fac.getWeekendstart()+" ~ "+" pm "+fac.getWeekendend(); 
 			fac.setFacilitytime2(str);
 		}
 		
@@ -169,22 +187,68 @@ public class MainController {
 		
 		return "index";
 	}
-	@RequestMapping("/todo_update")
-	public String facility_update(Model model) {
-		
-		
-		
+	//수정페이지 이동 컨트롤러
+	@RequestMapping("/facility_update")
+	public String facility_update(Model model,String id) {
+		AdminDTO admin=null;
+		FacilityDTO fac=null;
+		try {
+			admin=adminService.get(id);
+			fac=facilityservice.get(admin.getFacilityid());
+			model.addAttribute("fac", fac);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.addAttribute("center", "facility_update");
 		return "index";
 	}
-	
-	@RequestMapping("/todo_list")
-	public String todo_list(Model model) {
-		model.addAttribute("center", "todo_list");
+	//수정 컨트롤러
+	@RequestMapping("/updatefacility")
+	public String facility_update(Model model,String id,FacilityDTO fac) {
+		String str;
+		AdminDTO admin=null;
+		Util.saveFile(fac.getImg1(), admindir, custdir);
+		String imgname = fac.getImg1().getOriginalFilename();   // 파일덩어리 안에있는 파일이름을 꺼낸다.
+		String[] tempstr=imgname.split(".");
+		fac.setFacilityimg(tempstr[0]);
+		
+		if(fac.getWeekdayend().isEmpty()) {
+			str="24시 운영";
+			fac.setFacilitytime(str);
+		}
+		else {
+			str="am "+fac.getWeekdaystart()+" ~ "+" pm "+fac.getWeekdayend(); 
+			fac.setFacilitytime(str);
+		}
+		
+		if(fac.getWeekendend().isEmpty()) {
+			str="24시 운영";
+			fac.setFacilitytime2(str);
+		}
+		else {
+			str="am "+fac.getWeekendstart()+" ~ "+" pm "+fac.getWeekendend(); 
+			fac.setFacilitytime2(str);
+		}
+		try {
+			admin=adminService.get(id);
+			fac.setFacilityid(admin.getFacilityid());
+			facilityservice.modify(fac);
+			model.addAttribute("center","login");
+			model.addAttribute("registatus", "1");
+			
+		} catch (Exception e) {
+			/*
+			 * model.addAttribute("center", "register"); model.addAttribute("registatus",
+			 * "0");
+			 */
+			e.printStackTrace();
+		}
+		
 		return "index";
 	}
 	
-	@RequestMapping("/schedules")
+ 	@RequestMapping("/schedules")
 	public String schedules(Model model,String id,String selectday) {
 		List<SchedulesDTO> listadmin =null;
 		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");

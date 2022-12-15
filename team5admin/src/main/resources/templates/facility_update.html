@@ -32,14 +32,13 @@ function modal(){
 $(document).ready(function(){
 	
 var status = "[[${registatus}]]";
-	
 	if(status=="0"){
 		modal();
 	}
 	$('#register').click(function(){
 		$('#register_form').attr({
 			'enctype':'multipart/form-data',
-			'action':'[[@{/registerimpl}]]',
+			'action':'[[@{/updatefacility(id=${session.loginadmin.aid})}]]',
 			'method':'post'
 		});
 		$('#register_form').submit();
@@ -150,39 +149,7 @@ function sample6_execDaumPostcode() {
           		<div class="col-lg-12">
                   <div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-                      <form class="form-horizontal style-form" method="get" id="register_form">
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">아이디</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="aid" name="aid">
-                                  <span id="ispan"></span>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">비밀번호</label>
-                              <div class="col-sm-10">
-                                  <input type="password"  class="form-control" placeholder="" id="password" name="password">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">비밀번호 확인</label>
-                              <div class="col-sm-10">
-                                  <input type="password"  class="form-control" placeholder="" id="checkpassword" name="checkpassword">
-                                  <span id="pspan"></span>
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">이름</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="name" name="name">
-                              </div>
-                          </div>
-                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">이메일</label>
-                              <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="email" name="email">
-                              </div>
-                          </div>
+                      <form class="form-horizontal style-form" method="get" id="register_form" >
 						<div class="form-group">
                           <label class="col-sm-2 col-sm-2 control-label">시설 종류</label>
                           <div class="col-sm-10">
@@ -205,7 +172,7 @@ function sample6_execDaumPostcode() {
 						<div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">시설명</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="facilityname" name="facilityname">
+                                  <input type="text" class="form-control round-form" id="facilityname" name="facilityname" th:value="${fac.facilityname}">
                               </div>
                           </div>
                           <div class="form-group">
@@ -221,7 +188,7 @@ function sample6_execDaumPostcode() {
                       	<div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">시설 전화번호</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="facilitynumber" name="facilitynumber" placeholder="-생략 없이 작성">
+                                  <input type="text" class="form-control round-form" id="facilitynumber" name="facilitynumber"  th:value="${fac.facilitynumber}">
                               </div>
                          </div>
                       	<div class="form-group">
@@ -233,7 +200,7 @@ function sample6_execDaumPostcode() {
                          <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">평일 시작시간</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="weekdaystart" name="weekdaystart"placeholder="24시간 형식으로 작성, 24시 운영일 경우 시작 시간만 작성">
+                                  <input type="text" class="form-control round-form" id="weekdaystart" name="weekdaystart" placeholder="24시간 형식으로 작성, 24시 운영일 경우 시작 시간만 작성">
                               </div>
                           </div>
                          <div class="form-group">
@@ -257,13 +224,13 @@ function sample6_execDaumPostcode() {
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">위도</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="lat" name="lat">
+                                  <input type="text" class="form-control round-form" id="lat" name="lat"  th:value="${fac.lat}">
                               </div>
                           </div>
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">경도</label>
                               <div class="col-sm-10">
-                                  <input type="text" class="form-control round-form" id="log" name="log">
+                                  <input type="text" class="form-control round-form" id="lng" name="lng"  th:value="${fac.lng}">
                               </div>
                           </div>
                      	<button class="btn py-3 px-4 btn-primary" id="register" style="height:30px;">등록</button> <!--submit은 자바스크랩트에서 제어가 안됨 -->
