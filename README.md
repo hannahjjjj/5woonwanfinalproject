@@ -40,22 +40,32 @@
 + 모든 칸을 채우지 않으면 "입력사항을 모두 입력해주세요."모달창 띄우기
 + 카카오 API를 사용하여 주소찾기 기능
 + 모든 조건 충족시 회원가입
+![회원가입](https://user-images.githubusercontent.com/48542532/207912445-7d2ff275-79d0-4b6c-a25b-fa5622b66fd2.gif)
 ### 2.로그인
 + 카카오 API를 이용한 로그인
 + 로그인 실패시 모달창을 띄워 아이디 혹은 비밀번호 확인요청
+![로그인](https://user-images.githubusercontent.com/48542532/207912533-b6bf012e-2498-42bc-81d3-c498e97fd09e.gif)
 #### 로그인 성공 화면
 ### 3.마이페이지
 + 로그인한 아이디값 정보 불러옴
 + 마이페이지 수정 및 회원탈퇴 가능
 + 자신이 구매한 회원권과 예약 현황확인
 + 인바디 등록하면 자신의 수치 변화를 그래프를 통해 확인
+![마이페이지 2](https://user-images.githubusercontent.com/48542532/207913129-10f03429-36ab-4350-8b09-c6cfc7c23fa4.gif)
+![오씨알](https://user-images.githubusercontent.com/48542532/207913150-32d8774a-36e0-4082-90fe-f4c0a7ee2fc5.gif)
+
+
 ### 4.스케줄 관리
+
 + 자신이 원하는 날짜와 시간을 선택해 강사에게 수업요청 가능
 + 불가능 시간에는 따로 표시
 + 오늘 이후 날짜만 선택가능
+![스케줄](https://user-images.githubusercontent.com/48542532/207913501-3d985f2a-8eb2-4557-9190-9b25b7b6c2bd.gif)
 ### 5.시설 리스트
 + 운동 카테고리별로 정리
 + 페이징처리 구현
+![스케줄](https://user-images.githubusercontent.com/48542532/207913544-99696e64-1199-4f63-a1ec-eef082ab5f21.gif)
+
 ### 6.시설 상세 페이지
 + 시설의 기본정보
 + 좌측 카테고리별로 클릭하면 이동
@@ -74,9 +84,12 @@
 ### 7-1.PT 신청 기능
 + PT가격에서 자신이 원하는 회원권 구매
 + 결제 API를 통해 결제
+![강사 디테일 회원권 구매](https://user-images.githubusercontent.com/48542532/207913605-d19c17f9-128a-4459-8fc7-d31ae3785bdb.gif)
+
 ### 8. 검색기능
 + 메인페이지에서 자신이 사는 동네를 검색
 + 시설페이지에서 좌측에 있는 검색창 이용 가능
+![검색](https://user-images.githubusercontent.com/48542532/207913644-8fb584a8-6abe-4350-99a0-0bb2dbcae45d.gif)
 
 ## 관리자전용 PAGE
 ### 1.회원가입
