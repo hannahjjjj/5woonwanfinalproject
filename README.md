@@ -23,7 +23,7 @@
 ![시스템구성도](https://user-images.githubusercontent.com/111735494/207923738-b459a007-6587-4cef-ab3a-43f0e20c11ee.jpg)
 ### 수행도구
 ![image](https://user-images.githubusercontent.com/111735494/207928775-deba99ca-0dfa-4db3-a7bc-2ec041cd5356.png)
-### 프로젝트 UI
+### 유저 
 ![슬라이드1](https://user-images.githubusercontent.com/111735494/207485168-cfda4dc5-8be5-404d-99a3-316bb2f6eb88.JPG)
 ### 데이터베이스 설계
 ![파이널 프로젝트 ERD](https://user-images.githubusercontent.com/111735494/207484883-17c8ee47-b078-4cc3-a529-9a28c4e77a38.png)
