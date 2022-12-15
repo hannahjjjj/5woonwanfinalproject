@@ -48,6 +48,7 @@ public class MainController {
 	public String index(Model model,String id) {
 		AdminDTO admin = null;
 	    List<SchedulesDTO> list =null;
+	    System.out.println(id);
 		if(id.isEmpty()) {
 			model.addAttribute("center", "login");
 		}
