@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<style>
+</style>
+<script>
+
+$(document).ready(function () {
+
+	$('#update_btn').click(function() {
+		var c = confirm('수정 하시겠습니까?');
+		if(c == true){
+			$('#instructor_form').attr({
+				'method':'post',
+				'action': '[[@{/instructorupdate}]]'
+			});
+
+			$('#instructor_form').submit();
+			if (true){
+				var d = confirm('수정이 완료되었습니다.');	
+			}
+			else var d = confirm('다시 수정해주세요');
+	   	}else{
+		   return;
+	   	}
+
+	});
+});
+
+
+</script>
+<body>
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="card shadow mb-4" style="width: 1050px;">
+				<div class="card-header py-3" style="width: 1050px;">
+					<h1 class="h3 mb-0 text-gray-800">강사 정보 수정</h1>
+				</div>
+					<form id="instructor_form" th:each="i:${ins}">
+						<div class="form-group">
+							<label>시설번호:</label> 
+							<input type="text" class="form-control round-form" th:value="${i.facilityid}" id="facilityid" name="facilityid"> <span id="ispan"></span>
+						</div>
+						<div class="form-group">
+							<label>아이디:</label> 
+							<input type="text" class="form-control round-form" th:value="${i.instructorid}" id="instructorid" name="instructorid" readonly=readonly> <span id="ispan"></span>
+						</div>
+
+						<div class="form-group">
+							<label>이름:</label> <input type="text"
+								readonly=readonly class="form-control round-form"
+								th:value="${i.instructorname}" id="instructorname"
+								name="instructorname">
+						</div>
+						<div class="form-group">
+							<label>전화번호:</label> <input type="text"
+								class="form-control round-form" th:value="${i.instructorphone}"
+								id="instructorphone" name="instructorphone">
+						</div>
+						<div class="form-group">
+							<label>이메일 주소:</label> <input type="text"
+								class="form-control round-form" th:value="${i.instructoremail}"
+								id="instructoremail" name="instructoremail">
+						</div>
+				<div class="form-group" >
+					<label>종목선택 : </label><select class="form-control round-form" id="instructorcon" name ="instructorcon">
+					<option th:text="PT" ></option>
+					<option th:text="필라테스"></option>			
+					<option th:text="크로스핏"></option>			
+					</select>		
+				</div>
+         	  <div class="form-group">
+                    <label>사진:</label>
+                             <input type="file" class="form-control round-form" id="instructorimg" name="instructorimg" >
+             </div>				
+			</form>				
+					<button id="update_btn" class="btn btn-default">UPDATE</button>
+
+			</div>
+		</section>
+	</section>
+
+</body>
+</html>
