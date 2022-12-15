@@ -239,7 +239,9 @@ $(document).ready(function(){
 					   <!-- <li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_register}">시설 등록</a></li> -->
 							<li th:if="${session.loginadmin.grade!=3}"><a th:href="@{/facility_update(id=${session.loginadmin.aid})}">시설 수정</a></li>	
 							<li th:if="${session.loginadmin.grade==2}"><a
-								th:href="@{/facilitydetail(facilityid=${session.loginadmin.facilityid})}">강사 관리</a></li>	
+								th:href="@{/facilitydetail(facilityid=${session.loginadmin.facilityid})}">강사 관리</a></li>
+							<li th:if="${session.loginadmin.grade==3}"><a
+								th:href="@{/instructordetail(instructorid=${session.loginadmin.instructorid})}">강사 수정</a></li>		
 							<li
 								th:if="${session.loginadmin.grade!=1}and${session.loginadmin.grade==2}"><a
 								th:href="@{/schedules(id=${session.loginadmin.aid})}">스케줄 관리</a></li>

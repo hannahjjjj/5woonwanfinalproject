@@ -1,8 +1,8 @@
 # 오늘 운동 완료 🏃‍♂️5WoonWan🏃‍♀️
 ## SpringBoot Project 5WoonWan
-스프링부트과 html을 이용한 운동시설 검색 및 회원권 구매 <br> 트레이너와 1:1 스케줄링이 가능한 사이트
+스프링부트 html을 이용한 운동시설 검색 및 회원권 구매 <br> 트레이너와 1:1 스케줄링이 가능한 사이트
 ### 👨🏻‍🏫프로젝트 내용👩🏻‍🏫
-웹 사이트 시연영상 <br> ✔[click](www.youtube.com)
+웹 사이트 시연영상 <br> ✔[click](https://www.youtube.com/watch?v=371BYG-tJDY)
 ### 프로젝트기능구현
 1. 자신의 동네주변 헬스장검색
 2. 자신이 선택한 강사와 스케줄링 기능
@@ -22,8 +22,7 @@
 ### 시스템구성도
 ![파이널플젝 웹서버](https://user-images.githubusercontent.com/111735494/207484998-4676eaf6-e070-4874-8346-795ef076c13b.jpg)
 ### 수행도구
-+ Back-end <br> 
-+ Front-end <br><img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/>
+
 ### 프로젝트 UI
 ![슬라이드1](https://user-images.githubusercontent.com/111735494/207485168-cfda4dc5-8be5-404d-99a3-316bb2f6eb88.JPG)
 ### 데이터베이스 설계
