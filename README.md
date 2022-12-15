@@ -30,11 +30,11 @@
 ![파이널 프로젝트 ERD](https://user-images.githubusercontent.com/111735494/207484883-17c8ee47-b078-4cc3-a529-9a28c4e77a38.png)
 ### ⚡TROUBLE SHOOTING⚡
 ## 프로젝트 결과
-## 회원전용 웹페이지
 ### custwebpage
 ![image](https://user-images.githubusercontent.com/111735494/207851195-3e288c1f-37df-4c46-b8b0-c6cb0060a93e.png)
 ### adminwebpage
 ![image](https://user-images.githubusercontent.com/111735494/207851298-83278f44-5e78-4713-a6a5-1bbdb32f573f.png)
+## 회원전용 웹페이지
 ### 1.회원가입
 + Ajax 이용하여 아이디 중복 및 비밀번호2차확인
 + 모든 칸을 채우지 않으면 "입력사항을 모두 입력해주세요."모달창 띄우기
