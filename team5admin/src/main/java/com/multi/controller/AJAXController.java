@@ -52,13 +52,14 @@ public class AJAXController {
 		JSONArray age = new JSONArray();
 		int[] arrmale = {0,0,0,0,0,0};
 		int[] arrfemale = {0,0,0,0,0,0};
-		String strgender;
-		String strage;
+		String strgender=null;
+		String strage=null;
 
 				
 		List<AdminDTO> list = null;
 		try {
 			list = adminservice.genderratio(id);
+			System.out.println(list);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,6 +67,7 @@ public class AJAXController {
 		//연령대 별 카운트 넣어주기 ... 다른 방법이 생각이 나지않아요
 		for (int j = 0; j < list.size(); j++) {
 			strage = list.get(j).getAge_group();
+			System.out.println(strage);
 			strgender=list.get(j).getGender();
 			switch (strage) {
 			case "10대":
@@ -269,6 +271,7 @@ public class AJAXController {
 				admin=adminservice.get(id);
 				id=String.valueOf(admin.getInstructorid());
 				list = adminservice.insgenderratio(id);
+				System.out.println(list);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -151,11 +151,16 @@ public class AJAXController {
 
 	@RequestMapping("/scheduletime")
 	public Object scheduletime(String time,String id,String selectday,int insid) {
+		System.out.println(time);
+		System.out.println(id);
+		System.out.println(selectday);
+		System.out.println(insid);
+		
+		
 		String dateStr=selectday;
 		dateStr+=" "+time;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date sDate;
-		SchedulesDTO sc = null;
 		SchedulesDTO sc1 = null;
 		try {
 			sDate = formatter.parse(dateStr);
@@ -166,7 +171,7 @@ public class AJAXController {
 			e.printStackTrace();
 		}
 		try {
-			schedulesService.register(sc);
+			schedulesService.register(sc1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
