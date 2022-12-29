@@ -129,37 +129,37 @@
 	<div class="login-card">
 		<h3>주문&배송 정보</h3>
 		<form id="insert_form" th:each="o:${list}">
-				<div class="form-group">
+				<div>
 					<label>고객아이디 : </label><input type="text" name="custid"
-						th:value="${session.logincust.custid}" readonly="readonly">
+						th:value="${session.logincust.custid}" readonly="readonly" class="form-control round-form">
 				</div>
-				<div class="form-group">
+				<div>
 					<label>상품명 : </label><input type="text" name="itemname" id="itemname"
-						th:value="${o.itemname}" readonly="readonly">
+						th:value="${o.itemname}" readonly="readonly" class="form-control round-form">
 				</div>
-				<div class="form-group">
-				<input type="hidden" name="itemid" th:value="${o.itemid}" id="itemid"> 
+				<div>
+				<input type="hidden" name="itemid" th:value="${o.itemid}" id="itemid" class="form-control round-form"> 
 				</div>
 
-				<div class="form-group">
+				<div>
 					<label>횟수 : </label><input type="text" name="counting" id="counting"
-						th:value="${o.counting}" readonly="readonly">
+						th:value="${o.counting}" readonly="readonly" class="form-control round-form">
 				</div>
 				
-				<div class="form-group">
+				<div>
 					<label>상품가격 : </label><input type="text" name="itemprice" id="itemprice"
-						th:value="${o.itemprice + '원'}" readonly="readonly">
+						th:value="${o.itemprice + '원'}" readonly="readonly" class="form-control round-form">
 				</div>
 				
-				<div class="form-group" th:if="${o.instructorid != 0 }">
-					<label>강사선택 : </label><select class="form-control" id="sel1">
+				<div th:if="${o.instructorid != 0 }">
+					<label>강사선택 : </label><select class="form-control round-form" id="sel1">
 					<option th:each="in:${in}" th:text="${in.instructorname}" name ="instructor_name">
 					</option>					
 					</select>
 				</div>
 				
-				<div class="form-group" th:if="${o.instructorid == 0}">
-					<label>강사선택 : </label><input type="" class="form-control" id="sel1" readonly="readonly">							
+				<div th:if="${o.instructorid == 0}">
+					<label>강사선택 : </label><input type="" class="form-control round-form" id="sel1" readonly="readonly">							
 				</div>
 				<br> <br>
 			<p id="check">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</p>

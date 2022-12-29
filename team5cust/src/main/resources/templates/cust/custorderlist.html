@@ -26,7 +26,8 @@
 						<td th:text="${c.counting}" id="counting"></td>
 						<td th:if="${c.period != 0}" th:text="${c.period}"></td>
 						<td th:unless="${c.period != 0}" th:text="없음"></td>	
-						<td><a th:href="@{/custschedule(id=${c.custid},insid=${c.instructorid})}"><strong>관리</strong></a></td>
+						<td th:if="${c.instructor_name != null}"><a th:href="@{/custschedule(id=${c.custid},insid=${c.instructorid})}"><strong>관리</strong></a></td>
+						<td th:unless="${c.instructor_name != null}" th:text="없음"></td>
 					</tr>
 				</tbody>
 			</table>
